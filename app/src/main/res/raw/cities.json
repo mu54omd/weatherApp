@@ -1,0 +1,2457 @@
+[
+ {
+   "city_ascii": "Tehran",
+   "lat": 35.6892,
+   "lng": 51.3889
+ },
+ {
+   "city_ascii": "Mashhad",
+   "lat": 36.3264,
+   "lng": 59.5433
+ },
+ {
+   "city_ascii": "Khowrhesht",
+   "lat": 36.205,
+   "lng": 49.6872
+ },
+ {
+   "city_ascii": "Esfahan",
+   "lat": 32.6447,
+   "lng": 51.6675
+ },
+ {
+   "city_ascii": "Karaj",
+   "lat": 35.8272,
+   "lng": 50.9489
+ },
+ {
+   "city_ascii": "Shiraz",
+   "lat": 29.61,
+   "lng": 52.5425
+ },
+ {
+   "city_ascii": "Tabriz",
+   "lat": 38.0814,
+   "lng": 46.3006
+ },
+ {
+   "city_ascii": "Qom",
+   "lat": 34.64,
+   "lng": 50.8764
+ },
+ {
+   "city_ascii": "Ahvaz",
+   "lat": 31.3047,
+   "lng": 48.6783
+ },
+ {
+   "city_ascii": "Kermanshah",
+   "lat": 34.3325,
+   "lng": 47.0933
+ },
+ {
+   "city_ascii": "Kerman",
+   "lat": 30.2911,
+   "lng": 57.0678
+ },
+ {
+   "city_ascii": "Orumiyeh",
+   "lat": 37.5439,
+   "lng": 45.0647
+ },
+ {
+   "city_ascii": "Pishbar",
+   "lat": 33.3886,
+   "lng": 59.9789
+ },
+ {
+   "city_ascii": "Borvayeh-ye Al Bu `Aziz",
+   "lat": 31.6283,
+   "lng": 48.6147
+ },
+ {
+   "city_ascii": "Rasht",
+   "lat": 37.2744,
+   "lng": 49.5889
+ },
+ {
+   "city_ascii": "Bahar",
+   "lat": 34.9028,
+   "lng": 48.4425
+ },
+ {
+   "city_ascii": "Zahedan",
+   "lat": 29.5025,
+   "lng": 60.8558
+ },
+ {
+   "city_ascii": "Hamadan",
+   "lat": 34.8064,
+   "lng": 48.5161
+ },
+ {
+   "city_ascii": "Yazd",
+   "lat": 31.8822,
+   "lng": 54.3397
+ },
+ {
+   "city_ascii": "Ardabil",
+   "lat": 38.2425,
+   "lng": 48.29
+ },
+ {
+   "city_ascii": "Bandar `Abbas",
+   "lat": 27.1961,
+   "lng": 56.2878
+ },
+ {
+   "city_ascii": "Arak",
+   "lat": 34.0914,
+   "lng": 49.6933
+ },
+ {
+   "city_ascii": "Eslamshahr",
+   "lat": 35.5317,
+   "lng": 51.2247
+ },
+ {
+   "city_ascii": "Sanandaj",
+   "lat": 35.3114,
+   "lng": 46.9961
+ },
+ {
+   "city_ascii": "Qazvin",
+   "lat": 36.2894,
+   "lng": 50.0086
+ },
+ {
+   "city_ascii": "Zanjan",
+   "lat": 36.6789,
+   "lng": 48.5056
+ },
+ {
+   "city_ascii": "Khorramabad",
+   "lat": 33.4875,
+   "lng": 48.3561
+ },
+ {
+   "city_ascii": "Gorgan",
+   "lat": 36.8378,
+   "lng": 54.4414
+ },
+ {
+   "city_ascii": "Shahriar",
+   "lat": 35.6722,
+   "lng": 51.0236
+ },
+ {
+   "city_ascii": "Shahr-e Qods",
+   "lat": 35.7097,
+   "lng": 51.1119
+ },
+ {
+   "city_ascii": "Kashan",
+   "lat": 33.9825,
+   "lng": 51.4325
+ },
+ {
+   "city_ascii": "Malard",
+   "lat": 35.6806,
+   "lng": 50.9783
+ },
+ {
+   "city_ascii": "Sarta",
+   "lat": 36.4491,
+   "lng": 53.3234
+ },
+ {
+   "city_ascii": "Dezful",
+   "lat": 32.3786,
+   "lng": 48.4144
+ },
+ {
+   "city_ascii": "Babol",
+   "lat": 36.5475,
+   "lng": 52.6783
+ },
+ {
+   "city_ascii": "Bojnurd",
+   "lat": 37.4722,
+   "lng": 57.3289
+ },
+ {
+   "city_ascii": "Qa'em Shahr",
+   "lat": 36.4636,
+   "lng": 52.8581
+ },
+ {
+   "city_ascii": "Khomeyni Shahr",
+   "lat": 32.6803,
+   "lng": 51.5361
+ },
+ {
+   "city_ascii": "Sabzevar",
+   "lat": 36.2125,
+   "lng": 57.6764
+ },
+ {
+   "city_ascii": "Amol",
+   "lat": 36.4703,
+   "lng": 52.3467
+ },
+ {
+   "city_ascii": "Pakdasht",
+   "lat": 35.485,
+   "lng": 51.6794
+ },
+ {
+   "city_ascii": "Najafabad",
+   "lat": 32.6447,
+   "lng": 51.3603
+ },
+ {
+   "city_ascii": "Borujerd",
+   "lat": 33.9111,
+   "lng": 48.7522
+ },
+ {
+   "city_ascii": "Madan",
+   "lat": 30.3469,
+   "lng": 48.2825
+ },
+ {
+   "city_ascii": "Qarchak",
+   "lat": 35.4267,
+   "lng": 51.5842
+ },
+ {
+   "city_ascii": "Varamin",
+   "lat": 35.3508,
+   "lng": 51.6358
+ },
+ {
+   "city_ascii": "Bandar-e Bushehr",
+   "lat": 28.9264,
+   "lng": 50.8514
+ },
+ {
+   "city_ascii": "Neyshabur",
+   "lat": 36.22,
+   "lng": 58.82
+ },
+ {
+   "city_ascii": "Saveh",
+   "lat": 35.0278,
+   "lng": 50.3611
+ },
+ {
+   "city_ascii": "Birjand",
+   "lat": 32.8744,
+   "lng": 59.2161
+ },
+ {
+   "city_ascii": "Nasim Shahr",
+   "lat": 35.5617,
+   "lng": 51.1617
+ },
+ {
+   "city_ascii": "Khowy",
+   "lat": 38.5464,
+   "lng": 44.9542
+ },
+ {
+   "city_ascii": "Bukan",
+   "lat": 36.515,
+   "lng": 46.2075
+ },
+ {
+   "city_ascii": "Shahr-e Kord",
+   "lat": 32.3311,
+   "lng": 50.8594
+ },
+ {
+   "city_ascii": "Semnan",
+   "lat": 35.5811,
+   "lng": 53.3833
+ },
+ {
+   "city_ascii": "Fardis",
+   "lat": 35.73,
+   "lng": 50.9822
+ },
+ {
+   "city_ascii": "Maragheh",
+   "lat": 37.3894,
+   "lng": 46.2378
+ },
+ {
+   "city_ascii": "Sirjan",
+   "lat": 29.437,
+   "lng": 55.6802
+ },
+ {
+   "city_ascii": "Shahin Shahr",
+   "lat": 32.8606,
+   "lng": 51.5531
+ },
+ {
+   "city_ascii": "Malayer",
+   "lat": 34.3,
+   "lng": 48.8178
+ },
+ {
+   "city_ascii": "Mahabad",
+   "lat": 36.7678,
+   "lng": 45.7339
+ },
+ {
+   "city_ascii": "Saqqez",
+   "lat": 36.2411,
+   "lng": 46.2706
+ },
+ {
+   "city_ascii": "Bandar-e Mahshahr",
+   "lat": 30.5567,
+   "lng": 49.1897
+ },
+ {
+   "city_ascii": "Rafsanjan",
+   "lat": 30.4111,
+   "lng": 55.9911
+ },
+ {
+   "city_ascii": "Borazjan",
+   "lat": 29.2694,
+   "lng": 51.22
+ },
+ {
+   "city_ascii": "Gonbad-e Kavus",
+   "lat": 37.2433,
+   "lng": 55.1692
+ },
+ {
+   "city_ascii": "Shahrud",
+   "lat": 36.4133,
+   "lng": 54.9781
+ },
+ {
+   "city_ascii": "Marvdasht",
+   "lat": 29.8786,
+   "lng": 52.8067
+ },
+ {
+   "city_ascii": "Quchan",
+   "lat": 37.106,
+   "lng": 58.5095
+ },
+ {
+   "city_ascii": "Jahrom",
+   "lat": 28.5031,
+   "lng": 53.5658
+ },
+ {
+   "city_ascii": "Kamalshahr",
+   "lat": 35.8658,
+   "lng": 50.8717
+ },
+ {
+   "city_ascii": "Torbat-e Heydariyeh",
+   "lat": 35.29,
+   "lng": 59.2169
+ },
+ {
+   "city_ascii": "Marivan",
+   "lat": 35.5217,
+   "lng": 46.1806
+ },
+ {
+   "city_ascii": "Andimeshk",
+   "lat": 32.4714,
+   "lng": 48.3489
+ },
+ {
+   "city_ascii": "Shahreza",
+   "lat": 32.0122,
+   "lng": 51.8594
+ },
+ {
+   "city_ascii": "Zabol",
+   "lat": 31.0339,
+   "lng": 61.4878
+ },
+ {
+   "city_ascii": "Khorramshahr",
+   "lat": 30.4394,
+   "lng": 48.1817
+ },
+ {
+   "city_ascii": "Marand",
+   "lat": 38.4331,
+   "lng": 45.7686
+ },
+ {
+   "city_ascii": "Jiroft",
+   "lat": 28.6797,
+   "lng": 57.7447
+ },
+ {
+   "city_ascii": "Salmas",
+   "lat": 38.2028,
+   "lng": 44.7669
+ },
+ {
+   "city_ascii": "Bam",
+   "lat": 29.0994,
+   "lng": 58.3436
+ },
+ {
+   "city_ascii": "Behbahan",
+   "lat": 30.5942,
+   "lng": 50.2433
+ },
+ {
+   "city_ascii": "Dorud",
+   "lat": 33.4994,
+   "lng": 49.0531
+ },
+ {
+   "city_ascii": "Nazarabad",
+   "lat": 35.9583,
+   "lng": 50.605
+ },
+ {
+   "city_ascii": "Mohammad Shahr",
+   "lat": 35.7483,
+   "lng": 50.9025
+ },
+ {
+   "city_ascii": "Bandar-e Anzali",
+   "lat": 37.4708,
+   "lng": 49.47
+ },
+ {
+   "city_ascii": "Iranshahr",
+   "lat": 27.1978,
+   "lng": 60.6836
+ },
+ {
+   "city_ascii": "Fasa",
+   "lat": 28.9483,
+   "lng": 53.6336
+ },
+ {
+   "city_ascii": "Baneh",
+   "lat": 35.9969,
+   "lng": 45.8853
+ },
+ {
+   "city_ascii": "Yasuj",
+   "lat": 30.6672,
+   "lng": 51.5797
+ },
+ {
+   "city_ascii": "Chabahar",
+   "lat": 25.2928,
+   "lng": 60.6497
+ },
+ {
+   "city_ascii": "Robat Karim",
+   "lat": 35.4825,
+   "lng": 51.0786
+ },
+ {
+   "city_ascii": "Kashmar",
+   "lat": 35.2431,
+   "lng": 58.4594
+ },
+ {
+   "city_ascii": "Shushtar",
+   "lat": 32.045,
+   "lng": 48.8594
+ },
+ {
+   "city_ascii": "Ahar",
+   "lat": 38.4797,
+   "lng": 47.0669
+ },
+ {
+   "city_ascii": "Masjed Soleyman",
+   "lat": 31.96,
+   "lng": 49.2881
+ },
+ {
+   "city_ascii": "Torbat-e Jam",
+   "lat": 35.2431,
+   "lng": 60.625
+ },
+ {
+   "city_ascii": "Abhar",
+   "lat": 36.1511,
+   "lng": 49.2244
+ },
+ {
+   "city_ascii": "Mianeh",
+   "lat": 37.4239,
+   "lng": 47.7197
+ },
+ {
+   "city_ascii": "Do Gonbadan",
+   "lat": 30.36,
+   "lng": 50.7839
+ },
+ {
+   "city_ascii": "Kazerun",
+   "lat": 29.6156,
+   "lng": 51.6567
+ },
+ {
+   "city_ascii": "Behshahr",
+   "lat": 36.6911,
+   "lng": 53.5539
+ },
+ {
+   "city_ascii": "Alvand",
+   "lat": 36.1867,
+   "lng": 50.0639
+ },
+ {
+   "city_ascii": "Piranshahr",
+   "lat": 36.6956,
+   "lng": 45.1456
+ },
+ {
+   "city_ascii": "Eslamabad-e Gharb",
+   "lat": 34.1103,
+   "lng": 46.5275
+ },
+ {
+   "city_ascii": "Kuhdasht",
+   "lat": 33.5294,
+   "lng": 47.6092
+ },
+ {
+   "city_ascii": "Khowrasgan",
+   "lat": 32.6539,
+   "lng": 51.7553
+ },
+ {
+   "city_ascii": "Shirvan",
+   "lat": 37.4006,
+   "lng": 57.9278
+ },
+ {
+   "city_ascii": "Meybod",
+   "lat": 32.2444,
+   "lng": 54.0186
+ },
+ {
+   "city_ascii": "Takestan",
+   "lat": 36.0672,
+   "lng": 49.6958
+ },
+ {
+   "city_ascii": "Langarud",
+   "lat": 37.1956,
+   "lng": 50.1517
+ },
+ {
+   "city_ascii": "Bumahen",
+   "lat": 35.7314,
+   "lng": 51.8675
+ },
+ {
+   "city_ascii": "Baharestan",
+   "lat": 32.4867,
+   "lng": 51.7808
+ },
+ {
+   "city_ascii": "Aligudarz",
+   "lat": 33.4025,
+   "lng": 49.6903
+ },
+ {
+   "city_ascii": "Bandar Emam",
+   "lat": 30.5058,
+   "lng": 49.0742
+ },
+ {
+   "city_ascii": "Qorveh",
+   "lat": 35.1678,
+   "lng": 47.8008
+ },
+ {
+   "city_ascii": "Shush",
+   "lat": 32.1947,
+   "lng": 48.2475
+ },
+ {
+   "city_ascii": "Nahavand",
+   "lat": 34.1928,
+   "lng": 48.3731
+ },
+ {
+   "city_ascii": "Bonab",
+   "lat": 37.3428,
+   "lng": 46.0617
+ },
+ {
+   "city_ascii": "Ardakan",
+   "lat": 32.3061,
+   "lng": 54.0081
+ },
+ {
+   "city_ascii": "Ramhormoz",
+   "lat": 31.2753,
+   "lng": 49.6044
+ },
+ {
+   "city_ascii": "Meshgin Shahr",
+   "lat": 38.3972,
+   "lng": 47.6739
+ },
+ {
+   "city_ascii": "Bandar-e Genaveh",
+   "lat": 29.5839,
+   "lng": 50.5189
+ },
+ {
+   "city_ascii": "Naqadeh",
+   "lat": 36.9547,
+   "lng": 45.3881
+ },
+ {
+   "city_ascii": "Khomeyn",
+   "lat": 33.6422,
+   "lng": 50.0789
+ },
+ {
+   "city_ascii": "Omidiyeh",
+   "lat": 30.7583,
+   "lng": 49.705
+ },
+ {
+   "city_ascii": "Aran Bidgol",
+   "lat": 34.0589,
+   "lng": 51.4817
+ },
+ {
+   "city_ascii": "Baqershahr",
+   "lat": 35.5322,
+   "lng": 51.4036
+ },
+ {
+   "city_ascii": "Zarand",
+   "lat": 30.8108,
+   "lng": 56.5658
+ },
+ {
+   "city_ascii": "Mahdasht",
+   "lat": 35.7194,
+   "lng": 50.7978
+ },
+ {
+   "city_ascii": "Mobarakeh",
+   "lat": 32.3494,
+   "lng": 51.5
+ },
+ {
+   "city_ascii": "Meshkin Dasht",
+   "lat": 35.7469,
+   "lng": 50.9361
+ },
+ {
+   "city_ascii": "Neka",
+   "lat": 36.65,
+   "lng": 53.2972
+ },
+ {
+   "city_ascii": "Kangan",
+   "lat": 27.8389,
+   "lng": 52.0619
+ },
+ {
+   "city_ascii": "Abyek",
+   "lat": 36.0411,
+   "lng": 50.5306
+ },
+ {
+   "city_ascii": "Saravan",
+   "lat": 27.3708,
+   "lng": 62.3325
+ },
+ {
+   "city_ascii": "Babolsar",
+   "lat": 36.7006,
+   "lng": 52.65
+ },
+ {
+   "city_ascii": "Esfarayen",
+   "lat": 37.0703,
+   "lng": 57.5089
+ },
+ {
+   "city_ascii": "Damghan",
+   "lat": 36.1656,
+   "lng": 54.3419
+ },
+ {
+   "city_ascii": "Borujen",
+   "lat": 31.9678,
+   "lng": 51.2894
+ },
+ {
+   "city_ascii": "Dehdasht",
+   "lat": 30.7953,
+   "lng": 50.5653
+ },
+ {
+   "city_ascii": "Khash",
+   "lat": 28.22,
+   "lng": 61.2114
+ },
+ {
+   "city_ascii": "Taybad",
+   "lat": 34.7408,
+   "lng": 60.7792
+ },
+ {
+   "city_ascii": "Kut-e `Abdollah",
+   "lat": 31.2447,
+   "lng": 48.6594
+ },
+ {
+   "city_ascii": "Zarrin Shahr",
+   "lat": 32.3889,
+   "lng": 51.3733
+ },
+ {
+   "city_ascii": "Asadabad",
+   "lat": 34.7825,
+   "lng": 48.1219
+ },
+ {
+   "city_ascii": "Hashtgerd",
+   "lat": 35.9619,
+   "lng": 50.6889
+ },
+ {
+   "city_ascii": "Tonekabon",
+   "lat": 36.8153,
+   "lng": 50.8711
+ },
+ {
+   "city_ascii": "Khorramdarreh",
+   "lat": 36.2072,
+   "lng": 49.1992
+ },
+ {
+   "city_ascii": "Eqbaliyeh",
+   "lat": 36.2306,
+   "lng": 49.9225
+ },
+ {
+   "city_ascii": "Javanrud",
+   "lat": 34.8078,
+   "lng": 46.4939
+ },
+ {
+   "city_ascii": "Hashtpar",
+   "lat": 37.7933,
+   "lng": 48.9044
+ },
+ {
+   "city_ascii": "Sabbashahr",
+   "lat": 35.5817,
+   "lng": 51.1119
+ },
+ {
+   "city_ascii": "Bandar-e Torkaman",
+   "lat": 36.9014,
+   "lng": 54.0736
+ },
+ {
+   "city_ascii": "Bijar",
+   "lat": 35.8729,
+   "lng": 47.5993
+ },
+ {
+   "city_ascii": "`Aliabad-e Katul",
+   "lat": 36.9075,
+   "lng": 54.8667
+ },
+ {
+   "city_ascii": "Kahnuj",
+   "lat": 27.9406,
+   "lng": 57.6992
+ },
+ {
+   "city_ascii": "Shahr-e Babak",
+   "lat": 30.1233,
+   "lng": 55.1172
+ },
+ {
+   "city_ascii": "Susangerd",
+   "lat": 31.5569,
+   "lng": 48.1894
+ },
+ {
+   "city_ascii": "Tuyserkan",
+   "lat": 34.5494,
+   "lng": 48.4456
+ },
+ {
+   "city_ascii": "Chahar Dangeh",
+   "lat": 35.5958,
+   "lng": 51.3083
+ },
+ {
+   "city_ascii": "Neyriz",
+   "lat": 29.1928,
+   "lng": 54.3197
+ },
+ {
+   "city_ascii": "Nowshahr",
+   "lat": 36.6475,
+   "lng": 51.4931
+ },
+ {
+   "city_ascii": "Garmsar",
+   "lat": 35.2206,
+   "lng": 52.3389
+ },
+ {
+   "city_ascii": "Damavand",
+   "lat": 35.6928,
+   "lng": 52.0467
+ },
+ {
+   "city_ascii": "Golpayegan",
+   "lat": 33.4508,
+   "lng": 50.2817
+ },
+ {
+   "city_ascii": "Azna",
+   "lat": 33.4597,
+   "lng": 49.4547
+ },
+ {
+   "city_ascii": "Sowme`eh Sara",
+   "lat": 37.3,
+   "lng": 49.3142
+ },
+ {
+   "city_ascii": "Sardasht",
+   "lat": 36.1553,
+   "lng": 45.48
+ },
+ {
+   "city_ascii": "Bafq",
+   "lat": 31.6033,
+   "lng": 55.4003
+ },
+ {
+   "city_ascii": "Astaneh-ye Ashrafiyeh",
+   "lat": 37.2658,
+   "lng": 49.9431
+ },
+ {
+   "city_ascii": "Azarshahr",
+   "lat": 37.7628,
+   "lng": 45.9758
+ },
+ {
+   "city_ascii": "Eqlid",
+   "lat": 30.8928,
+   "lng": 52.6889
+ },
+ {
+   "city_ascii": "Sonqor",
+   "lat": 34.7828,
+   "lng": 47.5983
+ },
+ {
+   "city_ascii": "Harsin",
+   "lat": 34.2728,
+   "lng": 47.5875
+ },
+ {
+   "city_ascii": "Azadshahr",
+   "lat": 37.0869,
+   "lng": 55.1742
+ },
+ {
+   "city_ascii": "Takab",
+   "lat": 36.4008,
+   "lng": 47.1108
+ },
+ {
+   "city_ascii": "Konarak",
+   "lat": 25.3589,
+   "lng": 60.3992
+ },
+ {
+   "city_ascii": "Mahallat",
+   "lat": 33.9056,
+   "lng": 50.4572
+ },
+ {
+   "city_ascii": "Darcheh",
+   "lat": 32.6131,
+   "lng": 51.5531
+ },
+ {
+   "city_ascii": "Qa'en",
+   "lat": 33.7333,
+   "lng": 59.1811
+ },
+ {
+   "city_ascii": "Sarakhs",
+   "lat": 36.5425,
+   "lng": 61.1589
+ },
+ {
+   "city_ascii": "Sarab",
+   "lat": 37.9414,
+   "lng": 47.5367
+ },
+ {
+   "city_ascii": "Shadegan",
+   "lat": 30.6492,
+   "lng": 48.6653
+ },
+ {
+   "city_ascii": "Dowlatabad",
+   "lat": 32.8003,
+   "lng": 51.6958
+ },
+ {
+   "city_ascii": "Delijan",
+   "lat": 33.9903,
+   "lng": 50.6836
+ },
+ {
+   "city_ascii": "Gonabad",
+   "lat": 34.3575,
+   "lng": 58.6783
+ },
+ {
+   "city_ascii": "Khowrmuj",
+   "lat": 28.6567,
+   "lng": 51.3808
+ },
+ {
+   "city_ascii": "Qeshm",
+   "lat": 26.9494,
+   "lng": 56.2681
+ },
+ {
+   "city_ascii": "Lordegan",
+   "lat": 31.5081,
+   "lng": 50.8319
+ },
+ {
+   "city_ascii": "Kish",
+   "lat": 26.5553,
+   "lng": 53.985
+ },
+ {
+   "city_ascii": "Oshnaviyeh",
+   "lat": 37.0375,
+   "lng": 45.0981
+ },
+ {
+   "city_ascii": "Tabas",
+   "lat": 33.5961,
+   "lng": 56.9281
+ },
+ {
+   "city_ascii": "Fariman",
+   "lat": 35.7044,
+   "lng": 59.8486
+ },
+ {
+   "city_ascii": "Khalkhal",
+   "lat": 37.6272,
+   "lng": 48.53
+ },
+ {
+   "city_ascii": "Fereydun Kenar",
+   "lat": 36.685,
+   "lng": 52.5208
+ },
+ {
+   "city_ascii": "Rudsar",
+   "lat": 37.1406,
+   "lng": 50.2942
+ },
+ {
+   "city_ascii": "Falavarjan",
+   "lat": 32.5558,
+   "lng": 51.5106
+ },
+ {
+   "city_ascii": "Kahrizak",
+   "lat": 35.5169,
+   "lng": 51.3603
+ },
+ {
+   "city_ascii": "Dargaz",
+   "lat": 37.4456,
+   "lng": 59.1078
+ },
+ {
+   "city_ascii": "Estahban",
+   "lat": 29.1269,
+   "lng": 54.0394
+ },
+ {
+   "city_ascii": "Kalaleh",
+   "lat": 37.3789,
+   "lng": 55.4889
+ },
+ {
+   "city_ascii": "Ramsar",
+   "lat": 36.9225,
+   "lng": 50.6431
+ },
+ {
+   "city_ascii": "Sahneh",
+   "lat": 34.4811,
+   "lng": 47.68
+ },
+ {
+   "city_ascii": "Khodabandeh",
+   "lat": 36.1194,
+   "lng": 48.5917
+ },
+ {
+   "city_ascii": "Sarpol-e Zahab",
+   "lat": 34.4589,
+   "lng": 45.8614
+ },
+ {
+   "city_ascii": "Baft",
+   "lat": 29.235,
+   "lng": 56.5989
+ },
+ {
+   "city_ascii": "Gerash",
+   "lat": 27.6667,
+   "lng": 54.1411
+ },
+ {
+   "city_ascii": "Nazerabad",
+   "lat": 31.5775,
+   "lng": 54.4369
+ },
+ {
+   "city_ascii": "Shahin Dezh",
+   "lat": 36.6806,
+   "lng": 46.5681
+ },
+ {
+   "city_ascii": "Divandarreh",
+   "lat": 35.9158,
+   "lng": 47.0228
+ },
+ {
+   "city_ascii": "`Ajab Shir",
+   "lat": 37.4833,
+   "lng": 45.8911
+ },
+ {
+   "city_ascii": "Aleshtar",
+   "lat": 33.8653,
+   "lng": 48.2622
+ },
+ {
+   "city_ascii": "Khvaf",
+   "lat": 34.5711,
+   "lng": 60.1439
+ },
+ {
+   "city_ascii": "Dehloran",
+   "lat": 32.6892,
+   "lng": 47.2689
+ },
+ {
+   "city_ascii": "Zarqan",
+   "lat": 29.7683,
+   "lng": 52.7186
+ },
+ {
+   "city_ascii": "Farrokh Shahr",
+   "lat": 32.2714,
+   "lng": 50.9775
+ },
+ {
+   "city_ascii": "Kavar",
+   "lat": 29.2017,
+   "lng": 52.6917
+ },
+ {
+   "city_ascii": "Jam",
+   "lat": 27.8236,
+   "lng": 52.3303
+ },
+ {
+   "city_ascii": "Eyvan",
+   "lat": 33.8278,
+   "lng": 46.3061
+ },
+ {
+   "city_ascii": "Farsan",
+   "lat": 32.2553,
+   "lng": 50.5711
+ },
+ {
+   "city_ascii": "Bandar-e Lengeh",
+   "lat": 26.5594,
+   "lng": 54.885
+ },
+ {
+   "city_ascii": "Minudasht",
+   "lat": 37.2306,
+   "lng": 55.3736
+ },
+ {
+   "city_ascii": "Qahderijan",
+   "lat": 32.5772,
+   "lng": 51.4539
+ },
+ {
+   "city_ascii": "Eshtehard",
+   "lat": 35.7247,
+   "lng": 50.3717
+ },
+ {
+   "city_ascii": "Bazeh Kalagh",
+   "lat": 36.5325,
+   "lng": 59.3636
+ },
+ {
+   "city_ascii": "Chahchaheh",
+   "lat": 36.5325,
+   "lng": 59.3636
+ },
+ {
+   "city_ascii": "Bozmargi",
+   "lat": 36.5325,
+   "lng": 59.3636
+ },
+ {
+   "city_ascii": "Kalateh-ye Mir Ab",
+   "lat": 36.5325,
+   "lng": 59.3636
+ },
+ {
+   "city_ascii": "Sardrud",
+   "lat": 38.0286,
+   "lng": 46.1475
+ },
+ {
+   "city_ascii": "Karahrud",
+   "lat": 34.0628,
+   "lng": 49.6461
+ },
+ {
+   "city_ascii": "Lamerd",
+   "lat": 27.3336,
+   "lng": 53.1886
+ },
+ {
+   "city_ascii": "Hendijan",
+   "lat": 30.2383,
+   "lng": 49.7075
+ },
+ {
+   "city_ascii": "Germi",
+   "lat": 39.0297,
+   "lng": 48.0803
+ },
+ {
+   "city_ascii": "Ferdows",
+   "lat": 34.0192,
+   "lng": 58.1731
+ },
+ {
+   "city_ascii": "Rudehen",
+   "lat": 35.7333,
+   "lng": 51.9192
+ },
+ {
+   "city_ascii": "Bardaskan",
+   "lat": 35.2625,
+   "lng": 57.9703
+ },
+ {
+   "city_ascii": "Fuman",
+   "lat": 37.2242,
+   "lng": 49.3125
+ },
+ {
+   "city_ascii": "Abarkuh",
+   "lat": 31.1267,
+   "lng": 53.2592
+ },
+ {
+   "city_ascii": "Malekan",
+   "lat": 37.15,
+   "lng": 46.1042
+ },
+ {
+   "city_ascii": "Safashahr",
+   "lat": 30.6133,
+   "lng": 53.1928
+ },
+ {
+   "city_ascii": "Qa'emiyeh",
+   "lat": 29.8525,
+   "lng": 51.5842
+ },
+ {
+   "city_ascii": "Qarah Zia' od Din",
+   "lat": 38.89,
+   "lng": 45.0283
+ },
+ {
+   "city_ascii": "Poldokhtar",
+   "lat": 33.1489,
+   "lng": 47.7164
+ },
+ {
+   "city_ascii": "Bagh-e Malek",
+   "lat": 31.5247,
+   "lng": 49.8869
+ },
+ {
+   "city_ascii": "Semirom",
+   "lat": 31.4094,
+   "lng": 51.5736
+ },
+ {
+   "city_ascii": "Dehgolan",
+   "lat": 35.2778,
+   "lng": 47.4175
+ },
+ {
+   "city_ascii": "Paveh",
+   "lat": 35.0433,
+   "lng": 46.355
+ },
+ {
+   "city_ascii": "Bandar-e Deylam",
+   "lat": 30.0542,
+   "lng": 50.1639
+ },
+ {
+   "city_ascii": "Shahedshahr",
+   "lat": 35.5731,
+   "lng": 51.0869
+ },
+ {
+   "city_ascii": "Showt",
+   "lat": 39.2197,
+   "lng": 44.7722
+ },
+ {
+   "city_ascii": "Bardsir",
+   "lat": 29.9275,
+   "lng": 56.5764
+ },
+ {
+   "city_ascii": "Ashkhaneh",
+   "lat": 37.5578,
+   "lng": 56.9258
+ },
+ {
+   "city_ascii": "Ramshir",
+   "lat": 30.8936,
+   "lng": 49.4086
+ },
+ {
+   "city_ascii": "Ravansar",
+   "lat": 34.7125,
+   "lng": 46.6511
+ },
+ {
+   "city_ascii": "Mahdishahr",
+   "lat": 35.7144,
+   "lng": 53.3569
+ },
+ {
+   "city_ascii": "Gaz",
+   "lat": 32.8061,
+   "lng": 51.6206
+ },
+ {
+   "city_ascii": "Gotvand",
+   "lat": 32.2433,
+   "lng": 48.8136
+ },
+ {
+   "city_ascii": "Deyr",
+   "lat": 27.8417,
+   "lng": 51.9394
+ },
+ {
+   "city_ascii": "Galikesh",
+   "lat": 37.2728,
+   "lng": 55.4328
+ },
+ {
+   "city_ascii": "Sheyban",
+   "lat": 31.4061,
+   "lng": 48.7944
+ },
+ {
+   "city_ascii": "Kelishad va Sudarjan",
+   "lat": 32.5489,
+   "lng": 51.5286
+ },
+ {
+   "city_ascii": "`Ali Shahr",
+   "lat": 28.9306,
+   "lng": 51.0689
+ },
+ {
+   "city_ascii": "Baravat",
+   "lat": 29.0656,
+   "lng": 58.4039
+ },
+ {
+   "city_ascii": "Ravar",
+   "lat": 31.2633,
+   "lng": 56.8072
+ },
+ {
+   "city_ascii": "Garmdarreh",
+   "lat": 35.7478,
+   "lng": 51.0678
+ },
+ {
+   "city_ascii": "Goldasht",
+   "lat": 32.6269,
+   "lng": 51.4386
+ },
+ {
+   "city_ascii": "Gilan-e Gharb",
+   "lat": 34.1406,
+   "lng": 45.9183
+ },
+ {
+   "city_ascii": "Shabestar",
+   "lat": 38.18,
+   "lng": 45.7039
+ },
+ {
+   "city_ascii": "Hamidiyeh",
+   "lat": 31.4811,
+   "lng": 48.435
+ },
+ {
+   "city_ascii": "Khosrowshahr",
+   "lat": 37.9497,
+   "lng": 46.0508
+ },
+ {
+   "city_ascii": "Darreh Shahr",
+   "lat": 33.1431,
+   "lng": 47.3794
+ },
+ {
+   "city_ascii": "Ma'muniyeh",
+   "lat": 35.305,
+   "lng": 50.4975
+ },
+ {
+   "city_ascii": "Hafshejan",
+   "lat": 32.2269,
+   "lng": 50.7931
+ },
+ {
+   "city_ascii": "Galugah",
+   "lat": 36.7269,
+   "lng": 53.8089
+ },
+ {
+   "city_ascii": "Shazand",
+   "lat": 33.9292,
+   "lng": 49.4103
+ },
+ {
+   "city_ascii": "Torqabeh",
+   "lat": 36.3142,
+   "lng": 59.3725
+ },
+ {
+   "city_ascii": "Bandar-e Gaz",
+   "lat": 36.7739,
+   "lng": 53.9481
+ },
+ {
+   "city_ascii": "Mohammadabad",
+   "lat": 28.6517,
+   "lng": 59.0158
+ },
+ {
+   "city_ascii": "Hashtrud",
+   "lat": 37.4714,
+   "lng": 47.0583
+ },
+ {
+   "city_ascii": "Khvansar",
+   "lat": 33.2208,
+   "lng": 50.3153
+ },
+ {
+   "city_ascii": "Farashband",
+   "lat": 28.8564,
+   "lng": 52.0964
+ },
+ {
+   "city_ascii": "Khowrzuq",
+   "lat": 32.7783,
+   "lng": 51.6478
+ },
+ {
+   "city_ascii": "Evaz",
+   "lat": 27.76,
+   "lng": 54.0067
+ },
+ {
+   "city_ascii": "Siahkal",
+   "lat": 37.1506,
+   "lng": 49.8714
+ },
+ {
+   "city_ascii": "Likak",
+   "lat": 30.8928,
+   "lng": 50.0928
+ },
+ {
+   "city_ascii": "Mahmudabad Nemuneh",
+   "lat": 36.2903,
+   "lng": 49.8994
+ },
+ {
+   "city_ascii": "Jajarm",
+   "lat": 36.9519,
+   "lng": 56.3758
+ },
+ {
+   "city_ascii": "Hoveyzeh",
+   "lat": 31.4606,
+   "lng": 48.0781
+ },
+ {
+   "city_ascii": "Abrisham",
+   "lat": 32.5675,
+   "lng": 51.5733
+ },
+ {
+   "city_ascii": "Mahajeran-e Kamar",
+   "lat": 34.0486,
+   "lng": 49.4311
+ },
+ {
+   "city_ascii": "Khonj",
+   "lat": 27.8897,
+   "lng": 53.4308
+ },
+ {
+   "city_ascii": "Kabudarahang",
+   "lat": 35.2094,
+   "lng": 48.7236
+ },
+ {
+   "city_ascii": "Bandar-e Kong",
+   "lat": 26.5947,
+   "lng": 54.9381
+ },
+ {
+   "city_ascii": "Gomishan",
+   "lat": 37.07,
+   "lng": 54.0769
+ },
+ {
+   "city_ascii": "Ashkezar",
+   "lat": 32.0006,
+   "lng": 54.2075
+ },
+ {
+   "city_ascii": "Ab Pakhsh",
+   "lat": 29.3606,
+   "lng": 51.0683
+ },
+ {
+   "city_ascii": "Nakhl-e Taqi",
+   "lat": 27.5014,
+   "lng": 52.5858
+ },
+ {
+   "city_ascii": "Choghadak",
+   "lat": 28.9864,
+   "lng": 51.0375
+ },
+ {
+   "city_ascii": "Kherameh",
+   "lat": 29.4992,
+   "lng": 53.3131
+ },
+ {
+   "city_ascii": "Qasr-e Shirin",
+   "lat": 34.5158,
+   "lng": 45.5772
+ },
+ {
+   "city_ascii": "Taft",
+   "lat": 31.7492,
+   "lng": 54.2103
+ },
+ {
+   "city_ascii": "Osku",
+   "lat": 37.9147,
+   "lng": 46.1217
+ },
+ {
+   "city_ascii": "Niar",
+   "lat": 38.2369,
+   "lng": 48.3272
+ },
+ {
+   "city_ascii": "Gerd Faramarz Shahediyeh",
+   "lat": 31.9417,
+   "lng": 54.2677
+ },
+ {
+   "city_ascii": "Abrandabad-e Shahediyeh",
+   "lat": 31.9408,
+   "lng": 54.2736
+ },
+ {
+   "city_ascii": "Nehbandan",
+   "lat": 31.5436,
+   "lng": 60.0372
+ },
+ {
+   "city_ascii": "Sarvestan",
+   "lat": 29.2739,
+   "lng": 53.2203
+ },
+ {
+   "city_ascii": "`Anbarabad",
+   "lat": 28.4794,
+   "lng": 57.8414
+ },
+ {
+   "city_ascii": "Lavasan",
+   "lat": 35.8183,
+   "lng": 51.6383
+ },
+ {
+   "city_ascii": "Feyzabad",
+   "lat": 35.0183,
+   "lng": 58.7839
+ },
+ {
+   "city_ascii": "Bidestan",
+   "lat": 36.2308,
+   "lng": 50.1236
+ },
+ {
+   "city_ascii": "Dizicheh",
+   "lat": 32.3869,
+   "lng": 51.5122
+ },
+ {
+   "city_ascii": "Seyah Cheshmeh",
+   "lat": 39.0631,
+   "lng": 44.3836
+ },
+ {
+   "city_ascii": "Nikshahr",
+   "lat": 26.2253,
+   "lng": 60.2167
+ },
+ {
+   "city_ascii": "Arsanjan",
+   "lat": 29.9142,
+   "lng": 53.3058
+ },
+ {
+   "city_ascii": "Mehran",
+   "lat": 33.1208,
+   "lng": 46.1642
+ },
+ {
+   "city_ascii": "Sedeh Lanjan",
+   "lat": 32.3786,
+   "lng": 51.3178
+ },
+ {
+   "city_ascii": "Sa`adat Shahr",
+   "lat": 30.0772,
+   "lng": 53.1328
+ },
+ {
+   "city_ascii": "Dehaqan",
+   "lat": 31.9386,
+   "lng": 51.6475
+ },
+ {
+   "city_ascii": "Jask",
+   "lat": 25.6531,
+   "lng": 57.7817
+ },
+ {
+   "city_ascii": "Ilkhchi",
+   "lat": 37.9373,
+   "lng": 45.979
+ },
+ {
+   "city_ascii": "Ilkhechi",
+   "lat": 37.9378,
+   "lng": 45.9803
+ },
+ {
+   "city_ascii": "Tafresh",
+   "lat": 34.6939,
+   "lng": 50.0156
+ },
+ {
+   "city_ascii": "Boshruyeh",
+   "lat": 33.8681,
+   "lng": 57.4286
+ },
+ {
+   "city_ascii": "Bileh Savar",
+   "lat": 39.3778,
+   "lng": 48.3497
+ },
+ {
+   "city_ascii": "Haftkel",
+   "lat": 31.4444,
+   "lng": 49.5314
+ },
+ {
+   "city_ascii": "Ardestan",
+   "lat": 33.3731,
+   "lng": 52.3689
+ },
+ {
+   "city_ascii": "Tiran",
+   "lat": 32.7033,
+   "lng": 51.1558
+ },
+ {
+   "city_ascii": "Manujan",
+   "lat": 27.4031,
+   "lng": 57.4917
+ },
+ {
+   "city_ascii": "Manjil",
+   "lat": 36.7447,
+   "lng": 49.4014
+ },
+ {
+   "city_ascii": "Chamgardan",
+   "lat": 32.3931,
+   "lng": 51.3392
+ },
+ {
+   "city_ascii": "Anar",
+   "lat": 30.8694,
+   "lng": 55.2678
+ },
+ {
+   "city_ascii": "Dastgerd",
+   "lat": 32.8008,
+   "lng": 51.6647
+ },
+ {
+   "city_ascii": "Morteza Gerd",
+   "lat": 35.6019,
+   "lng": 51.3486
+ },
+ {
+   "city_ascii": "Bandar-e Khamir",
+   "lat": 26.9511,
+   "lng": 55.5867
+ },
+ {
+   "city_ascii": "Veys",
+   "lat": 31.4861,
+   "lng": 48.8756
+ },
+ {
+   "city_ascii": "Shal",
+   "lat": 35.8975,
+   "lng": 49.7694
+ },
+ {
+   "city_ascii": "Charam",
+   "lat": 30.7461,
+   "lng": 50.7461
+ },
+ {
+   "city_ascii": "Ahram",
+   "lat": 28.8833,
+   "lng": 51.275
+ },
+ {
+   "city_ascii": "Amlash",
+   "lat": 37.0944,
+   "lng": 50.1928
+ },
+ {
+   "city_ascii": "Lalejin",
+   "lat": 34.9742,
+   "lng": 48.4756
+ },
+ {
+   "city_ascii": "Neqab",
+   "lat": 36.7072,
+   "lng": 57.4194
+ },
+ {
+   "city_ascii": "Sepidan",
+   "lat": 30.2594,
+   "lng": 51.9853
+ },
+ {
+   "city_ascii": "Dargahan",
+   "lat": 26.9667,
+   "lng": 56.0708
+ },
+ {
+   "city_ascii": "Razan",
+   "lat": 35.3886,
+   "lng": 49.0331
+ },
+ {
+   "city_ascii": "Natanz",
+   "lat": 33.5072,
+   "lng": 51.9136
+ },
+ {
+   "city_ascii": "Kiashahr",
+   "lat": 37.4214,
+   "lng": 49.9408
+ },
+ {
+   "city_ascii": "Famenin",
+   "lat": 35.1139,
+   "lng": 48.9725
+ },
+ {
+   "city_ascii": "Shandiz",
+   "lat": 36.3961,
+   "lng": 59.3092
+ },
+ {
+   "city_ascii": "Hidaj",
+   "lat": 36.2547,
+   "lng": 49.1311
+ },
+ {
+   "city_ascii": "Dowbaran",
+   "lat": 28.405,
+   "lng": 54.1878
+ },
+ {
+   "city_ascii": "Sarayan",
+   "lat": 33.8614,
+   "lng": 58.5217
+ },
+ {
+   "city_ascii": "Rostamabad",
+   "lat": 36.8994,
+   "lng": 49.4931
+ },
+ {
+   "city_ascii": "Namin",
+   "lat": 38.4256,
+   "lng": 48.4839
+ },
+ {
+   "city_ascii": "Jannat Shahr",
+   "lat": 28.6569,
+   "lng": 54.6861
+ },
+ {
+   "city_ascii": "Suran",
+   "lat": 27.2856,
+   "lng": 61.9964
+ },
+ {
+   "city_ascii": "Bandar-e `Asaluyeh",
+   "lat": 27.4744,
+   "lng": 52.6114
+ },
+ {
+   "city_ascii": "Kharv-e Sofla",
+   "lat": 36.1403,
+   "lng": 59.0075
+ },
+ {
+   "city_ascii": "Fereydunshahr",
+   "lat": 32.9419,
+   "lng": 50.1203
+ },
+ {
+   "city_ascii": "Kalardasht",
+   "lat": 36.5056,
+   "lng": 51.1589
+ },
+ {
+   "city_ascii": "Zehak",
+   "lat": 30.8933,
+   "lng": 61.6789
+ },
+ {
+   "city_ascii": "Faradonbeh",
+   "lat": 32.0078,
+   "lng": 51.2156
+ },
+ {
+   "city_ascii": "Rabor",
+   "lat": 29.2903,
+   "lng": 56.9133
+ },
+ {
+   "city_ascii": "Qal`eh Ganj",
+   "lat": 27.525,
+   "lng": 57.88
+ },
+ {
+   "city_ascii": "Fannuj",
+   "lat": 26.5753,
+   "lng": 59.6403
+ },
+ {
+   "city_ascii": "Lowshan",
+   "lat": 36.6278,
+   "lng": 49.5114
+ },
+ {
+   "city_ascii": "Shahr-e Herat",
+   "lat": 30.0547,
+   "lng": 54.3717
+ },
+ {
+   "city_ascii": "Ben",
+   "lat": 32.5444,
+   "lng": 50.7461
+ },
+ {
+   "city_ascii": "Khomam",
+   "lat": 37.3911,
+   "lng": 49.6597
+ },
+ {
+   "city_ascii": "Landeh",
+   "lat": 30.9808,
+   "lng": 50.4214
+ },
+ {
+   "city_ascii": "Varzaneh",
+   "lat": 32.4197,
+   "lng": 52.6478
+ },
+ {
+   "city_ascii": "Basmenj",
+   "lat": 37.9964,
+   "lng": 46.4717
+ },
+ {
+   "city_ascii": "Sangar",
+   "lat": 37.1797,
+   "lng": 49.6942
+ },
+ {
+   "city_ascii": "Naysar",
+   "lat": 35.3267,
+   "lng": 47.0686
+ },
+ {
+   "city_ascii": "Eyvanekey",
+   "lat": 35.3444,
+   "lng": 52.0714
+ },
+ {
+   "city_ascii": "Sangan",
+   "lat": 34.3994,
+   "lng": 60.2558
+ },
+ {
+   "city_ascii": "Sarableh",
+   "lat": 33.7683,
+   "lng": 46.5619
+ },
+ {
+   "city_ascii": "Asfarvarin",
+   "lat": 35.9358,
+   "lng": 49.7469
+ },
+ {
+   "city_ascii": "Rezvanshahr",
+   "lat": 37.5481,
+   "lng": 49.1356
+ },
+ {
+   "city_ascii": "Sureshjan",
+   "lat": 32.3156,
+   "lng": 50.6783
+ },
+ {
+   "city_ascii": "Charmahin",
+   "lat": 32.3372,
+   "lng": 51.1933
+ },
+ {
+   "city_ascii": "Senjan",
+   "lat": 34.0506,
+   "lng": 49.6214
+ },
+ {
+   "city_ascii": "Zaboli",
+   "lat": 27.1283,
+   "lng": 61.6722
+ },
+ {
+   "city_ascii": "Bampur",
+   "lat": 27.195,
+   "lng": 60.4547
+ },
+ {
+   "city_ascii": "Boldaji",
+   "lat": 31.9383,
+   "lng": 51.0533
+ },
+ {
+   "city_ascii": "Arakvaz-e Malekshahi",
+   "lat": 33.3847,
+   "lng": 46.5978
+ },
+ {
+   "city_ascii": "Mamqan",
+   "lat": 37.8458,
+   "lng": 45.9719
+ },
+ {
+   "city_ascii": "Bajestan",
+   "lat": 34.5161,
+   "lng": 58.1842
+ },
+ {
+   "city_ascii": "Zarach",
+   "lat": 31.9911,
+   "lng": 54.2322
+ },
+ {
+   "city_ascii": "Rostam Kola",
+   "lat": 36.6789,
+   "lng": 53.4297
+ },
+ {
+   "city_ascii": "Qasr-e Qand",
+   "lat": 26.2356,
+   "lng": 60.7408
+ },
+ {
+   "city_ascii": "Khorramabad",
+   "lat": 36.7822,
+   "lng": 50.8714
+ },
+ {
+   "city_ascii": "Poldasht",
+   "lat": 39.3447,
+   "lng": 45.0681
+ },
+ {
+   "city_ascii": "Kashaf",
+   "lat": 36.3678,
+   "lng": 59.5767
+ },
+ {
+   "city_ascii": "Kushk",
+   "lat": 32.6419,
+   "lng": 51.4997
+ },
+ {
+   "city_ascii": "Lavandevil",
+   "lat": 38.3089,
+   "lng": 48.8703
+ },
+ {
+   "city_ascii": "Vahdattiyeh",
+   "lat": 29.4842,
+   "lng": 51.2369
+ },
+ {
+   "city_ascii": "Hamadanak",
+   "lat": 35.5422,
+   "lng": 51.1383
+ },
+ {
+   "city_ascii": "Sarab-e Taveh-ye `Olya",
+   "lat": 30.5964,
+   "lng": 51.5725
+ },
+ {
+   "city_ascii": "Chamestan",
+   "lat": 36.4792,
+   "lng": 52.1194
+ },
+ {
+   "city_ascii": "Shahmirzad",
+   "lat": 35.7692,
+   "lng": 53.3361
+ },
+ {
+   "city_ascii": "Arvand Kenar",
+   "lat": 29.9789,
+   "lng": 48.5206
+ },
+ {
+   "city_ascii": "Arvand Kenar",
+   "lat": 29.9786,
+   "lng": 48.5189
+ },
+ {
+   "city_ascii": "Kariz",
+   "lat": 34.8117,
+   "lng": 60.8239
+ },
+ {
+   "city_ascii": "Sa'in Qal`eh",
+   "lat": 36.3058,
+   "lng": 49.0739
+ },
+ {
+   "city_ascii": "Hasseh",
+   "lat": 32.7067,
+   "lng": 51.7556
+ },
+ {
+   "city_ascii": "Garmeh",
+   "lat": 36.9864,
+   "lng": 56.2881
+ },
+ {
+   "city_ascii": "Qasr-e Qomsheh",
+   "lat": 29.7756,
+   "lng": 52.4417
+ },
+ {
+   "city_ascii": "Khan Bebin",
+   "lat": 37.0097,
+   "lng": 54.9858
+ },
+ {
+   "city_ascii": "Shamsabad",
+   "lat": 32.2978,
+   "lng": 48.4283
+ },
+ {
+   "city_ascii": "Pir Bakran",
+   "lat": 32.4678,
+   "lng": 51.5556
+ },
+ {
+   "city_ascii": "Gol Tappeh",
+   "lat": 35.4872,
+   "lng": 51.565
+ },
+ {
+   "city_ascii": "Maryanaj",
+   "lat": 34.8297,
+   "lng": 48.4578
+ },
+ {
+   "city_ascii": "Qal`eh Chan`an",
+   "lat": 31.2403,
+   "lng": 48.7011
+ },
+ {
+   "city_ascii": "Basht",
+   "lat": 30.3611,
+   "lng": 51.1558
+ },
+ {
+   "city_ascii": "Kuhbanan",
+   "lat": 31.41,
+   "lng": 56.2825
+ },
+ {
+   "city_ascii": "Deh Bakri",
+   "lat": 29.0508,
+   "lng": 57.9167
+ },
+ {
+   "city_ascii": "Asalem",
+   "lat": 37.7211,
+   "lng": 48.9583
+ },
+ {
+   "city_ascii": "Qal`eh Tall",
+   "lat": 31.6331,
+   "lng": 49.8897
+ },
+ {
+   "city_ascii": "Darb-e Behesht",
+   "lat": 29.2331,
+   "lng": 57.3397
+ },
+ {
+   "city_ascii": "Dakhan",
+   "lat": 35.125,
+   "lng": 49.5175
+ },
+ {
+   "city_ascii": "Lasht-e Nesha",
+   "lat": 37.3608,
+   "lng": 49.8611
+ },
+ {
+   "city_ascii": "Heris",
+   "lat": 38.2475,
+   "lng": 47.1164
+ },
+ {
+   "city_ascii": "Baghin",
+   "lat": 30.1839,
+   "lng": 56.8075
+ },
+ {
+   "city_ascii": "Hachirud",
+   "lat": 36.6856,
+   "lng": 51.345
+ },
+ {
+   "city_ascii": "Nukan",
+   "lat": 34.3608,
+   "lng": 47.1725
+ },
+ {
+   "city_ascii": "Shahrak-e Enqelab",
+   "lat": 35.5156,
+   "lng": 51.6867
+ },
+ {
+   "city_ascii": "Qari Kola-ye Arateh",
+   "lat": 36.4917,
+   "lng": 52.9531
+ },
+ {
+   "city_ascii": "Dalgan",
+   "lat": 27.4825,
+   "lng": 59.4464
+ },
+ {
+   "city_ascii": "Rayen",
+   "lat": 29.5981,
+   "lng": 57.4383
+ },
+ {
+   "city_ascii": "Bagh-e Bahadoran",
+   "lat": 32.3756,
+   "lng": 51.1881
+ },
+ {
+   "city_ascii": "Meymand",
+   "lat": 28.8683,
+   "lng": 52.7525
+ },
+ {
+   "city_ascii": "Rasak",
+   "lat": 26.2356,
+   "lng": 61.4014
+ },
+ {
+   "city_ascii": "Ardal",
+   "lat": 31.9989,
+   "lng": 50.6617
+ },
+ {
+   "city_ascii": "Mashhad Rizeh",
+   "lat": 34.7947,
+   "lng": 60.5144
+ },
+ {
+   "city_ascii": "Kuchesfahan",
+   "lat": 37.2783,
+   "lng": 49.7728
+ },
+ {
+   "city_ascii": "Galleh Dar",
+   "lat": 27.6578,
+   "lng": 52.6594
+ },
+ {
+   "city_ascii": "Mahalleh-ye Shirinu",
+   "lat": 27.6258,
+   "lng": 52.4761
+ },
+ {
+   "city_ascii": "Sufian",
+   "lat": 38.2722,
+   "lng": 45.9789
+ },
+ {
+   "city_ascii": "Bastak",
+   "lat": 27.1953,
+   "lng": 54.3678
+ },
+ {
+   "city_ascii": "Sorkheh",
+   "lat": 35.4644,
+   "lng": 53.2086
+ },
+ {
+   "city_ascii": "Miandasht",
+   "lat": 33.0758,
+   "lng": 50.1631
+ },
+ {
+   "city_ascii": "Talkhvoncheh",
+   "lat": 32.2614,
+   "lng": 51.5619
+ },
+ {
+   "city_ascii": "Bavanat",
+   "lat": 30.4717,
+   "lng": 53.6261
+ },
+ {
+   "city_ascii": "Zahed Shahr",
+   "lat": 28.7461,
+   "lng": 53.8039
+ },
+ {
+   "city_ascii": "Qahjavarestan",
+   "lat": 32.7017,
+   "lng": 51.8358
+ },
+ {
+   "city_ascii": "Gorgab",
+   "lat": 32.8661,
+   "lng": 51.5972
+ },
+ {
+   "city_ascii": "Salmanshahr",
+   "lat": 36.7039,
+   "lng": 51.1936
+ },
+ {
+   "city_ascii": "Khesht",
+   "lat": 29.5633,
+   "lng": 51.335
+ },
+ {
+   "city_ascii": "Shahrak-e Ja`fariyeh",
+   "lat": 35.6617,
+   "lng": 50.9947
+ },
+ {
+   "city_ascii": "Danesfahan",
+   "lat": 35.8117,
+   "lng": 49.7431
+ },
+ {
+   "city_ascii": "Chahar Borj-e Qadim",
+   "lat": 37.1231,
+   "lng": 45.9761
+ },
+ {
+   "city_ascii": "Ja`fariyeh",
+   "lat": 34.7739,
+   "lng": 50.5164
+ },
+ {
+   "city_ascii": "Marvast",
+   "lat": 30.4775,
+   "lng": 54.2128
+ },
+ {
+   "city_ascii": "Shahr-e Majlesi",
+   "lat": 32.1956,
+   "lng": 51.5017
+ },
+ {
+   "city_ascii": "Mirjaveh",
+   "lat": 29.0147,
+   "lng": 61.4503
+ },
+ {
+   "city_ascii": "Dowlatabad",
+   "lat": 35.2842,
+   "lng": 59.5225
+ },
+ {
+   "city_ascii": "Kaleybar",
+   "lat": 38.8664,
+   "lng": 47.0406
+ },
+ {
+   "city_ascii": "Mohammad Yar",
+   "lat": 36.9819,
+   "lng": 45.5222
+ },
+ {
+   "city_ascii": "Milajerd",
+   "lat": 34.6214,
+   "lng": 49.2081
+ },
+ {
+   "city_ascii": "Abuzar-e Ghaffari",
+   "lat": 32.1806,
+   "lng": 48.2778
+ },
+ {
+   "city_ascii": "Joghtay",
+   "lat": 36.6383,
+   "lng": 57.0717
+ },
+ {
+   "city_ascii": "Juraqan",
+   "lat": 34.885,
+   "lng": 48.5531
+ },
+ {
+   "city_ascii": "Bahabad",
+   "lat": 31.8719,
+   "lng": 56.0239
+ },
+ {
+   "city_ascii": "Surak",
+   "lat": 36.5939,
+   "lng": 53.2086
+ },
+ {
+   "city_ascii": "Golbaf",
+   "lat": 29.8828,
+   "lng": 57.7322
+ },
+ {
+   "city_ascii": "Horr-e Riahi",
+   "lat": 32.1444,
+   "lng": 48.3906
+ },
+ {
+   "city_ascii": "Nashtifan",
+   "lat": 34.435,
+   "lng": 60.1811
+ },
+ {
+   "city_ascii": "Eshkanan",
+   "lat": 27.2278,
+   "lng": 53.6072
+ },
+ {
+   "city_ascii": "Zeydabad",
+   "lat": 29.6008,
+   "lng": 55.5367
+ },
+ {
+   "city_ascii": "Banaruyeh",
+   "lat": 28.0864,
+   "lng": 54.0481
+ },
+ {
+   "city_ascii": "Shahr-e Pir",
+   "lat": 28.3122,
+   "lng": 54.3328
+ },
+ {
+   "city_ascii": "Bidkhun",
+   "lat": 27.4792,
+   "lng": 52.6681
+ },
+ {
+   "city_ascii": "Pa'in Chaf",
+   "lat": 37.2294,
+   "lng": 50.2544
+ },
+ {
+   "city_ascii": "Moslem Ebn-e `Aqil",
+   "lat": 32.0561,
+   "lng": 48.3056
+ },
+ {
+   "city_ascii": "Jolfa",
+   "lat": 38.9386,
+   "lng": 45.6253
+ },
+ {
+   "city_ascii": "Komijan",
+   "lat": 34.7181,
+   "lng": 49.325
+ },
+ {
+   "city_ascii": "Ashtian",
+   "lat": 34.5222,
+   "lng": 50.0069
+ },
+ {
+   "city_ascii": "Banak",
+   "lat": 27.8722,
+   "lng": 52.0289
+ },
+ {
+   "city_ascii": "Sarbisheh",
+   "lat": 32.5775,
+   "lng": 59.7961
+ },
+ {
+   "city_ascii": "Pardanjan",
+   "lat": 32.2539,
+   "lng": 50.5975
+ },
+ {
+   "city_ascii": "Azandarian",
+   "lat": 34.5044,
+   "lng": 48.6919
+ },
+ {
+   "city_ascii": "Maraveh Tappeh",
+   "lat": 37.9031,
+   "lng": 55.9567
+ },
+ {
+   "city_ascii": "Sa`idi",
+   "lat": 30.3364,
+   "lng": 57.0994
+ },
+ {
+   "city_ascii": "Shahrak-e Pars",
+   "lat": 35.6081,
+   "lng": 51.3808
+ },
+ {
+   "city_ascii": "Seyyedan",
+   "lat": 30.0019,
+   "lng": 53.0033
+ },
+ {
+   "city_ascii": "Kond Rud",
+   "lat": 38.0094,
+   "lng": 46.4794
+ },
+ {
+   "city_ascii": "Nalas",
+   "lat": 36.2631,
+   "lng": 45.4933
+ },
+ {
+   "city_ascii": "Sari",
+   "lat": 36.5633,
+   "lng": 53.0601
+ },
+ {
+   "city_ascii": "Ilam",
+   "lat": 33.6374,
+   "lng": 46.4227
+ }
+]

@@ -1,19 +1,24 @@
 package com.musashi.weatherapp.ui.screen
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.json.JSONArray
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
+    @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
 ): ViewModel() {
 
@@ -22,7 +27,31 @@ class WeatherViewModel @Inject constructor(
 
     init {
         getCities()
+        getCitiesFromRawLocalJson(context)
         moveCitiesFromDb()
+    }
+
+    private fun getCitiesFromRawLocalJson(context: Context) {
+        if(state.value.cities.isEmpty()) {
+            val cityList: JSONArray =
+                context.resources.openRawResource(R.raw.cities).bufferedReader().use {
+                    JSONArray(it.readText())
+                }
+            viewModelScope.launch {
+                cityList.takeIf { it.length() > 0 }?.let { list ->
+                    for (index in 0 until list.length()) {
+                        val cityObj = list.getJSONObject(index)
+                        weatherRepository.upsertCity(
+                            CityModel(
+                                cityName = cityObj.getString("city_ascii"),
+                                latitude = cityObj.getDouble("lat"),
+                                longitude = cityObj.getDouble("lng")
+                            )
+                        )
+                    }
+                }
+            }
+        }
     }
 
     fun getNextHourWeather(): Double?{
