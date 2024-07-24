@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.components
+package com.musashi.weatherapp.ui.screen.summary.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,7 +45,7 @@ fun WeatherStat(
         ) {
             WeatherItem(
                 cardColor = MaterialTheme.colorScheme.secondaryContainer,
-                image = returnWeatherCode(currentWeatherCode),
+                image = returnWeatherCode(currentWeatherCode).imageId,
                 title = "Now",
                 value = temperature.toString(), unit = "°C",
                 offsetMillis = 0
@@ -60,7 +60,7 @@ fun WeatherStat(
             )
             WeatherItem(
                 cardColor = MaterialTheme.colorScheme.primaryContainer,
-                image = returnWeatherCode(nextHourWeatherCode),
+                image = returnWeatherCode(nextHourWeatherCode).imageId,
                 title = "Next Hour",
                 value = nextHourTemp.toString(),
                 unit = "°C",

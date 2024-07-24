@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen
+package com.musashi.weatherapp.ui.screen.summary
 
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.WeatherResponseModel

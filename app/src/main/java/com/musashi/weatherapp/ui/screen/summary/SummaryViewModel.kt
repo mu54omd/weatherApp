@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen
+package com.musashi.weatherapp.ui.screen.summary
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -17,7 +17,7 @@ import org.json.JSONArray
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(
+class SummaryViewModel @Inject constructor(
     @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
 ): ViewModel() {
@@ -33,12 +33,12 @@ class WeatherViewModel @Inject constructor(
 
     private fun getCitiesFromRawLocalJson(context: Context) {
         if(state.value.cities.isEmpty()) {
-            val cityList: JSONArray =
+            val citiesJsonArray: JSONArray =
                 context.resources.openRawResource(R.raw.cities).bufferedReader().use {
                     JSONArray(it.readText())
                 }
             viewModelScope.launch {
-                cityList.takeIf { it.length() > 0 }?.let { list ->
+                citiesJsonArray.takeIf { it.length() > 0 }?.let { list ->
                     for (index in 0 until list.length()) {
                         val cityObj = list.getJSONObject(index)
                         weatherRepository.upsertCity(
@@ -56,7 +56,7 @@ class WeatherViewModel @Inject constructor(
 
     fun getNextHourWeather(): Double?{
         val currentHour = state.value.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
-        val nextHourIndex = state.value.weatherStatus?.hourly?.time?.indexOf(currentHour)
+        val nextHourIndex = state.value.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
         val nextHourTemp = nextHourIndex?.let {
             state.value.weatherStatus?.hourly?.temperature2m?.get(
                 it
@@ -90,7 +90,7 @@ class WeatherViewModel @Inject constructor(
             }?: _state.update {
                 it.copy(
                     currentCity = CityModel(
-                        cityName = "",
+                        cityName = state.value.currentCity.cityName,
                         latitude = 0.0,
                         longitude = 0.0
                     )

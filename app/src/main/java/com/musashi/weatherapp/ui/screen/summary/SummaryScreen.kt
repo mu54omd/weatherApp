@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen
+package com.musashi.weatherapp.ui.screen.summary
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,25 +33,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.musashi.weatherapp.ui.screen.components.LoadingDialog
-import com.musashi.weatherapp.ui.screen.components.SuggestionListItem
-import com.musashi.weatherapp.ui.screen.components.WeatherStat
+import com.musashi.weatherapp.ui.screen.summary.components.LoadingDialog
+import com.musashi.weatherapp.ui.screen.summary.components.SuggestionListItem
+import com.musashi.weatherapp.ui.screen.summary.components.WeatherStat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun WeatherScreen(
+fun SummaryScreen(
     modifier: Modifier = Modifier,
-    viewModel: WeatherViewModel = hiltViewModel()
+    state: WeatherState,
+    changeCity: (String) -> Unit,
+    nextHourWeather: Double?,
+    nextHourWeatherCode: Int?,
 ) {
     var textValue by rememberSaveable { mutableStateOf("") }
-    val state = viewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
     var expanded by remember { mutableStateOf(false) }
 
 
-    if(state.value.isCityLoading){
+    if(state.isCityLoading){
         LoadingDialog()
     }else {
         Column(
@@ -69,7 +69,7 @@ fun WeatherScreen(
                     textValue = it
                     scope.launch {
                         delay(500)
-                        viewModel.changeCity(it)
+                        changeCity(it)
                     }
                     expanded = textValue.isNotEmpty()
                 },
@@ -80,7 +80,7 @@ fun WeatherScreen(
                         contentDescription = "")
                 },
                 trailingIcon = {
-                    if(state.value.isWeatherLoading){
+                    if(state.isWeatherLoading){
                         CircularProgressIndicator( modifier = Modifier.size(25.dp))
                     }
                 },
@@ -100,14 +100,14 @@ fun WeatherScreen(
                     LazyColumn(modifier = Modifier.height(100.dp)) {
                         if(textValue.isNotEmpty()){
                             items(
-                                state.value.cities.filter {
+                                state.cities.filter {
                                 it.cityName.lowercase().contains(textValue.lowercase())
                                 }
                             ){
                                 SuggestionListItem(title = it.cityName) { title ->
                                     textValue = title
                                     expanded = false
-                                    viewModel.changeCity(title)
+                                    changeCity(title)
                                 }
                             }
                         }
@@ -116,12 +116,12 @@ fun WeatherScreen(
             }
             Spacer(modifier = Modifier.size(10.dp))
             WeatherStat(
-                cityName = state.value.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
-                temperature = state.value.weatherStatus?.current?.temperature2m ?: 0.0,
-                humidity = state.value.weatherStatus?.current?.relativeHumidity2m ?: 0,
-                nextHourTemp = viewModel.getNextHourWeather() ?: 0.0,
-                currentWeatherCode = state.value.weatherStatus?.current?.weatherCode ?: 0,
-                nextHourWeatherCode = viewModel.getNextHourWeatherCode() ?: 0,
+                cityName = state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
+                temperature = state.weatherStatus?.current?.temperature2m ?: 0.0,
+                humidity = state.weatherStatus?.current?.relativeHumidity2m ?: 0,
+                nextHourTemp = nextHourWeather ?: 0.0,
+                currentWeatherCode = state.weatherStatus?.current?.weatherCode ?: 0,
+                nextHourWeatherCode = nextHourWeatherCode ?: 0,
                 modifier = Modifier.fillMaxWidth()
             )
 

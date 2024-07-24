@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Weather App</string>
+
+    <string name="clear_sky">Clear Sky</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="fog">Fog</string>
+    <string name="freezing_drizzle">Freezing Drizzle</string>
+    <string name="freezing_rain">Freezing Rain</string>
+    <string name="mainly_clear">Mainly Clear</string>
+    <string name="rain">Rain</string>
+    <string name="rain_shower">Rain Shower</string>
+    <string name="snow_fall">Snowfall</string>
+    <string name="snow_grain">Snow Grain</string>
+    <string name="snow_shower">Snow Shower</string>
+    <string name="thunder">Thunder</string>
+
+    <string name="humidity_low">Humidity Low</string>
+    <string name="humidity_medium">Humidity Medium</string>
+    <string name="humidity_very_low">Humidity Very Low</string>
+    <string name="humidity_high">Humidity High</string>
+
 </resources>

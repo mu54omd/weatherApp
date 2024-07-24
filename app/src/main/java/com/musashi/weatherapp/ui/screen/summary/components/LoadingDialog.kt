@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.components
+package com.musashi.weatherapp.ui.screen.summary.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

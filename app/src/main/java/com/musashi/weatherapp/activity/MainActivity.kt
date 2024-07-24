@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.musashi.weatherapp.ui.screen.WeatherScreen
+import com.musashi.weatherapp.ui.screen.navgraph.NavGraph
+import com.musashi.weatherapp.ui.screen.navgraph.Route
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
-                WeatherScreen()
+                NavGraph(startDestination = Route.SummaryScreen.route)
             }
         }
     }
