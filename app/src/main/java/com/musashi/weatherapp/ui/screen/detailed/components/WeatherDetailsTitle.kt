@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +30,7 @@ fun WeatherDetailsTitle(
             .height(40.dp)
             .padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 5.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.Green.copy(alpha = 0.1f)
+            containerColor = MaterialTheme.colorScheme.surfaceTint
         ),
         shape = MaterialTheme.shapes.extraSmall
     ){

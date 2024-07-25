@@ -8,8 +8,12 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity
 data class CityModel(
+    @PrimaryKey
+    val id: Int,
+    @SerializedName("country")
+    val countryName: String,
     @SerializedName("city_ascii")
-    @PrimaryKey  val cityName: String,
+    val cityName: String,
     @SerializedName("lat")
     val latitude: Double,
     @SerializedName("lng")

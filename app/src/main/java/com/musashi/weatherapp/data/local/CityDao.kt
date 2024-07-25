@@ -14,10 +14,15 @@ interface CityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(cityModel: CityModel)
 
-    @Query("SELECT * FROM CityModel")
-    fun getCities(): Flow<List<CityModel>>
+    @Query("SELECT COUNT(*) FROM CityModel")
+    suspend fun getTableCount(): Long
 
-    @Query("SELECT * FROM CityModel WHERE cityName=:cityName")
-    suspend fun getCity(cityName: String): CityModel?
+    @Query("SELECT DISTINCT countryName FROM CityModel")
+    fun getCountries(): Flow<List<String>>
 
+    @Query("SELECT * FROM CityModel WHERE countryName=:countryName")
+    fun selectCountry(countryName: String): Flow<List<CityModel>>
+
+    @Query("SELECT * FROM CityModel WHERE cityName=:cityName AND countryName=:countryName")
+    suspend fun selectCity(cityName: String, countryName: String): CityModel?
 }

@@ -74,7 +74,8 @@ fun NavGraph(
 
                 SummaryScreen(
                     state = state.value,
-                    changeCity = { summaryViewModel.changeCity(it) },
+                    selectCountry = { summaryViewModel.selectCountry(it)},
+                    changeCity = {cityName, countryName -> summaryViewModel.selectCity(cityName, countryName) },
                     nextHourWeather = summaryViewModel.getNextHourWeather(),
                     nextHourWeatherCode = summaryViewModel.getNextHourWeatherCode()
                 )

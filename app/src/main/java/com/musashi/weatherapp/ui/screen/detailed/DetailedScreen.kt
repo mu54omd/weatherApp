@@ -25,7 +25,7 @@ fun DetailedScreen(
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     ) {
         CityDetails(
             weatherCodeImage = returnWeatherCode(state.weatherStatus?.current?.weatherCode ?: 0).imageId,

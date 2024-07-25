@@ -1,27 +1,12 @@
 package com.musashi.weatherapp.ui.screen.summary
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,10 +16,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.ui.screen.summary.components.LoadingDialog
-import com.musashi.weatherapp.ui.screen.summary.components.SuggestionListItem
+import com.musashi.weatherapp.ui.screen.summary.components.WeatherSearchBar
 import com.musashi.weatherapp.ui.screen.summary.components.WeatherStat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -43,18 +27,23 @@ import kotlinx.coroutines.launch
 fun SummaryScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
-    changeCity: (String) -> Unit,
+    selectCountry: (String) -> Unit,
+    changeCity: (String, String) -> Unit,
     nextHourWeather: Double?,
     nextHourWeatherCode: Int?,
 ) {
-    var textValue by rememberSaveable { mutableStateOf("") }
+    var textValueCity by rememberSaveable { mutableStateOf("") }
+    var textValueCountry by rememberSaveable { mutableStateOf("") }
+    var cityTitle by rememberSaveable { mutableStateOf("") }
     val scope = rememberCoroutineScope()
-    var expanded by remember { mutableStateOf(false) }
+    var expandedCountry by remember { mutableStateOf(false) }
+    var expandedCity by remember { mutableStateOf(false) }
 
 
-    if(state.isCityLoading){
+    if(!state.isDatabaseLoaded){
         LoadingDialog()
     }else {
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -62,58 +51,59 @@ fun SummaryScreen(
                 .fillMaxSize()
                 .padding(30.dp)
         ) {
-            TextField(
-                value = textValue,
-                label = { Text(text = "City")},
+            WeatherSearchBar(
+                label = "Country",
+                textValue = textValueCountry,
                 onValueChange = {
-                    textValue = it
+                    textValueCountry = it
                     scope.launch {
                         delay(500)
-                        changeCity(it)
+                        selectCountry(it)
                     }
-                    expanded = textValue.isNotEmpty()
+                    expandedCountry = textValueCountry.isNotEmpty()
+                    textValueCity = ""
                 },
-                modifier = Modifier.width(300.dp),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Filled.Place,
-                        contentDescription = "")
+                isLoading = false,
+                expanded = expandedCountry,
+                expandedChange = { expandedCountry = false },
+                countries = state.countries,
+                onSuggestionSelect = { title ->
+                    textValueCountry = title
+                    expandedCountry = false
+                    selectCountry(title)
                 },
-                trailingIcon = {
-                    if(state.isWeatherLoading){
-                        CircularProgressIndicator( modifier = Modifier.size(25.dp))
-                    }
-                },
-                shape = MaterialTheme.shapes.extraLarge,
-                colors = TextFieldDefaults.colors(
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent
-                )
-            )
-            AnimatedVisibility(visible = expanded) {
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)
-                    )
-                ) {
-                    LazyColumn(modifier = Modifier.height(100.dp)) {
-                        if(textValue.isNotEmpty()){
-                            items(
-                                state.cities.filter {
-                                it.cityName.lowercase().contains(textValue.lowercase())
-                                }
-                            ){
-                                SuggestionListItem(title = it.cityName) { title ->
-                                    textValue = title
-                                    expanded = false
-                                    changeCity(title)
-                                }
-                            }
-                        }
-                    }
+                isEnabled = true,
+                onClearClicked = {
+                    textValueCountry = ""
+                    textValueCity = ""
                 }
-            }
+            )
+
+            Spacer(modifier = Modifier.size(10.dp))
+
+            WeatherSearchBar(
+                label = "City",
+                textValue = textValueCity,
+                onValueChange = {
+                    textValueCity = it
+                    scope.launch {
+                        delay(500)
+                        changeCity(it, textValueCountry)
+                    }
+                    expandedCity = textValueCity.isNotEmpty()
+                },
+                isLoading = state.isWeatherLoading,
+                expanded = expandedCity,
+                expandedChange = { expandedCity = false },
+                cities = state.cities,
+                onSuggestionSelect = { title ->
+                    textValueCity = title
+                    expandedCity = false
+                    changeCity(title, textValueCountry)
+                },
+                isEnabled = state.isCountrySelected && textValueCountry.isNotEmpty(),
+                onClearClicked = { textValueCity = ""}
+            )
             Spacer(modifier = Modifier.size(10.dp))
             WeatherStat(
                 cityName = state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
@@ -124,7 +114,6 @@ fun SummaryScreen(
                 nextHourWeatherCode = nextHourWeatherCode ?: 0,
                 modifier = Modifier.fillMaxWidth()
             )
-
         }
     }
 }

@@ -23,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,7 +45,7 @@ fun CityDetails(
             .height(200.dp)
             .padding(start = 20.dp, end = 20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.Yellow.copy(alpha = 0.3f)
+            containerColor = MaterialTheme.colorScheme.errorContainer
         )
     ) {
         Column(
@@ -63,7 +62,7 @@ fun CityDetails(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.primaryContainer).fillMaxWidth()
+                modifier = Modifier.background(color = MaterialTheme.colorScheme.secondaryContainer).fillMaxWidth()
             ) {
                 Icon(
                     imageVector = Icons.Filled.LocationOn,

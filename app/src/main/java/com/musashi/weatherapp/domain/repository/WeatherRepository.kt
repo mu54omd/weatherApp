@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
 
-    suspend fun getCityCoordinate(): Either<NetworkError, List<CityModel>>
     suspend fun getWeathers(latitude: Double, longitude: Double): Either<NetworkError, WeatherResponseModel>
-    fun getCitiesFromDb(): Flow<List<CityModel>>
-    suspend fun getCity(cityName: String): CityModel?
+    suspend fun getTableCount(): Long
+    fun getCountries(): Flow<List<String>>
+    fun getCities(countryName: String): Flow<List<CityModel>>
+    suspend fun getCity(cityName: String, countryName: String): CityModel?
     suspend fun upsertCity(cityModel: CityModel)
 
 }

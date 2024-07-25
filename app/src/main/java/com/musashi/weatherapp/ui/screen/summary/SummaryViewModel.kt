@@ -26,34 +26,11 @@ class SummaryViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        getCities()
-        getCitiesFromRawLocalJson(context)
-        moveCitiesFromDb()
+        createDatabaseFromRawJson(context)
+        getListOfCountries()
     }
 
-    private fun getCitiesFromRawLocalJson(context: Context) {
-        if(state.value.cities.isEmpty()) {
-            val citiesJsonArray: JSONArray =
-                context.resources.openRawResource(R.raw.cities).bufferedReader().use {
-                    JSONArray(it.readText())
-                }
-            viewModelScope.launch {
-                citiesJsonArray.takeIf { it.length() > 0 }?.let { list ->
-                    for (index in 0 until list.length()) {
-                        val cityObj = list.getJSONObject(index)
-                        weatherRepository.upsertCity(
-                            CityModel(
-                                cityName = cityObj.getString("city_ascii"),
-                                latitude = cityObj.getDouble("lat"),
-                                longitude = cityObj.getDouble("lng")
-                            )
-                        )
-                    }
-                }
-            }
-        }
-    }
-
+    //Public function
     fun getNextHourWeather(): Double?{
         val currentHour = state.value.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
         val nextHourIndex = state.value.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
@@ -75,12 +52,33 @@ class SummaryViewModel @Inject constructor(
         return nextHourWeatherCode
     }
 
-    fun changeCity(cityName: String){
+    fun selectCountry(countryName: String){
+
         viewModelScope.launch {
-            weatherRepository.getCity(cityName = cityName.replaceFirstChar { char -> char.uppercaseChar() })?.let { targetCity ->
+            if (weatherRepository.getCities(countryName = countryName).first().isNotEmpty()) {
+                _state.update { it.copy(isCountrySelected = true) }
+                _state.update {
+                    it.copy(
+                        cities = weatherRepository.getCities(countryName = countryName).first()
+                    )
+                }
+            }else{
+                _state.update { it.copy(isCountrySelected = false) }
+            }
+        }
+    }
+
+    fun selectCity(cityName: String, countryName: String){
+        viewModelScope.launch {
+            weatherRepository.getCity(
+                cityName = cityName.replaceFirstChar { char -> char.uppercaseChar() },
+                countryName = countryName.replaceFirstChar { char -> char.uppercaseChar() }
+            )?.let { targetCity ->
                 _state.update {
                     it.copy(
                         currentCity = CityModel(
+                            id = targetCity.id,
+                            countryName = targetCity.countryName,
                             cityName = targetCity.cityName,
                             latitude = targetCity.latitude,
                             longitude = targetCity.longitude
@@ -90,7 +88,9 @@ class SummaryViewModel @Inject constructor(
             }?: _state.update {
                 it.copy(
                     currentCity = CityModel(
-                        cityName = state.value.currentCity.cityName,
+                        id = 0,
+                        countryName = "",
+                        cityName = "",
                         latitude = 0.0,
                         longitude = 0.0
                     )
@@ -99,49 +99,55 @@ class SummaryViewModel @Inject constructor(
             getWeathers()
         }
     }
+    //Private function
+    private fun createDatabaseFromRawJson(context: Context) {
 
-    private fun getCities(){
+        _state.update { it.copy(isDatabaseLoaded = false) }
         viewModelScope.launch {
-            _state.update {
-                it.copy(isCityLoading = true)
-            }
-            weatherRepository.getCityCoordinate()
-                .onLeft { error ->
-                _state.update {
-                    it.copy(
-                        error = error.error.message,
+            val count = weatherRepository.getTableCount()
+
+            if (count < 47868) {
+                val citiesJsonArray: JSONArray =
+                    context.resources.openRawResource(R.raw.world_cities_with_id).bufferedReader()
+                        .use {
+                            JSONArray(it.readText())
+                        }
+                citiesJsonArray.takeIf { it.length() > 0 }?.let { list ->
+                    for (index in 0 until list.length()) {
+                        val cityObj = list.getJSONObject(index)
+                        weatherRepository.upsertCity(
+                            CityModel(
+                                id = cityObj.getInt("id"),
+                                countryName = cityObj.getString("country"),
+                                cityName = cityObj.getString("city_ascii"),
+                                latitude = cityObj.getDouble("lat"),
+                                longitude = cityObj.getDouble("lng")
+                            )
                         )
-                }
-            }.onRight { cities ->
-                _state.update {
-                    it.copy(cities = cities)
-                }
-                cities.forEach { city ->
-                    weatherRepository.upsertCity(city)
+                    }
                 }
             }
-            _state.update {
-                it.copy(isCityLoading = false)
-            }
+            _state.update { it.copy(isDatabaseLoaded = true) }
         }
+
     }
 
-    private fun moveCitiesFromDb(){
+    private fun getListOfCountries(){
         viewModelScope.launch {
             _state.update {
-                it.copy(cities = weatherRepository.getCitiesFromDb().first())
+                it.copy(
+                    countries = weatherRepository.getCountries().first()
+                )
             }
         }
     }
 
     private fun getWeathers(){
+        if( state.value.currentCity != CityModel(0, "", "",0.0, 0.0 )) {
 
-        if( state.value.currentCity.longitude != 0.0 && state.value.currentCity.latitude != 0.0 ) {
+            _state.update { it.copy(isWeatherLoading = true) }
 
             viewModelScope.launch {
-                _state.update {
-                    it.copy(isWeatherLoading = true)
-                }
                 weatherRepository.getWeathers(
                     latitude = state.value.currentCity.latitude,
                     longitude = state.value.currentCity.longitude,
@@ -154,10 +160,8 @@ class SummaryViewModel @Inject constructor(
                         it.copy(weatherStatus = weathers)
                     }
                 }
-                _state.update {
-                    it.copy(isWeatherLoading = false)
-                }
             }
+            _state.update { it.copy(isWeatherLoading = false) }
         }
     }
 }

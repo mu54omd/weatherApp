@@ -4,12 +4,10 @@ import android.app.Application
 import androidx.room.Room
 import com.musashi.weatherapp.data.local.CityDao
 import com.musashi.weatherapp.data.local.CityDatabase
-import com.musashi.weatherapp.data.remote.CityApi
 import com.musashi.weatherapp.data.remote.WeatherApi
 import com.musashi.weatherapp.data.repository.WeatherRepositoryImpl
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.utils.Constants.BASE_URL
-import com.musashi.weatherapp.utils.Constants.BASE_URL_CITY_API
 import com.musashi.weatherapp.utils.Constants.CITY_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -53,21 +51,11 @@ object WeatherModule {
     }
     @Provides
     @Singleton
-    fun provideCityApi():CityApi{
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL_CITY_API)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(CityApi::class.java)
-    }
-    @Provides
-    @Singleton
     fun provideWeatherRepository(
         weatherApi: WeatherApi,
-        cityApi: CityApi,
         cityDao: CityDao,
     ): WeatherRepository{
-        return WeatherRepositoryImpl(weatherApi = weatherApi, cityApi = cityApi, cityDao = cityDao)
+        return WeatherRepositoryImpl(weatherApi = weatherApi, cityDao = cityDao)
     }
 
 }
