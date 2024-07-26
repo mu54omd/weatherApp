@@ -23,6 +23,7 @@ fun DetailedScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
     onBookmarkClick: () -> Unit,
+    isCityBookmarked: () -> Boolean
 ) {
     if(state.currentCity.cityName != "") {
         Column(
@@ -40,8 +41,10 @@ fun DetailedScreen(
                 cityTitle = state.currentCity.cityName,
                 lat = state.currentCity.latitude,
                 lng = state.currentCity.longitude,
-                onFavoriteClick = onBookmarkClick,
-                isCityBookmarked = state.isBookmarkSaved
+                onFavoriteClick = {
+                    onBookmarkClick()
+                },
+                isCityBookmarked = state.isBookmarkSaved && isCityBookmarked()
             )
             Spacer(modifier = Modifier.height(10.dp))
             WeatherDetailsTitle()

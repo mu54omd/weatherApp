@@ -39,19 +39,15 @@ class SummaryViewModel @Inject constructor(
 
         if(isCityBookmarked()){
             saveLocalSetting("", "", false)
-            _state.update { it.copy(isBookmarkSaved = false) }
         }else{
             saveLocalSetting(state.value.currentCity.countryName, state.value.currentCity.cityName, true)
-            _state.update { it.copy(isBookmarkSaved = true) }
         }
 
 
     }
-    fun isCityBookmarked(): Boolean{
-        return state.value.isBookmarkSaved &&
-                (state.value.currentCity.cityName == state.value.localCityCountry.second) &&
-                (state.value.currentCity.countryName == state.value.localCityCountry.first)
-    }
+    fun isCityBookmarked() = (state.value.isBookmarkSaved) &&
+            (state.value.currentCity.countryName == state.value.localCityCountry.first) &&
+                (state.value.currentCity.cityName == state.value.localCityCountry.second)
 
     fun getNextHourWeather(): Double?{
         val currentHour = state.value.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
@@ -127,6 +123,12 @@ class SummaryViewModel @Inject constructor(
             userLocalUserManager.saveSelectedCity(city = city)
             userLocalUserManager.saveSelectedCountry(country = country)
             userLocalUserManager.saveBookmarkState(state = state)
+            _state.update {
+                it.copy(
+                    isBookmarkSaved = state,
+                    localCityCountry = Pair(first = country, second = city)
+                )
+            }
         }
     }
 
