@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.room.Room
 import com.musashi.weatherapp.data.local.CityDao
 import com.musashi.weatherapp.data.local.CityDatabase
+import com.musashi.weatherapp.data.preferences.LocalUserManagerImpl
 import com.musashi.weatherapp.data.remote.WeatherApi
 import com.musashi.weatherapp.data.repository.WeatherRepositoryImpl
+import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.utils.Constants.BASE_URL
 import com.musashi.weatherapp.utils.Constants.CITY_DATABASE_NAME
@@ -21,6 +23,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object WeatherModule {
+
+    @Provides
+    @Singleton
+    fun provideLocalManager(application: Application):LocalUserManager{
+        return LocalUserManagerImpl(application)
+    }
 
     @Provides
     @Singleton

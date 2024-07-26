@@ -91,8 +91,11 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
+    //data preferences
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
 
+    //meterial3
     implementation("androidx.compose.material3:material3:1.3.0-beta04")
 
 

@@ -4,7 +4,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -23,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,62 +38,79 @@ import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 @Composable
 fun CityDetails(
     modifier: Modifier = Modifier,
+    isCityBookmarked: Boolean,
+    onFavoriteClick: () -> Unit,
     @DrawableRes weatherCodeImage: Int,
     @StringRes weatherCodeTitle: Int,
     cityTitle: String,
     lat: Double,
     lng: Double
 ) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .padding(start = 20.dp, end = 20.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.errorContainer
-        )
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ){
-            Image(
-                painter = painterResource(id = weatherCodeImage),
-                contentDescription = stringResource(id = weatherCodeTitle),
-                modifier = Modifier.size(120.dp)
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.secondaryContainer).fillMaxWidth()
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.LocationOn,
-                    contentDescription = "Location"
-                )
-                Text(
-                    text = cityTitle,
-                    style = MaterialTheme.typography.titleLarge
-                    )
-            }
-            Spacer(modifier = Modifier.height(10.dp))
+    Box {
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(space = 50.dp)
+        Card(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .padding(start = 20.dp, end = 20.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.errorContainer
+            )
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = lat.toString(),
-                    style = MaterialTheme.typography.labelLarge
+                Image(
+                    painter = painterResource(id = weatherCodeImage),
+                    contentDescription = stringResource(id = weatherCodeTitle),
+                    modifier = Modifier.size(120.dp)
                 )
-                Text(
-                    text = lng.toString(),
-                    style = MaterialTheme.typography.labelLarge
-                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .background(color = MaterialTheme.colorScheme.secondaryContainer)
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.LocationOn,
+                        contentDescription = "Location"
+                    )
+                    Text(
+                        text = cityTitle,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(space = 50.dp)
+                ) {
+                    Text(
+                        text = lat.toString(),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                    Text(
+                        text = lng.toString(),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
             }
         }
+
+        Image(
+            imageVector = if(isCityBookmarked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+            contentDescription = "Save",
+            modifier = Modifier
+                .align(alignment = Alignment.TopStart)
+                .padding(start = 30.dp, top = 5.dp)
+                .clickable { onFavoriteClick()},
+            contentScale = ContentScale.Fit
+        )
     }
 }
 
@@ -97,6 +119,8 @@ fun CityDetails(
 private fun CityDetailsPreview() {
     WeatherAppTheme {
         CityDetails(
+            isCityBookmarked = true,
+            onFavoriteClick = {},
             weatherCodeImage = R.drawable.clear_sky,
             weatherCodeTitle = R.string.clear_sky,
             cityTitle = "Tonekabon",

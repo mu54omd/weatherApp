@@ -74,15 +74,21 @@ fun NavGraph(
 
                 SummaryScreen(
                     state = state.value,
-                    selectCountry = { summaryViewModel.selectCountry(it)},
+                    countryValue = state.value.localCityCountry.first,
+                    cityValue = state.value.localCityCountry.second,
+                    selectCountry = {country -> summaryViewModel.selectCountry(country)},
                     changeCity = {cityName, countryName -> summaryViewModel.selectCity(cityName, countryName) },
                     nextHourWeather = summaryViewModel.getNextHourWeather(),
-                    nextHourWeatherCode = summaryViewModel.getNextHourWeatherCode()
+                    nextHourWeatherCode = summaryViewModel.getNextHourWeatherCode(),
                 )
             }
 
             composable(route = Route.DetailedScreen.route) {
-                DetailedScreen(state = state.value)
+                DetailedScreen(
+                    state = state.value,
+                    onBookmarkClick = { summaryViewModel.onBookmarkClick() },
+                    isCityBookmarked = { summaryViewModel.isCityBookmarked() }
+                )
             }
         }
     }

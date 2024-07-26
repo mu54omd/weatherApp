@@ -3,6 +3,7 @@ package com.musashi.weatherapp.ui.screen.summary.components
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.StartOffset
+import androidx.compose.animation.core.StartOffsetType
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -53,7 +54,10 @@ fun WeatherItem(
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 1000),
             repeatMode = RepeatMode.Reverse,
-            initialStartOffset = StartOffset(offsetMillis = offsetMillis)
+            initialStartOffset = StartOffset(
+                offsetMillis = offsetMillis,
+                offsetType = StartOffsetType.FastForward
+            )
         ),
         label = ""
     )

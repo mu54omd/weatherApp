@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.CityModel
+import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,17 +21,38 @@ import javax.inject.Inject
 class SummaryViewModel @Inject constructor(
     @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
+    private val userLocalUserManager: LocalUserManager
 ): ViewModel() {
 
+
+    /////////////////////////////////////////////////Initialization//////////////////////////////////////////////////////
     private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
 
     init {
         createDatabaseFromRawJson(context)
         getListOfCountries()
+        readLocalSetting()
+    }
+    /////////////////////////////////////////////////Public functions//////////////////////////////////////////////////////
+    fun onBookmarkClick(){
+
+        if(isCityBookmarked()){
+            saveLocalSetting("", "", false)
+            _state.update { it.copy(isBookmarkSaved = false) }
+        }else{
+            saveLocalSetting(state.value.currentCity.countryName, state.value.currentCity.cityName, true)
+            _state.update { it.copy(isBookmarkSaved = true) }
+        }
+
+
+    }
+    fun isCityBookmarked(): Boolean{
+        return state.value.isBookmarkSaved &&
+                (state.value.currentCity.cityName == state.value.localCityCountry.second) &&
+                (state.value.currentCity.countryName == state.value.localCityCountry.first)
     }
 
-    //Public function
     fun getNextHourWeather(): Double?{
         val currentHour = state.value.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
         val nextHourIndex = state.value.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
@@ -99,7 +121,34 @@ class SummaryViewModel @Inject constructor(
             getWeathers()
         }
     }
-    //Private function
+    /////////////////////////////////////////////////Private functions//////////////////////////////////////////////////////
+    private fun saveLocalSetting(country: String, city: String, state: Boolean){
+        viewModelScope.launch {
+            userLocalUserManager.saveSelectedCity(city = city)
+            userLocalUserManager.saveSelectedCountry(country = country)
+            userLocalUserManager.saveBookmarkState(state = state)
+        }
+    }
+
+    private fun readLocalSetting(){
+        viewModelScope.launch {
+            val country =  userLocalUserManager.readSelectedCountry().first()
+            val city =  userLocalUserManager.readSelectedCity().first()
+            val bookmarkState = userLocalUserManager.readBookmarkState().first()
+            _state.update {
+                it.copy(
+                    localCityCountry = Pair(
+                        first = country,
+                        second = city
+                    ),
+                    isBookmarkSaved = bookmarkState
+                )
+            }
+            selectCountry(state.value.localCityCountry.first)
+            selectCity(state.value.localCityCountry.second, state.value.localCityCountry.first)
+        }
+    }
+
     private fun createDatabaseFromRawJson(context: Context) {
 
         _state.update { it.copy(isDatabaseLoaded = false) }
@@ -129,7 +178,6 @@ class SummaryViewModel @Inject constructor(
             }
             _state.update { it.copy(isDatabaseLoaded = true) }
         }
-
     }
 
     private fun getListOfCountries(){

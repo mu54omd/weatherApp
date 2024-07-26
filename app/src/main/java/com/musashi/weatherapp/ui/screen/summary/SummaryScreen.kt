@@ -26,15 +26,16 @@ import kotlinx.coroutines.launch
 @Composable
 fun SummaryScreen(
     modifier: Modifier = Modifier,
+    countryValue: String,
+    cityValue: String,
     state: WeatherState,
     selectCountry: (String) -> Unit,
     changeCity: (String, String) -> Unit,
     nextHourWeather: Double?,
     nextHourWeatherCode: Int?,
 ) {
-    var textValueCity by rememberSaveable { mutableStateOf("") }
-    var textValueCountry by rememberSaveable { mutableStateOf("") }
-    var cityTitle by rememberSaveable { mutableStateOf("") }
+    var textValueCountry by rememberSaveable { mutableStateOf(countryValue) }
+    var textValueCity by rememberSaveable { mutableStateOf(cityValue) }
     val scope = rememberCoroutineScope()
     var expandedCountry by remember { mutableStateOf(false) }
     var expandedCity by remember { mutableStateOf(false) }
