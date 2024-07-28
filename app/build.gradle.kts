@@ -95,8 +95,9 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
 
-    //meterial3
+    //material 3
     implementation("androidx.compose.material3:material3:1.3.0-beta04")
+    implementation("androidx.compose.material:material-icons-extended:1.6.8")
 
 
 

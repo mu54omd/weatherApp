@@ -2,6 +2,8 @@ package com.musashi.weatherapp.di
 
 import android.app.Application
 import androidx.room.Room
+import com.musashi.weatherapp.data.local.BookmarkDao
+import com.musashi.weatherapp.data.local.BookmarkDatabase
 import com.musashi.weatherapp.data.local.CityDao
 import com.musashi.weatherapp.data.local.CityDatabase
 import com.musashi.weatherapp.data.preferences.LocalUserManagerImpl
@@ -10,6 +12,7 @@ import com.musashi.weatherapp.data.repository.WeatherRepositoryImpl
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.utils.Constants.BASE_URL
+import com.musashi.weatherapp.utils.Constants.CITY_BOOKMARK_DATABASE_NAME
 import com.musashi.weatherapp.utils.Constants.CITY_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -24,12 +27,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object WeatherModule {
 
+    //Provide DataStore for Hilt
     @Provides
     @Singleton
     fun provideLocalManager(application: Application):LocalUserManager{
         return LocalUserManagerImpl(application)
     }
 
+    //Provide City Database for Hilt
     @Provides
     @Singleton
     fun provideCityDatabase( application: Application):CityDatabase{
@@ -40,12 +45,35 @@ object WeatherModule {
         ).fallbackToDestructiveMigration()
             .build()
     }
+
+    //Provide City DAO for Hilt
     @Provides
     @Singleton
     fun provideCityDao(
         cityDatabase: CityDatabase
     ): CityDao{
         return cityDatabase.cityDao
+    }
+
+    //Provide Bookmark Database for Hilt
+    @Provides
+    @Singleton
+    fun provideBookmarkDatabase( application: Application): BookmarkDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = BookmarkDatabase::class.java,
+            name = CITY_BOOKMARK_DATABASE_NAME
+        ).fallbackToDestructiveMigration()
+            .build()
+    }
+
+    //Provide Bookmark Database for Hilt
+    @Provides
+    @Singleton
+    fun provideBookmarkDao(
+        bookmarkDatabase: BookmarkDatabase
+    ): BookmarkDao{
+        return bookmarkDatabase.bookmarkDao
     }
 
     @Provides
@@ -62,8 +90,13 @@ object WeatherModule {
     fun provideWeatherRepository(
         weatherApi: WeatherApi,
         cityDao: CityDao,
+        bookmarkDao: BookmarkDao
     ): WeatherRepository{
-        return WeatherRepositoryImpl(weatherApi = weatherApi, cityDao = cityDao)
+        return WeatherRepositoryImpl(
+            weatherApi = weatherApi,
+            cityDao = cityDao,
+            bookmarkDao = bookmarkDao
+            )
     }
 
 }

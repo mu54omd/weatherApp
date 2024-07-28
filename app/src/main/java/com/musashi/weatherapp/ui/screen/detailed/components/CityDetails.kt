@@ -15,10 +15,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.BookmarkAdded
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -26,10 +27,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
@@ -38,7 +42,7 @@ import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 @Composable
 fun CityDetails(
     modifier: Modifier = Modifier,
-    isCityBookmarked: Boolean,
+    isCitySetAsDefault: Boolean,
     onFavoriteClick: () -> Unit,
     @DrawableRes weatherCodeImage: Int,
     @StringRes weatherCodeTitle: Int,
@@ -46,13 +50,14 @@ fun CityDetails(
     lat: Double,
     lng: Double
 ) {
-    Box {
-
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .padding(start = 20.dp, end = 20.dp),
+    ) {
         Card(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(200.dp)
-                .padding(start = 20.dp, end = 20.dp),
+            modifier = Modifier.fillMaxSize(),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.errorContainer
             )
@@ -102,15 +107,27 @@ fun CityDetails(
             }
         }
 
-        Image(
-            imageVector = if(isCityBookmarked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-            contentDescription = "Save",
+        Column(
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .padding(start = 30.dp, top = 5.dp)
-                .clickable { onFavoriteClick()},
-            contentScale = ContentScale.Fit
-        )
+                .align(alignment = BiasAlignment(-0.9f, -0.9f))
+        ) {
+            Image(
+                imageVector = if (isCitySetAsDefault) Icons.Filled.BookmarkAdded else Icons.Rounded.BookmarkBorder,
+                contentDescription = "Set as Default",
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(20.dp))
+                    .clickable { onFavoriteClick() }
+                    .padding(4.dp),
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = if(isCitySetAsDefault) "Default" else "Set as Default",
+                style = MaterialTheme.typography.labelSmall,
+                textAlign = TextAlign.Start
+            )
+        }
     }
 }
 
@@ -119,7 +136,7 @@ fun CityDetails(
 private fun CityDetailsPreview() {
     WeatherAppTheme {
         CityDetails(
-            isCityBookmarked = true,
+            isCitySetAsDefault = true,
             onFavoriteClick = {},
             weatherCodeImage = R.drawable.clear_sky,
             weatherCodeTitle = R.string.clear_sky,

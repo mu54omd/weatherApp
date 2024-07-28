@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.detailed.components
+package com.musashi.weatherapp.ui.screen.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -15,8 +15,9 @@ import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
-fun EmptyDetails(
-    modifier: Modifier = Modifier
+fun EmptyScreen(
+    modifier: Modifier = Modifier,
+    messageText: String,
 ) {
     Column(
         modifier = modifier.fillMaxSize().alpha(0.5f),
@@ -27,7 +28,7 @@ fun EmptyDetails(
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = "Empty Details",
         )
-        Text(text = "No City Selected!")
+        Text(text = messageText)
     }
 }
 
@@ -35,6 +36,8 @@ fun EmptyDetails(
 @Composable
 private fun EmptyDetailsPreview() {
     WeatherAppTheme {
-        EmptyDetails()
+        EmptyScreen(
+            messageText = "No City Selected!"
+        )
     }
 }

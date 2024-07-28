@@ -31,6 +31,7 @@ fun SummaryScreen(
     state: WeatherState,
     selectCountry: (String) -> Unit,
     changeCity: (String, String) -> Unit,
+    onAddFavoriteClick: () -> Unit,
     nextHourWeather: Double?,
     nextHourWeatherCode: Int?,
 ) {
@@ -77,7 +78,8 @@ fun SummaryScreen(
                 onClearClicked = {
                     textValueCountry = ""
                     textValueCity = ""
-                }
+                },
+                onAddFavoriteClick = {}
             )
 
             Spacer(modifier = Modifier.size(10.dp))
@@ -103,7 +105,8 @@ fun SummaryScreen(
                     changeCity(title, textValueCountry)
                 },
                 isEnabled = state.isCountrySelected && textValueCountry.isNotEmpty(),
-                onClearClicked = { textValueCity = ""}
+                onClearClicked = { textValueCity = ""},
+                onAddFavoriteClick = onAddFavoriteClick
             )
             Spacer(modifier = Modifier.size(10.dp))
             WeatherStat(

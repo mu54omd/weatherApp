@@ -1,6 +1,7 @@
 package com.musashi.weatherapp.data.repository
 
 import arrow.core.Either
+import com.musashi.weatherapp.data.local.BookmarkDao
 import com.musashi.weatherapp.data.local.CityDao
 import com.musashi.weatherapp.data.mapper.toNetworkError
 import com.musashi.weatherapp.data.remote.WeatherApi
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi,
-    private val cityDao: CityDao
+    private val cityDao: CityDao,
+    private val bookmarkDao: BookmarkDao
 ): WeatherRepository {
 
     override suspend fun getWeathers(latitude: Double, longitude: Double): Either<NetworkError, WeatherResponseModel> {
@@ -24,6 +26,7 @@ class WeatherRepositoryImpl @Inject constructor(
         }
     }
 
+    //For city database
     override suspend fun getTableCount(): Long {
         return cityDao.getTableCount()
     }
@@ -44,4 +47,17 @@ class WeatherRepositoryImpl @Inject constructor(
         return cityDao.selectCity(cityName, countryName)
     }
 
+
+    //For bookmark database
+    override suspend fun upsertBookmark(cityModel: CityModel) {
+        bookmarkDao.upsert(cityModel)
+    }
+
+    override suspend fun deleteBookmark(cityModel: CityModel) {
+        bookmarkDao.delete(cityModel)
+    }
+
+    override fun getBookmark(): Flow<List<CityModel>> {
+        return bookmarkDao.getBookmarkedCities()
+    }
 }

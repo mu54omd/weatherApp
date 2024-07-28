@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
+import com.musashi.weatherapp.ui.screen.common.EmptyScreen
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
-import com.musashi.weatherapp.ui.screen.detailed.components.EmptyDetails
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItem
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
 import com.musashi.weatherapp.ui.screen.summary.WeatherState
@@ -23,7 +23,7 @@ fun DetailedScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
     onBookmarkClick: () -> Unit,
-    isCityBookmarked: () -> Boolean
+    isCitySetAsDefault: () -> Boolean
 ) {
     if(state.currentCity.cityName != "") {
         Column(
@@ -44,7 +44,7 @@ fun DetailedScreen(
                 onFavoriteClick = {
                     onBookmarkClick()
                 },
-                isCityBookmarked = state.isBookmarkSaved && isCityBookmarked()
+                isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault()
             )
             Spacer(modifier = Modifier.height(10.dp))
             WeatherDetailsTitle()
@@ -67,7 +67,7 @@ fun DetailedScreen(
             }
         }
     }else{
-        EmptyDetails()
+        EmptyScreen(messageText = "No City Selected!")
     }
 }
 

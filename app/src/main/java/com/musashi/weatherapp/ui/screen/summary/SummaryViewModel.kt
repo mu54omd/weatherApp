@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
+import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,53 +35,40 @@ class SummaryViewModel @Inject constructor(
         createDatabaseFromRawJson(context)
         getListOfCountries()
         readLocalSetting()
+        loadBookmark()
     }
     /////////////////////////////////////////////////Public functions//////////////////////////////////////////////////////
-    fun onBookmarkClick(){
+    fun addToBookmark(){
+        viewModelScope.launch {
+            weatherRepository.upsertBookmark(cityModel = state.value.currentCity)
+            loadBookmark()
+        }
+    }
 
-        if(isCityBookmarked()){
+    fun deleteFromBookmark(city: CityModel){
+        viewModelScope.launch {
+            weatherRepository.deleteBookmark(cityModel = city)
+            loadBookmark()
+        }
+    }
+
+    fun onSetDefaultCityClick(){
+        if(isCitySetAsDefault(state.value)){
             saveLocalSetting("", "", false)
         }else{
             saveLocalSetting(state.value.currentCity.countryName, state.value.currentCity.cityName, true)
         }
-
-
     }
-    fun isCityBookmarked() = (state.value.isBookmarkSaved) &&
-            (state.value.currentCity.countryName == state.value.localCityCountry.first) &&
-                (state.value.currentCity.cityName == state.value.localCityCountry.second)
 
-    fun getNextHourWeather(): Double?{
-        val currentHour = state.value.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
-        val nextHourIndex = state.value.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
-        val nextHourTemp = nextHourIndex?.let {
-            state.value.weatherStatus?.hourly?.temperature2m?.get(
-                it
-            )
-        }
-        return nextHourTemp
-    }
-    fun getNextHourWeatherCode(): Int?{
-        val currentHour = state.value.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
-        val nextHourIndex = state.value.weatherStatus?.hourly?.time?.indexOf(currentHour)
-        val nextHourWeatherCode = nextHourIndex?.let {
-            state.value.weatherStatus?.hourly?.weatherCode?.get(
-                it
-            )
-        }
-        return nextHourWeatherCode
+    fun setSelectedAsCurrentCity(city: CityModel){
+        _state.update { it.copy(currentCity = city) }
     }
 
     fun selectCountry(countryName: String){
-
         viewModelScope.launch {
             if (weatherRepository.getCities(countryName = countryName).first().isNotEmpty()) {
                 _state.update { it.copy(isCountrySelected = true) }
-                _state.update {
-                    it.copy(
-                        cities = weatherRepository.getCities(countryName = countryName).first()
-                    )
-                }
+                _state.update { it.copy(cities = weatherRepository.getCities(countryName = countryName).first()) }
             }else{
                 _state.update { it.copy(isCountrySelected = false) }
             }
@@ -114,7 +103,7 @@ class SummaryViewModel @Inject constructor(
                     )
                 )
             }
-            getWeathers()
+            getCurrentCityWeather()
         }
     }
     /////////////////////////////////////////////////Private functions//////////////////////////////////////////////////////
@@ -125,7 +114,7 @@ class SummaryViewModel @Inject constructor(
             userLocalUserManager.saveBookmarkState(state = state)
             _state.update {
                 it.copy(
-                    isBookmarkSaved = state,
+                    isDefaultCitySet = state,
                     localCityCountry = Pair(first = country, second = city)
                 )
             }
@@ -143,7 +132,7 @@ class SummaryViewModel @Inject constructor(
                         first = country,
                         second = city
                     ),
-                    isBookmarkSaved = bookmarkState
+                    isDefaultCitySet = bookmarkState
                 )
             }
             selectCountry(state.value.localCityCountry.first)
@@ -192,26 +181,65 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    private fun getWeathers(){
+    private fun getCurrentCityWeather(){
         if( state.value.currentCity != CityModel(0, "", "",0.0, 0.0 )) {
 
             _state.update { it.copy(isWeatherLoading = true) }
+            getWeather(
+                latitude = state.value.currentCity.latitude,
+                longitude = state.value.currentCity.longitude
+            )
+            _state.update { it.copy(isWeatherLoading = false) }
+        }
+    }
 
-            viewModelScope.launch {
-                weatherRepository.getWeathers(
-                    latitude = state.value.currentCity.latitude,
-                    longitude = state.value.currentCity.longitude,
-                ).onLeft { error ->
-                    _state.update {
-                        it.copy(error = error.error.message)
-                    }
-                }.onRight { weathers ->
-                    _state.update {
-                        it.copy(weatherStatus = weathers)
-                    }
+    private fun getWeather(latitude: Double, longitude: Double){
+        viewModelScope.launch {
+            weatherRepository.getWeathers(
+                latitude = latitude,
+                longitude = longitude,
+            ).onLeft { error ->
+                _state.update {
+                    it.copy(error = error.error.message)
+                }
+            }.onRight { weathers ->
+                _state.update {
+                    it.copy(weatherStatus = weathers)
                 }
             }
-            _state.update { it.copy(isWeatherLoading = false) }
+        }
+    }
+
+    private fun loadBookmark(){
+        viewModelScope.launch {
+            _state.update { it.copy(
+                bookmarkedCities = weatherRepository.getBookmark().first(),
+                isBookmarkListLoaded = true,
+            ) }
+            if(state.value.isBookmarkListLoaded) {
+                if(!state.value.isSomethingDeleteFromBookmarkList)
+                    getBookmarkedCityWeather()
+            }
+        }
+    }
+
+    private fun getBookmarkedCityWeather(){
+        val result = mutableListOf<BookmarkModel>()
+        viewModelScope.launch {
+            _state.update { it.copy(isBookmarkWeatherReceived = false) }
+            state.value.bookmarkedCities.forEach { city ->
+                weatherRepository.getWeathers(
+                    latitude = city.latitude,
+                    longitude = city.longitude,
+                ).onLeft { error ->
+                    result += BookmarkModel(city, 0.0, 0, error = error.error.message)
+                    _state.update { it.copy(result = result) }
+                }.onRight { weathers ->
+                    result += BookmarkModel(city, weathers.current.temperature2m, weathers.current.weatherCode, error = null)
+                    _state.update { it.copy(result = result) }
+                }
+            }
+            _state.update { it.copy(isBookmarkWeatherReceived = true) }
         }
     }
 }

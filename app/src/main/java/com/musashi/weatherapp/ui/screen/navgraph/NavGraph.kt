@@ -17,6 +17,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.ui.helper.getNextHourWeather
+import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
+import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
+import com.musashi.weatherapp.ui.screen.bookmark.BookmarkScreen
 import com.musashi.weatherapp.ui.screen.detailed.DetailedScreen
 import com.musashi.weatherapp.ui.screen.navgraph.components.BottomNavigationItem
 import com.musashi.weatherapp.ui.screen.navgraph.components.WeatherBottomBar
@@ -28,13 +32,14 @@ fun NavGraph(
     startDestination: String
 ) {
     val summaryViewModel: SummaryViewModel = hiltViewModel()
-    val state = summaryViewModel.state.collectAsState()
+    val summaryState = summaryViewModel.state.collectAsState()
     val navController = rememberNavController()
 
     val bottomNavigationItem = remember {
         listOf(
             BottomNavigationItem(icon = R.drawable.clear_sky, text = "Home"),
             BottomNavigationItem(icon = R.drawable.mainly_clear, text = "Details"),
+            BottomNavigationItem(icon = R.drawable.snow_fall, text = "Favorites"),
         )
     }
     val backstackState = navController.currentBackStackEntryAsState().value
@@ -45,6 +50,7 @@ fun NavGraph(
         when(backstackState?.destination?.route){
             Route.SummaryScreen.route -> 0
             Route.DetailedScreen.route -> 1
+            Route.BookmarkScreen.route -> 2
             else -> 0
         }
     }
@@ -58,6 +64,7 @@ fun NavGraph(
                     when(index){
                         0 -> navigateToTab(navController = navController, route = Route.SummaryScreen.route)
                         1 -> navigateToTab(navController = navController, route = Route.DetailedScreen.route)
+                        2 -> navigateToTab(navController = navController, route = Route.BookmarkScreen.route)
                     }
                 }
             )
@@ -73,21 +80,33 @@ fun NavGraph(
             composable(route = Route.SummaryScreen.route) {
 
                 SummaryScreen(
-                    state = state.value,
-                    countryValue = state.value.localCityCountry.first,
-                    cityValue = state.value.localCityCountry.second,
+                    state = summaryState.value,
+                    countryValue = summaryState.value.localCityCountry.first,
+                    cityValue = summaryState.value.localCityCountry.second,
                     selectCountry = {country -> summaryViewModel.selectCountry(country)},
                     changeCity = {cityName, countryName -> summaryViewModel.selectCity(cityName, countryName) },
-                    nextHourWeather = summaryViewModel.getNextHourWeather(),
-                    nextHourWeatherCode = summaryViewModel.getNextHourWeatherCode(),
+                    nextHourWeather = getNextHourWeather(state = summaryState.value),
+                    nextHourWeatherCode = getNextHourWeatherCode(state = summaryState.value),
+                    onAddFavoriteClick = { summaryViewModel.addToBookmark() }
                 )
             }
 
             composable(route = Route.DetailedScreen.route) {
                 DetailedScreen(
-                    state = state.value,
-                    onBookmarkClick = { summaryViewModel.onBookmarkClick() },
-                    isCityBookmarked = { summaryViewModel.isCityBookmarked() }
+                    state = summaryState.value,
+                    onBookmarkClick = { summaryViewModel.onSetDefaultCityClick() },
+                    isCitySetAsDefault = { isCitySetAsDefault(state = summaryState.value) }
+                )
+            }
+
+            composable(route = Route.BookmarkScreen.route){
+                BookmarkScreen(
+                    state = summaryState.value,
+                    onDeleteClick = { city -> summaryViewModel.deleteFromBookmark(city) },
+                    onBookmarkCardClick = { city ->
+                        summaryViewModel.setSelectedAsCurrentCity(city)
+                        navigateToTab(navController = navController, route = Route.DetailedScreen.route)
+                    }
                 )
             }
         }
