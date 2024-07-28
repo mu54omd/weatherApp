@@ -64,7 +64,9 @@ fun NavGraph(
                     when(index){
                         0 -> navigateToTab(navController = navController, route = Route.SummaryScreen.route)
                         1 -> navigateToTab(navController = navController, route = Route.DetailedScreen.route)
-                        2 -> navigateToTab(navController = navController, route = Route.BookmarkScreen.route)
+                        2 -> {
+                            navigateToTab(navController = navController, route = Route.BookmarkScreen.route)
+                        }
                     }
                 }
             )

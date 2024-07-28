@@ -48,8 +48,8 @@ class SummaryViewModel @Inject constructor(
     fun deleteFromBookmark(city: CityModel){
         viewModelScope.launch {
             weatherRepository.deleteBookmark(cityModel = city)
-            loadBookmark()
         }
+        loadBookmark()
     }
 
     fun onSetDefaultCityClick(){
@@ -217,8 +217,7 @@ class SummaryViewModel @Inject constructor(
                 isBookmarkListLoaded = true,
             ) }
             if(state.value.isBookmarkListLoaded) {
-                if(!state.value.isSomethingDeleteFromBookmarkList)
-                    getBookmarkedCityWeather()
+                getBookmarkedCityWeather()
             }
         }
     }

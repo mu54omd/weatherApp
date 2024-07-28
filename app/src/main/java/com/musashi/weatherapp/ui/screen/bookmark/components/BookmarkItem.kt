@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +46,9 @@ fun BookmarkItem(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(110.dp)
+            .padding(bottom = 10.dp)
+        ,
         contentAlignment = Alignment.Center
     ) {
         Card(
@@ -63,7 +65,7 @@ fun BookmarkItem(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 5.dp, end = 5.dp)
+                    .padding(start = 5.dp, end = 20.dp)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,14 +83,14 @@ fun BookmarkItem(
                 }
                 Column(
                     modifier = Modifier
-                        .padding(start = 20.dp)
+                        .padding(start = 20.dp, end = 10.dp)
                         .weight(1f)
                 ) {
                     Text(text = cityName, style = MaterialTheme.typography.titleMedium)
                     Text(text = countryName)
                 }
                 Image(
-                    imageVector = Icons.Default.Clear,
+                    imageVector = Icons.Outlined.Delete,
                     contentDescription = "Delete Bookmark",
                     modifier = Modifier
                         .clip(CircleShape)

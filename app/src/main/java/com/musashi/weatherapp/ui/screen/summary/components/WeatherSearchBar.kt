@@ -85,7 +85,7 @@ fun WeatherSearchBar(
                 }
                 if(label == "City"){
                     cities.forEach { city ->
-                        visibilityFavoriteIcon = city.cityName == textValue
+                        visibilityFavoriteIcon = (city.cityName == textValue) && textValue.isNotEmpty()
                         AnimatedVisibility(
                             visible = visibilityFavoriteIcon,
                             modifier = Modifier.padding(end = 25.dp)

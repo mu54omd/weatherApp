@@ -1,10 +1,16 @@
 package com.musashi.weatherapp.ui.screen.bookmark.components
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.domain.model.BookmarkModel
@@ -20,26 +26,40 @@ fun BookmarkList(
     onBookmarkCardClick: (CityModel) -> Unit,
     onDeleteClick: (CityModel) -> Unit,
 ) {
+    val deletedItem = remember { mutableStateListOf<BookmarkModel>() }
     if(bookmarkedCity.isEmpty()){
         EmptyScreen(messageText = "Nothing is Here!")
     }else {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(all = 10.dp)
-
         ) {
-            items(bookmarksResult.size) {  i->
+            items(bookmarksResult.size) { i ->
                 val city = bookmarksResult[i]
-                BookmarkItem(
-                    onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
-                    weatherImageId = returnWeatherCode(city.weatherCode).imageId,
-                    weatherTextId = returnWeatherCode(city.weatherCode).stringId,
-                    temperature = city.temp,
-                    cityName = city.cityModel.cityName,
-                    countryName = city.cityModel.countryName,
-                    onDeleteClick = { onDeleteClick(city.cityModel) }
-                )
+                AnimatedVisibility(
+                    visible = !deletedItem.contains(city),
+                    exit = slideOutHorizontally(
+                        targetOffsetX = { -it },
+                        animationSpec = tween(durationMillis = 300)
+                    ) + shrinkVertically(
+                        animationSpec = tween(delayMillis = 300)
+                    )
+                ) {
+                    BookmarkItem(
+                        onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
+                        weatherImageId = returnWeatherCode(city.weatherCode).imageId,
+                        weatherTextId = returnWeatherCode(city.weatherCode).stringId,
+                        temperature = city.temp,
+                        cityName = city.cityModel.cityName,
+                        countryName = city.cityModel.countryName,
+                        onDeleteClick = { deletedItem.add(city) }
+                    )
+                }
+            }
+        }
+        SideEffect {
+            deletedItem.forEach {
+                onDeleteClick(it.cityModel)
             }
         }
     }
