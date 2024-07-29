@@ -9,6 +9,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,7 +41,7 @@ import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 @Composable
 fun WeatherItem(
     modifier: Modifier = Modifier,
-    cardColor: Color,
+    cardColor: List<Color>,
     title: String,
     @DrawableRes image: Int,
     value: String,
@@ -74,12 +76,11 @@ fun WeatherItem(
                 .height(150.dp)
                 .padding(4.dp),
             shape = MaterialTheme.shapes.medium,
-            colors = CardDefaults.cardColors(
-                containerColor = cardColor
-            ),
             elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
         ) {
-            Box {
+            Box(modifier = Modifier.background(brush = Brush.verticalGradient(
+                colors = cardColor
+            ))) {
                 Card(
                     modifier = Modifier
                         .width(90.dp)
@@ -142,7 +143,10 @@ fun WeatherItem(
 private fun WeatherItemPreview() {
     WeatherAppTheme {
         WeatherItem(
-            cardColor = MaterialTheme.colorScheme.primaryContainer,
+            cardColor = listOf(
+                MaterialTheme.colorScheme.primaryContainer,
+                MaterialTheme.colorScheme.secondaryContainer,
+            ),
             image = R.drawable.snow_fall,
             title = "title",
             value = "value",

@@ -1,6 +1,10 @@
 package com.musashi.weatherapp.ui.screen.navgraph
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,7 +20,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
@@ -37,9 +40,9 @@ fun NavGraph(
 
     val bottomNavigationItem = remember {
         listOf(
-            BottomNavigationItem(icon = R.drawable.clear_sky, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.mainly_clear, text = "Details"),
-            BottomNavigationItem(icon = R.drawable.snow_fall, text = "Favorites"),
+            BottomNavigationItem(icon = Icons.Outlined.Home, text = "Home"),
+            BottomNavigationItem(icon = Icons.Outlined.Search, text = "Details"),
+            BottomNavigationItem(icon = Icons.Outlined.FavoriteBorder, text = "Favorites"),
         )
     }
     val backstackState = navController.currentBackStackEntryAsState().value

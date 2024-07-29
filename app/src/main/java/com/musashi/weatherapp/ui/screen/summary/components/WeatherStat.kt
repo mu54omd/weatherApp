@@ -44,14 +44,20 @@ fun WeatherStat(
 
         ) {
             WeatherItem(
-                cardColor = MaterialTheme.colorScheme.secondaryContainer,
+                cardColor = listOf(
+                    MaterialTheme.colorScheme.secondaryContainer,
+                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
+                ),
                 image = returnWeatherCode(currentWeatherCode).imageId,
                 title = "Now",
                 value = temperature.toString(), unit = "°C",
                 offsetMillis = 0
             )
             WeatherItem(
-                cardColor = MaterialTheme.colorScheme.tertiaryContainer,
+                cardColor = listOf(
+                    MaterialTheme.colorScheme.tertiaryContainer,
+                    MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+                    ),
                 image = returnHumidityImage(humidity),
                 title = "Humidity",
                 value = humidity.toString(),
@@ -59,7 +65,10 @@ fun WeatherStat(
                 offsetMillis = 200
             )
             WeatherItem(
-                cardColor = MaterialTheme.colorScheme.primaryContainer,
+                cardColor = listOf(
+                    MaterialTheme.colorScheme.primaryContainer,
+                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                    ),
                 image = returnWeatherCode(nextHourWeatherCode).imageId,
                 title = "Next Hour",
                 value = nextHourTemp.toString(),

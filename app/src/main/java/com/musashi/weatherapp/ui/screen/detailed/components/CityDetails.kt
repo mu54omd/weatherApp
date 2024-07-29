@@ -59,7 +59,7 @@ fun CityDetails(
         Card(
             modifier = Modifier.fillMaxSize(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.errorContainer
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
             )
         ) {
             Column(
@@ -77,7 +77,7 @@ fun CityDetails(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier
-                        .background(color = MaterialTheme.colorScheme.secondaryContainer)
+                        .background(color = MaterialTheme.colorScheme.surfaceVariant)
                         .fillMaxWidth()
                 ) {
                     Icon(

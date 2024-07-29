@@ -3,6 +3,7 @@ package com.musashi.weatherapp.ui.screen.bookmark.components
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,49 +57,57 @@ fun BookmarkItem(
             modifier = Modifier.fillMaxSize(),
             onClick = onBookmarkCardClick,
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-            colors = CardDefaults.elevatedCardColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer
-            ),
             shape = MaterialTheme.shapes.extraLarge
         ) {
-            Row(
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = 5.dp, end = 20.dp)
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(id = weatherImageId),
-                        contentDescription = stringResource(id = weatherTextId),
-                        modifier = Modifier.size(80.dp)
+            Box(
+                modifier = Modifier.background(
+                    brush = Brush.horizontalGradient(
+                        listOf(
+                            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                            MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
+                        )
                     )
-                    Text(
-                        text = "${temperature.toString()}°C",
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
-                    )
-                }
-                Column(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 10.dp)
-                        .weight(1f)
-                ) {
-                    Text(text = cityName, style = MaterialTheme.typography.titleMedium)
-                    Text(text = countryName)
-                }
-                Image(
-                    imageVector = Icons.Outlined.Delete,
-                    contentDescription = "Delete Bookmark",
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .clickable {
-                            onDeleteClick()
-                        }
                 )
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 5.dp, end = 20.dp)
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        Image(
+                            painter = painterResource(id = weatherImageId),
+                            contentDescription = stringResource(id = weatherTextId),
+                            modifier = Modifier.size(80.dp)
+                        )
+                        Text(
+                            text = "${temperature.toString()}°C",
+                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .padding(start = 20.dp, end = 10.dp)
+                            .weight(1f)
+                    ) {
+                        Text(text = cityName, style = MaterialTheme.typography.titleMedium)
+                        Text(text = countryName)
+                    }
+                    Image(
+                        imageVector = Icons.Outlined.Delete,
+                        contentDescription = "Delete Bookmark",
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .clickable {
+                                onDeleteClick()
+                            }
+                    )
+                }
             }
         }
     }

@@ -118,6 +118,7 @@ fun SummaryScreen(
                 nextHourWeatherCode = nextHourWeatherCode ?: 0,
                 modifier = Modifier.fillMaxWidth()
             )
+
         }
     }
 }
