@@ -99,7 +99,12 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.3.0-beta04")
     implementation("androidx.compose.material:material-icons-extended:1.6.8")
 
+    // define a BOM and its version
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
 
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
