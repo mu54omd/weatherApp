@@ -2,9 +2,9 @@ package com.musashi.weatherapp.ui.screen.bookmark.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -49,10 +49,11 @@ fun BookmarkList(
                         animationSpec = tween(durationMillis = 300)
                     ) + shrinkVertically(
                         animationSpec = tween(delayMillis = 300)
+                    ),
+                    enter = fadeIn(
+                        animationSpec = tween(durationMillis = 300)
                     )
                 ) {
-                    Column {
-
                         BookmarkItem(
                             onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
                             weatherImageId = returnWeatherCode(city.weatherCode).imageId,
@@ -63,7 +64,6 @@ fun BookmarkList(
                             onDeleteClick = { deletedItem.add(city) },
                             isWeatherLoaded = city.error == null
                         )
-                    }
                 }
             }
         }
