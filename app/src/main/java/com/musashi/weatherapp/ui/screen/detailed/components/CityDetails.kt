@@ -1,8 +1,8 @@
 package com.musashi.weatherapp.ui.screen.detailed.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
+import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails as CityDetails1
 
 @Composable
 fun CityDetails(
@@ -67,7 +67,7 @@ fun CityDetails(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Image(
+                Icon(
                     painter = painterResource(id = weatherCodeImage),
                     contentDescription = stringResource(id = weatherCodeTitle),
                     modifier = Modifier.size(120.dp)
@@ -113,14 +113,14 @@ fun CityDetails(
             modifier = Modifier
                 .align(alignment = BiasAlignment(-0.9f, -0.9f))
         ) {
-            Image(
+            Icon(
                 imageVector = if (isCitySetAsDefault) Icons.Filled.BookmarkAdded else Icons.Rounded.BookmarkBorder,
                 contentDescription = "Set as Default",
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(20.dp))
                     .clickable { onFavoriteClick() }
                     .padding(4.dp),
-                contentScale = ContentScale.Crop
+                //contentScale = ContentScale.Crop
             )
             Text(
                 text = if(isCitySetAsDefault) "Default" else "Set as Default",
@@ -131,19 +131,22 @@ fun CityDetails(
     }
 }
 
+@Preview(showBackground = true,  uiMode = UI_MODE_NIGHT_YES)
 @Preview
 @Composable
 private fun CityDetailsPreview() {
     WeatherAppTheme {
-        CityDetails(
-            isCitySetAsDefault = true,
-            onFavoriteClick = {},
-            weatherCodeImage = R.drawable.clear_sky,
-            weatherCodeTitle = R.string.clear_sky,
-            cityTitle = "Tonekabon",
-            lat = 36.8163,
-            lng = 50.8738
+        Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+            CityDetails1(
+                isCitySetAsDefault = true,
+                onFavoriteClick = {},
+                weatherCodeImage = R.drawable.clear_sky,
+                weatherCodeTitle = R.string.clear_sky,
+                cityTitle = "Tonekabon",
+                lat = 36.8163,
+                lng = 50.8738
 
-        )
+            )
+        }
     }
 }

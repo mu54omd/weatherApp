@@ -26,7 +26,8 @@ fun WeatherStat(
     humidity: Int,
     nextHourTemp: Double,
     currentWeatherCode: Int,
-    nextHourWeatherCode: Int
+    nextHourWeatherCode: Int,
+    isWeatherLoaded: Boolean,
 ) {
 
     Column(
@@ -45,35 +46,41 @@ fun WeatherStat(
         ) {
             WeatherItem(
                 cardColor = listOf(
-                    MaterialTheme.colorScheme.secondaryContainer,
+                    MaterialTheme.colorScheme.primaryContainer,
                     MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
                 ),
+                shimmerColor =MaterialTheme.colorScheme.secondaryContainer,
                 image = returnWeatherCode(currentWeatherCode).imageId,
                 title = "Now",
                 value = temperature.toString(), unit = "°C",
-                offsetMillis = 0
+                offsetMillis = 0,
+                isWeatherLoaded = isWeatherLoaded
             )
             WeatherItem(
                 cardColor = listOf(
                     MaterialTheme.colorScheme.tertiaryContainer,
                     MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
                     ),
+                shimmerColor = MaterialTheme.colorScheme.tertiaryContainer,
                 image = returnHumidityImage(humidity),
                 title = "Humidity",
                 value = humidity.toString(),
                 unit = "%",
-                offsetMillis = 200
+                offsetMillis = 200,
+                isWeatherLoaded = isWeatherLoaded
             )
             WeatherItem(
                 cardColor = listOf(
                     MaterialTheme.colorScheme.primaryContainer,
-                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
                     ),
+                shimmerColor = MaterialTheme.colorScheme.primaryContainer,
                 image = returnWeatherCode(nextHourWeatherCode).imageId,
                 title = "Next Hour",
                 value = nextHourTemp.toString(),
                 unit = "°C",
-                offsetMillis = 500
+                offsetMillis = 500,
+                isWeatherLoaded = isWeatherLoaded
             )
         }
     }
@@ -89,7 +96,8 @@ private fun WeatherStatPreview() {
             humidity = 74,
             nextHourTemp = 23.3,
             currentWeatherCode = 1,
-            nextHourWeatherCode = 1
+            nextHourWeatherCode = 1,
+            isWeatherLoaded = false
         )
     }
 

@@ -8,7 +8,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,12 +22,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -36,17 +37,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.ui.screen.common.shimmerEffect
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
 fun WeatherItem(
     modifier: Modifier = Modifier,
     cardColor: List<Color>,
+    shimmerColor: Color,
     title: String,
     @DrawableRes image: Int,
     value: String,
     unit: String,
-    offsetMillis: Int
+    offsetMillis: Int,
+    isWeatherLoaded: Boolean
 ) {
 
     val infiniteTransition = rememberInfiniteTransition(label = "")
@@ -99,7 +103,8 @@ fun WeatherItem(
                     ){
                         Text(
                             text = title,
-                            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                            color = Color.Black
                         )
                     }
                 }
@@ -111,25 +116,34 @@ fun WeatherItem(
                         .fillMaxWidth()
                         .padding(start = 10.dp, end = 10.dp, top = 30.dp)
                 ) {
-
-                    Image(
-                        painter = painterResource(id = image),
-                        contentDescription = title,
-                        modifier = Modifier.size(size.dp)
-                    )
-                    Row(
-                        verticalAlignment = Alignment.Bottom,
-                        modifier = Modifier
-                            .padding(bottom = 20.dp)
-                            .fillMaxHeight()
-                    ) {
-                        Text(
-                            text = value,
-                            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                    if(isWeatherLoaded) {
+                        Icon(
+                            painter = painterResource(id = image),
+                            contentDescription = title,
+                            modifier = Modifier.size(size.dp)
                         )
-                        Text(
-                            text = unit,
-                            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                        Row(
+                            verticalAlignment = Alignment.Bottom,
+                            modifier = Modifier
+                                .padding(bottom = 20.dp)
+                                .fillMaxHeight()
+                        ) {
+                            Text(
+                                text = value,
+                                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                            )
+                            Text(
+                                text = unit,
+                                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                            )
+                        }
+                    }else{
+                        Box(modifier = Modifier
+                            .size(80.dp)
+                            .clip(shape = MaterialTheme.shapes.large)
+                            .shimmerEffect(
+                                color = shimmerColor
+                            )
                         )
                     }
                 }
@@ -147,11 +161,14 @@ private fun WeatherItemPreview() {
                 MaterialTheme.colorScheme.primaryContainer,
                 MaterialTheme.colorScheme.secondaryContainer,
             ),
+            shimmerColor = MaterialTheme.colorScheme.primaryContainer,
             image = R.drawable.snow_fall,
             title = "title",
             value = "value",
             unit = "unit",
-            offsetMillis = 5)
+            offsetMillis = 5,
+            isWeatherLoaded = true
+        )
     }
     
 }

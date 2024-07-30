@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +54,7 @@ fun SummaryScreen(
             modifier = modifier
                 .fillMaxSize()
                 .padding(30.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             WeatherSearchBar(
                 label = "Country",
@@ -116,7 +119,8 @@ fun SummaryScreen(
                 nextHourTemp = nextHourWeather ?: 0.0,
                 currentWeatherCode = state.weatherStatus?.current?.weatherCode ?: 0,
                 nextHourWeatherCode = nextHourWeatherCode ?: 0,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                isWeatherLoaded = state.error == null
             )
 
         }

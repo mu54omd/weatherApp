@@ -1,8 +1,8 @@
 package com.musashi.weatherapp.ui.screen.bookmark.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.ui.screen.common.shimmerEffect
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
@@ -43,7 +45,8 @@ fun BookmarkItem(
     @StringRes weatherTextId: Int,
     temperature: Double,
     cityName: String,
-    countryName: String
+    countryName: String,
+    isWeatherLoaded: Boolean
 ) {
     Box(
         modifier = modifier
@@ -79,16 +82,24 @@ fun BookmarkItem(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
+                        modifier = Modifier
                     ) {
-                        Image(
-                            painter = painterResource(id = weatherImageId),
-                            contentDescription = stringResource(id = weatherTextId),
-                            modifier = Modifier.size(80.dp)
-                        )
-                        Text(
-                            text = "${temperature.toString()}°C",
-                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
-                        )
+                        if(isWeatherLoaded) {
+                            Icon(
+                                painter = painterResource(id = weatherImageId),
+                                contentDescription = stringResource(id = weatherTextId),
+                                modifier = Modifier.size(80.dp)
+                            )
+                            Text(
+                                text = "${temperature.toString()}°C",
+                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
+                            )
+                        }else{
+                            Box(modifier = Modifier
+                                .size(80.dp)
+                                .clip(shape = MaterialTheme.shapes.extraLarge)
+                                .shimmerEffect())
+                        }
                     }
                     Column(
                         modifier = Modifier
@@ -98,7 +109,7 @@ fun BookmarkItem(
                         Text(text = cityName, style = MaterialTheme.typography.titleMedium)
                         Text(text = countryName)
                     }
-                    Image(
+                    Icon(
                         imageVector = Icons.Outlined.Delete,
                         contentDescription = "Delete Bookmark",
                         modifier = Modifier
@@ -114,6 +125,7 @@ fun BookmarkItem(
 
 }
 
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview
 @Composable
 private fun BookmarkItemPreview() {
@@ -125,7 +137,8 @@ private fun BookmarkItemPreview() {
             weatherTextId = R.string.snow_fall,
             temperature = 13.4,
             cityName = "City",
-            countryName = "Country"
+            countryName = "Country",
+            isWeatherLoaded = true
         )
     }
 }

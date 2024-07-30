@@ -1,14 +1,15 @@
 package com.musashi.weatherapp.ui.screen.navgraph.components
 
-import androidx.compose.foundation.Image
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -35,13 +36,14 @@ fun WeatherBottomBar(
     NavigationBar(
         modifier = modifier
             .fillMaxWidth()
-            .background(brush = Brush.horizontalGradient(
-                listOf(
-                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
-                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+            .background(
+                brush = Brush.horizontalGradient(
+                    listOf(
+                        MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
+                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+                    )
                 )
-            )
-        ),
+            ),
         containerColor = Color.Transparent,
         tonalElevation = 5.dp
     ) {
@@ -54,11 +56,11 @@ fun WeatherBottomBar(
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Image(
+                            Icon(
                                 imageVector = item.icon,
                                 contentDescription = "",
-                                modifier = Modifier.size(30.dp),
-                            )
+                                modifier = Modifier.size(30.dp)
+                                )
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(
@@ -66,8 +68,14 @@ fun WeatherBottomBar(
                     ),
                     label = {
                         when(selected==index){
-                            true -> Text(text = item.text, style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),)
-                            else -> Text(text = item.text, style = MaterialTheme.typography.bodySmall)
+                            true -> Text(
+                                text = item.text,
+                                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                                )
+                            else -> Text(
+                                text = item.text,
+                                style = MaterialTheme.typography.bodySmall
+                            )
                         }
 
                     }
@@ -81,6 +89,7 @@ data class BottomNavigationItem(
     val text: String
 )
 
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview
 @Composable
 private fun WeatherBottomBarPreview() {
@@ -89,7 +98,7 @@ private fun WeatherBottomBarPreview() {
             WeatherBottomBar(
                 items = listOf(
                     BottomNavigationItem(icon = Icons.Outlined.Home, text = "Summary"),
-                    BottomNavigationItem(icon = Icons.Outlined.Search, text = "Details"),
+                    BottomNavigationItem(icon = Icons.Default.Search, text = "Details"),
                 ),
                 selected = 0,
                 onItemClick = {})

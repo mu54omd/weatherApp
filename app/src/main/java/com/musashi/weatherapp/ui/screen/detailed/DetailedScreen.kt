@@ -7,6 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOff
+import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInternet4
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,11 +28,13 @@ fun DetailedScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
     onBookmarkClick: () -> Unit,
-    isCitySetAsDefault: () -> Boolean
+    isCitySetAsDefault: () -> Boolean,
+    isErrorOccurred: Boolean
 ) {
     if(state.currentCity.cityName != "") {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
@@ -44,31 +51,45 @@ fun DetailedScreen(
                 onFavoriteClick = {
                     onBookmarkClick()
                 },
-                isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault()
+                isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault(),
+                modifier = Modifier.verticalScroll(rememberScrollState())
             )
             Spacer(modifier = Modifier.height(10.dp))
             WeatherDetailsTitle()
             Spacer(modifier = Modifier.height(10.dp))
-            LazyColumn() {
-                val currentHour = state.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
-                val nextHourIndex = state.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
-                state.weatherStatus?.hourly?.let { status ->
-                    itemsIndexed(status.time) { index, item ->
-                        if (index >= nextHourIndex!!) {
-                            WeatherDetailsItem(
-                                date = item.split("T")[0],
-                                time = item.split("T")[1],
-                                temp = status.temperature2m[index],
-                                humidity = status.relativeHumidity2m[index]
-                            )
+            if(!isErrorOccurred) {
+                LazyColumn() {
+                    val currentHour = state.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
+                    val nextHourIndex =
+                        state.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
+                    state.weatherStatus?.hourly?.let { status ->
+                        itemsIndexed(status.time) { index, item ->
+                            if (index >= nextHourIndex!!) {
+                                WeatherDetailsItem(
+                                    date = item.split("T")[0],
+                                    time = item.split("T")[1],
+                                    temp = status.temperature2m[index],
+                                    humidity = status.relativeHumidity2m[index]
+                                )
+                            }
                         }
                     }
                 }
+            }else{
+
+                EmptyScreen(
+                    messageText = state.error.toString(),
+                    messageImage = Icons.Default.SignalWifiStatusbarConnectedNoInternet4
+                    )
             }
         }
     }else{
-        EmptyScreen(messageText = "No City Selected!")
+        EmptyScreen(
+            messageText = "No City Selected!",
+            messageImage = Icons.Default.LocationOff
+            )
     }
+
 }
 
 

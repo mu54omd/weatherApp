@@ -4,9 +4,12 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CollectionsBookmark
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateListOf
@@ -28,7 +31,10 @@ fun BookmarkList(
 ) {
     val deletedItem = remember { mutableStateListOf<BookmarkModel>() }
     if(bookmarkedCity.isEmpty()){
-        EmptyScreen(messageText = "Nothing is Here!")
+        EmptyScreen(
+            messageText = "Nothing is Here!",
+            messageImage = Icons.Default.CollectionsBookmark
+            )
     }else {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
@@ -45,15 +51,19 @@ fun BookmarkList(
                         animationSpec = tween(delayMillis = 300)
                     )
                 ) {
-                    BookmarkItem(
-                        onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
-                        weatherImageId = returnWeatherCode(city.weatherCode).imageId,
-                        weatherTextId = returnWeatherCode(city.weatherCode).stringId,
-                        temperature = city.temp,
-                        cityName = city.cityModel.cityName,
-                        countryName = city.cityModel.countryName,
-                        onDeleteClick = { deletedItem.add(city) }
-                    )
+                    Column {
+
+                        BookmarkItem(
+                            onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
+                            weatherImageId = returnWeatherCode(city.weatherCode).imageId,
+                            weatherTextId = returnWeatherCode(city.weatherCode).stringId,
+                            temperature = city.temp,
+                            cityName = city.cityModel.cityName,
+                            countryName = city.cityModel.countryName,
+                            onDeleteClick = { deletedItem.add(city) },
+                            isWeatherLoaded = city.error == null
+                        )
+                    }
                 }
             }
         }

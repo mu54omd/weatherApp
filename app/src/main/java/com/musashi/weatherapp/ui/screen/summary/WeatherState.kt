@@ -9,6 +9,8 @@ data class WeatherState(
     val isSomethingDeleteFromBookmarkList: Boolean = false,
     val isBookmarkWeatherReceived: Boolean = false,
 
+    val isRefreshing: Boolean = false,
+
     val isDatabaseLoaded: Boolean = false,
     val isWeatherLoading: Boolean = false,
     val isCountrySelected: Boolean = false,

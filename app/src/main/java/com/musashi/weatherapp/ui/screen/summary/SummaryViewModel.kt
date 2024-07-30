@@ -106,6 +106,12 @@ class SummaryViewModel @Inject constructor(
             getCurrentCityWeather()
         }
     }
+    fun refresh() {
+        if(state.value.error != null) {
+            loadBookmark()
+            getCurrentCityWeather()
+        }
+    }
     /////////////////////////////////////////////////Private functions//////////////////////////////////////////////////////
     private fun saveLocalSetting(country: String, city: String, state: Boolean){
         viewModelScope.launch {
@@ -204,7 +210,7 @@ class SummaryViewModel @Inject constructor(
                 }
             }.onRight { weathers ->
                 _state.update {
-                    it.copy(weatherStatus = weathers)
+                    it.copy(weatherStatus = weathers, error = null)
                 }
             }
         }
