@@ -15,9 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
@@ -42,21 +44,21 @@ fun WeatherDetailsTitle(
                 .padding(start = 10.dp, end = 10.dp)
         ) {
             Text(
-                text = "Date",
+                text = stringResource(R.string.date),
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.width(60.dp))
             Text(
-                text = "Time",
+                text = stringResource(R.string.time),
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.width(5.dp))
             Text(
-                text = "Temperature",
+                text = stringResource(R.string.temperature),
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
             )
             Text(
-                text = "Humidity",
+                text = stringResource(id = R.string.humidity),
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
             )
         }

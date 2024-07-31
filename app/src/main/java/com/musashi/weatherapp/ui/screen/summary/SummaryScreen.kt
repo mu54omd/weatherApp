@@ -1,8 +1,8 @@
 package com.musashi.weatherapp.ui.screen.summary
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,8 +20,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.activity.AppTheme
+import com.musashi.weatherapp.ui.screen.summary.components.LanguagePicker
 import com.musashi.weatherapp.ui.screen.summary.components.LoadingDialog
 import com.musashi.weatherapp.ui.screen.summary.components.ThemeSwitcher
 import com.musashi.weatherapp.ui.screen.summary.components.WeatherSearchBar
@@ -41,28 +44,44 @@ fun SummaryScreen(
     nextHourWeather: Double?,
     nextHourWeatherCode: Int?,
     changeTheme: (AppTheme) -> Unit,
+    changeLanguage: (String) -> Unit
 ) {
     var textValueCountry by rememberSaveable { mutableStateOf(countryValue) }
     var textValueCity by rememberSaveable { mutableStateOf(cityValue) }
     val scope = rememberCoroutineScope()
     var expandedCountry by remember { mutableStateOf(false) }
     var expandedCity by remember { mutableStateOf(false) }
+    var isPersianSelected by rememberSaveable { mutableStateOf(false) }
 
 
     if(!state.isDatabaseLoaded){
         LoadingDialog()
     }else {
 
-        Row(
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically,
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
-                .padding(end = 40.dp)
+                .padding(start = 40.dp, end = 40.dp)
 
         ) {
-            ThemeSwitcher(changeTheme = { changeTheme(it)})
+            LanguagePicker(
+                isChecked = isPersianSelected,
+                onCheckedClick = {
+                    if(isPersianSelected){
+                        changeLanguage("en-US")
+                    }else{
+                        changeLanguage("fa")
+                    }
+                    isPersianSelected = !isPersianSelected
+                },
+                modifier = Modifier.align(Alignment.TopStart)
+            )
+            ThemeSwitcher(
+                changeTheme = { changeTheme(it)},
+                modifier = Modifier.align(Alignment.TopEnd)
+            )
         }
 
         Column(
@@ -75,7 +94,7 @@ fun SummaryScreen(
         ) {
 
             WeatherSearchBar(
-                label = "Country",
+                label = stringResource(R.string.search_bar_country),
                 textValue = textValueCountry,
                 onValueChange = {
                     textValueCountry = it
@@ -106,7 +125,7 @@ fun SummaryScreen(
             Spacer(modifier = Modifier.size(10.dp))
 
             WeatherSearchBar(
-                label = "City",
+                label = stringResource(id = R.string.search_bar_city),
                 textValue = textValueCity,
                 onValueChange = {
                     textValueCity = it

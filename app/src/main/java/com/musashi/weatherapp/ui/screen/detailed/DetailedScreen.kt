@@ -15,7 +15,9 @@ import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInte
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.screen.common.EmptyScreen
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
@@ -85,7 +87,7 @@ fun DetailedScreen(
         }
     }else{
         EmptyScreen(
-            messageText = "No City Selected!",
+            messageText = stringResource(R.string.no_city_selected),
             messageImage = Icons.Default.LocationOff
             )
     }

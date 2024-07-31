@@ -18,5 +18,26 @@
     <string name="humidity_medium">Humidity Medium</string>
     <string name="humidity_very_low">Humidity Very Low</string>
     <string name="humidity_high">Humidity High</string>
+    <string name="search_bar_country">Country</string>
+    <string name="search_bar_city">City</string>
+    <string name="next_hour_temp">Next Hour</string>
+    <string name="humidity">Humidity</string>
+    <string name="now_temp">Now</string>
+    <string name="place">Place</string>
+    <string name="clear">Clear</string>
+    <string name="add">Add</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="home">Home</string>
+    <string name="details">Details</string>
+    <string name="favorites">Favorites</string>
+    <string name="location">Location</string>
+    <string name="set_as_default">Set as Default</string>
+    <string name="default_set">Default</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="temperature">Temperature</string>
+    <string name="delete_bookmark">Delete Bookmark</string>
+    <string name="nothing_is_here">Nothing is Here!</string>
+    <string name="no_city_selected">No City Selected!</string>
 
 </resources>

@@ -25,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.activity.MainViewModel
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
@@ -52,9 +53,9 @@ fun NavGraph(
 
     val bottomNavigationItem = remember {
         listOf(
-            BottomNavigationItem(icon = Icons.Outlined.Home, text = "Home"),
-            BottomNavigationItem(icon = Icons.Outlined.Search, text = "Details"),
-            BottomNavigationItem(icon = Icons.Outlined.FavoriteBorder, text = "Favorites"),
+            BottomNavigationItem(icon = Icons.Outlined.Home, text = R.string.home),
+            BottomNavigationItem(icon = Icons.Outlined.Search, text = R.string.details),
+            BottomNavigationItem(icon = Icons.Outlined.FavoriteBorder, text = R.string.favorites),
         )
     }
     val backstackState = navController.currentBackStackEntryAsState().value
@@ -133,7 +134,8 @@ fun NavGraph(
                         nextHourWeather = getNextHourWeather(state = summaryState.value),
                         nextHourWeatherCode = getNextHourWeatherCode(state = summaryState.value),
                         onAddFavoriteClick = { summaryViewModel.addToBookmark() },
-                        changeTheme = { mainViewModel.changeTheme(it) }
+                        changeTheme = { mainViewModel.changeTheme(it) },
+                        changeLanguage = { mainViewModel.changeLanguage(it) }
                     )
                 }
 

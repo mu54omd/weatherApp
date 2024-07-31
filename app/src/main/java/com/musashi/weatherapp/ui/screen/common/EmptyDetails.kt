@@ -32,7 +32,7 @@ fun EmptyScreen(
     ) {
         Icon(
             imageVector = messageImage,
-            contentDescription = "Empty Details",
+            contentDescription = messageText,
         )
         Text(text = messageText)
     }

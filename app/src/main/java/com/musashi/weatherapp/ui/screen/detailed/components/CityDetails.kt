@@ -82,7 +82,7 @@ fun CityDetails(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.LocationOn,
-                        contentDescription = "Location"
+                        contentDescription = stringResource(R.string.location)
                     )
                     Text(
                         text = cityTitle,
@@ -115,7 +115,7 @@ fun CityDetails(
         ) {
             Icon(
                 imageVector = if (isCitySetAsDefault) Icons.Filled.BookmarkAdded else Icons.Rounded.BookmarkBorder,
-                contentDescription = "Set as Default",
+                contentDescription = stringResource(R.string.set_as_default),
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(20.dp))
                     .clickable { onFavoriteClick() }
@@ -123,7 +123,7 @@ fun CityDetails(
                 //contentScale = ContentScale.Crop
             )
             Text(
-                text = if(isCitySetAsDefault) "Default" else "Set as Default",
+                text = if(isCitySetAsDefault) stringResource(R.string.default_set) else stringResource(id = R.string.set_as_default),
                 style = MaterialTheme.typography.labelSmall,
                 textAlign = TextAlign.Start
             )

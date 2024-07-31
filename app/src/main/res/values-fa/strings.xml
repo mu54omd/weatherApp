@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">نرم افزار پیش بینی هوا</string>
+
+    <string name="clear_sky">آسمان صاف</string>
+    <string name="drizzle">نم نم باران</string>
+    <string name="fog">مه</string>
+    <string name="freezing_drizzle">نم نم باران و برف</string>
+    <string name="freezing_rain">باران یخ زده</string>
+    <string name="mainly_clear">کمی ابری</string>
+    <string name="rain">بارانی</string>
+    <string name="rain_shower">باران شدید</string>
+    <string name="snow_fall">بارش برف</string>
+    <string name="snow_grain">بارش ریز برف </string>
+    <string name="snow_shower">بارش شدید برف</string>
+    <string name="thunder">رعد و برق</string>
+
+    <string name="humidity_low">رطوبت کم</string>
+    <string name="humidity_medium">رطوبت متوسط</string>
+    <string name="humidity_very_low">رطوبت خیلی کم</string>
+    <string name="humidity_high">رطوبت خیلی زیاد</string>
+    <string name="search_bar_country">کشور</string>
+    <string name="search_bar_city">شهر</string>
+    <string name="next_hour_temp">ساعت بعد</string>
+    <string name="humidity">رطوبت</string>
+    <string name="now_temp">الان</string>
+    <string name="place">مکان</string>
+    <string name="clear">پاک کردن</string>
+    <string name="add">افزودن</string>
+    <string name="add_to_favorites">به شهرهای منتخب اضافه کن</string>
+    <string name="home">خانه</string>
+    <string name="details">جزییات</string>
+    <string name="favorites">شهرهای منتخب</string>
+    <string name="location">مکان</string>
+    <string name="set_as_default">انتخاب پیشفرض؟</string>
+    <string name="default_set">پیشفرض</string>
+    <string name="date">تاریخ</string>
+    <string name="time">زمان</string>
+    <string name="temperature">دما</string>
+    <string name="delete_bookmark">پاک کردن نشانک</string>
+    <string name="nothing_is_here">هیچی اینجا نیست!</string>
+    <string name="no_city_selected">شهری انتخاب نشده!</string>
+</resources>

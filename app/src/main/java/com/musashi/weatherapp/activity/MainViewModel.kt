@@ -1,5 +1,7 @@
 package com.musashi.weatherapp.activity
 
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
@@ -36,6 +38,10 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             localUserManager.saveThemeState(themeName.name)
         }
+    }
+
+    fun changeLanguage(locale: String){
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
     }
 
     private fun loadThemeColor(){

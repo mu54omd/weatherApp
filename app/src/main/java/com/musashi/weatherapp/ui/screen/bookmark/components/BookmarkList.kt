@@ -15,7 +15,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
@@ -32,7 +34,7 @@ fun BookmarkList(
     val deletedItem = remember { mutableStateListOf<BookmarkModel>() }
     if(bookmarkedCity.isEmpty()){
         EmptyScreen(
-            messageText = "Nothing is Here!",
+            messageText = stringResource(R.string.nothing_is_here),
             messageImage = Icons.Default.CollectionsBookmark
             )
     }else {

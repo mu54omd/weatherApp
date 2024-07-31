@@ -32,7 +32,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.CityModel
 
 @Composable
@@ -67,12 +69,12 @@ fun WeatherSearchBar(
                 if(textValue.isEmpty()) {
                     Icon(
                         imageVector = Icons.Filled.Place,
-                        contentDescription = "Place"
+                        contentDescription = stringResource(R.string.place)
                     )
                 }else{
                     Icon(
                         imageVector = Icons.Default.Clear,
-                        contentDescription = "Clear",
+                        contentDescription = stringResource(R.string.clear),
                         modifier = Modifier.clickable {
                             onClearClicked()
                         }
@@ -103,9 +105,9 @@ fun WeatherSearchBar(
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.Add,
-                                    contentDescription = "Add to Favorites",
+                                    contentDescription = stringResource(R.string.add_to_favorites),
                                 )
-                                Text(text = "Add", style = MaterialTheme.typography.labelSmall)
+                                Text(text = stringResource(R.string.add), style = MaterialTheme.typography.labelSmall)
                             }
                         }
                     }

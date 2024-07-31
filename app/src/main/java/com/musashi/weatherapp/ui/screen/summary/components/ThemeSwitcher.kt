@@ -41,99 +41,101 @@ fun ThemeSwitcher(
     changeTheme: (AppTheme) -> Unit,
 ) {
     var isExpanded by rememberSaveable{ mutableStateOf(false) }
-    AnimatedVisibility(
-        visible = !isExpanded,
-        exit = scaleOut(),
-        enter = scaleIn()
-    ) {
-        Icon(
-            imageVector = Icons.Default.ColorLens,
-            contentDescription = "Yellow",
-            modifier = Modifier
-                .size(30.dp)
-                .clip(CircleShape)
-                .clickable {
-                    isExpanded = true
-                },
-        )
-    }
-    AnimatedVisibility(
-        visible = isExpanded,
-        enter = slideInHorizontally(initialOffsetX = { w -> w }) + expandHorizontally(expandFrom = Alignment.End),
-        exit = shrinkHorizontally()
-    ) {
-        Card(
-            modifier = modifier
-                .width(150.dp)
-                .height(30.dp),
-            shape = MaterialTheme.shapes.extraLarge,
-            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondaryContainer)
+    Row(modifier = modifier) {
+        AnimatedVisibility(
+            visible = !isExpanded,
+            exit = scaleOut(),
+            enter = scaleIn()
+        ) {
+            Icon(
+                imageVector = Icons.Default.ColorLens,
+                contentDescription = "Yellow",
+                modifier = Modifier
+                    .size(30.dp)
+                    .clip(CircleShape)
+                    .clickable {
+                        isExpanded = true
+                    },
+            )
+        }
+        AnimatedVisibility(
+            visible = isExpanded,
+            enter = slideInHorizontally(initialOffsetX = { w -> w }) + expandHorizontally(expandFrom = Alignment.End),
+            exit = shrinkHorizontally()
+        ) {
+            Card(
+                modifier = Modifier
+                    .width(150.dp)
+                    .height(30.dp),
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondaryContainer)
             ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Circle,
-                    contentDescription = "Yellow",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            changeTheme(AppTheme.Yellow)
-                            isExpanded = false
-                        },
-                    tint = Color.Yellow
-                )
-                Icon(
-                    imageVector = Icons.Default.Circle,
-                    contentDescription = "Red",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            changeTheme(AppTheme.Red)
-                            isExpanded = false
-                        },
-                    tint = Color.Red
-                )
-                Icon(
-                    imageVector = Icons.Default.Circle,
-                    contentDescription = "Blue",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            changeTheme(AppTheme.Blue)
-                            isExpanded = false
-                        },
-                    tint = Color.Blue
-                )
-                Icon(
-                    imageVector = Icons.Default.Circle,
-                    contentDescription = "Light",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            changeTheme(AppTheme.Light)
-                            isExpanded = false
-                        },
-                    tint = Color.Green
-                )
-                Icon(
-                    imageVector = Icons.Default.Circle,
-                    contentDescription = "Dark",
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            changeTheme(AppTheme.Dark)
-                            isExpanded = false
-                        },
-                    tint = Color.DarkGray
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Circle,
+                        contentDescription = "Yellow",
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                changeTheme(AppTheme.Yellow)
+                                isExpanded = false
+                            },
+                        tint = Color.Yellow
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Circle,
+                        contentDescription = "Red",
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                changeTheme(AppTheme.Red)
+                                isExpanded = false
+                            },
+                        tint = Color.Red
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Circle,
+                        contentDescription = "Blue",
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                changeTheme(AppTheme.Blue)
+                                isExpanded = false
+                            },
+                        tint = Color.Blue
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Circle,
+                        contentDescription = "Light",
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                changeTheme(AppTheme.Light)
+                                isExpanded = false
+                            },
+                        tint = Color.Green
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Circle,
+                        contentDescription = "Dark",
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                changeTheme(AppTheme.Dark)
+                                isExpanded = false
+                            },
+                        tint = Color.DarkGray
+                    )
+                }
             }
         }
     }

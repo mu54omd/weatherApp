@@ -11,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.helper.returnHumidityImage
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
@@ -51,7 +53,7 @@ fun WeatherStat(
                 ),
                 shimmerColor =MaterialTheme.colorScheme.secondaryContainer,
                 image = returnWeatherCode(currentWeatherCode).imageId,
-                title = "Now",
+                title = stringResource(R.string.now_temp),
                 value = temperature.toString(), unit = "°C",
                 offsetMillis = 0,
                 isWeatherLoaded = isWeatherLoaded
@@ -63,7 +65,7 @@ fun WeatherStat(
                     ),
                 shimmerColor = MaterialTheme.colorScheme.tertiaryContainer,
                 image = returnHumidityImage(humidity),
-                title = "Humidity",
+                title = stringResource(R.string.humidity),
                 value = humidity.toString(),
                 unit = "%",
                 offsetMillis = 200,
@@ -76,7 +78,7 @@ fun WeatherStat(
                     ),
                 shimmerColor = MaterialTheme.colorScheme.primaryContainer,
                 image = returnWeatherCode(nextHourWeatherCode).imageId,
-                title = "Next Hour",
+                title = stringResource(R.string.next_hour_temp),
                 value = nextHourTemp.toString(),
                 unit = "°C",
                 offsetMillis = 500,

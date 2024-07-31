@@ -111,7 +111,7 @@ fun BookmarkItem(
                     }
                     Icon(
                         imageVector = Icons.Outlined.Delete,
-                        contentDescription = "Delete Bookmark",
+                        contentDescription = stringResource(R.string.delete_bookmark),
                         modifier = Modifier
                             .clip(CircleShape)
                             .clickable {
