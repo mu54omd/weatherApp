@@ -33,6 +33,12 @@ class LocalUserManagerImpl(
         }
     }
 
+    override suspend fun saveThemeState(color: String) {
+        context.dataStore.edit { setting ->
+            setting[PreferencesKeys.THEME_COLOR] = color
+        }
+    }
+
     override fun readSelectedCountry(): Flow<String> {
         return context.dataStore.data.map { preferences ->
             preferences[PreferencesKeys.SELECTED_COUNTRY]?:""
@@ -50,6 +56,12 @@ class LocalUserManagerImpl(
             preferences[PreferencesKeys.IS_BOOKMARKED]?:false
         }
     }
+
+    override fun readThemeState(): Flow<String> {
+        return context.dataStore.data.map { preferences ->
+            preferences[PreferencesKeys.THEME_COLOR]?:"Light"
+        }
+    }
 }
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_SETTINGS)
@@ -57,4 +69,5 @@ private object PreferencesKeys{
     val SELECTED_CITY = stringPreferencesKey(name = Constants.SELECTED_CITY)
     val SELECTED_COUNTRY = stringPreferencesKey(name = Constants.SELECTED_COUNTRY)
     val IS_BOOKMARKED = booleanPreferencesKey(name = Constants.IS_BOOKMARKED)
+    val THEME_COLOR = stringPreferencesKey(name = Constants.THEME_COLOR)
 }

@@ -13,4 +13,6 @@ object Constants {
     const val SELECTED_CITY = "selectedCity"
     const val SELECTED_COUNTRY = "selectedCOUNTRY"
     const val IS_BOOKMARKED = "isBookmarked"
+
+    const val THEME_COLOR = "themeColor"
 }

@@ -135,7 +135,7 @@ fun CityDetails(
 @Preview
 @Composable
 private fun CityDetailsPreview() {
-    WeatherAppTheme {
+    WeatherAppTheme() {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
             CityDetails1(
                 isCitySetAsDefault = true,

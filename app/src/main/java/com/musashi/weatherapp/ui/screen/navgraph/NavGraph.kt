@@ -25,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.musashi.weatherapp.activity.MainViewModel
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
@@ -40,10 +41,13 @@ import com.musashi.weatherapp.ui.screen.summary.SummaryViewModel
 fun NavGraph(
     startDestination: String
 ) {
+    val mainViewModel: MainViewModel = hiltViewModel()
+
     val summaryViewModel: SummaryViewModel = hiltViewModel()
     val summaryState = summaryViewModel.state.collectAsState()
-    val swipeRefreshState =
-        rememberSwipeRefreshState(isRefreshing = summaryState.value.isRefreshing)
+
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = summaryState.value.isRefreshing)
+
     val navController = rememberNavController()
 
     val bottomNavigationItem = remember {
@@ -128,7 +132,8 @@ fun NavGraph(
                         },
                         nextHourWeather = getNextHourWeather(state = summaryState.value),
                         nextHourWeatherCode = getNextHourWeatherCode(state = summaryState.value),
-                        onAddFavoriteClick = { summaryViewModel.addToBookmark() }
+                        onAddFavoriteClick = { summaryViewModel.addToBookmark() },
+                        changeTheme = { mainViewModel.changeTheme(it) }
                     )
                 }
 

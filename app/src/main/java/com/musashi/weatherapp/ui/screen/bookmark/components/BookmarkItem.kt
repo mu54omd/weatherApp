@@ -129,7 +129,7 @@ fun BookmarkItem(
 @Preview
 @Composable
 private fun BookmarkItemPreview() {
-    WeatherAppTheme {
+    WeatherAppTheme() {
         BookmarkItem(
             onBookmarkCardClick = {},
             onDeleteClick = {},

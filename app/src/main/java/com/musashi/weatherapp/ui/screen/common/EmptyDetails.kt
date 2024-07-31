@@ -42,7 +42,7 @@ fun EmptyScreen(
 @Preview
 @Composable
 private fun EmptyDetailsPreview() {
-    WeatherAppTheme {
+    WeatherAppTheme() {
         Surface(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             EmptyScreen(
                 messageText = "No City Selected!",

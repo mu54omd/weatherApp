@@ -67,7 +67,7 @@ fun WeatherDetailsItem(
 @Preview
 @Composable
 private fun WeatherDetailsPreview() {
-    WeatherAppTheme {
+    WeatherAppTheme() {
         WeatherDetailsItem(date = "2024-07-24",time = "12:00", temp = 43.2, humidity = 23)
     }
 }

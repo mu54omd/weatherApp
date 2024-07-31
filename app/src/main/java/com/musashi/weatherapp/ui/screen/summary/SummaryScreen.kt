@@ -2,9 +2,11 @@ package com.musashi.weatherapp.ui.screen.summary
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -19,7 +21,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.musashi.weatherapp.activity.AppTheme
 import com.musashi.weatherapp.ui.screen.summary.components.LoadingDialog
+import com.musashi.weatherapp.ui.screen.summary.components.ThemeSwitcher
 import com.musashi.weatherapp.ui.screen.summary.components.WeatherSearchBar
 import com.musashi.weatherapp.ui.screen.summary.components.WeatherStat
 import kotlinx.coroutines.delay
@@ -36,6 +40,7 @@ fun SummaryScreen(
     onAddFavoriteClick: () -> Unit,
     nextHourWeather: Double?,
     nextHourWeatherCode: Int?,
+    changeTheme: (AppTheme) -> Unit,
 ) {
     var textValueCountry by rememberSaveable { mutableStateOf(countryValue) }
     var textValueCity by rememberSaveable { mutableStateOf(cityValue) }
@@ -48,6 +53,18 @@ fun SummaryScreen(
         LoadingDialog()
     }else {
 
+        Row(
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+                .padding(end = 40.dp)
+
+        ) {
+            ThemeSwitcher(changeTheme = { changeTheme(it)})
+        }
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -56,6 +73,7 @@ fun SummaryScreen(
                 .padding(30.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+
             WeatherSearchBar(
                 label = "Country",
                 textValue = textValueCountry,
