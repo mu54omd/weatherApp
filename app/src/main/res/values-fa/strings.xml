@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">نرم افزار پیش بینی هوا</string>
+    <string name="app_name">هواشناسی</string>
 
     <string name="clear_sky">آسمان صاف</string>
     <string name="drizzle">نم نم باران</string>

@@ -68,7 +68,7 @@ fun ThemeSwitcher(
                     .width(150.dp)
                     .height(30.dp),
                 shape = MaterialTheme.shapes.extraLarge,
-                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondaryContainer)
+                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondaryContainer),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,

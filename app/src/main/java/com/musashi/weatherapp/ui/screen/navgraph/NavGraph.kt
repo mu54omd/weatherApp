@@ -5,7 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -37,7 +36,6 @@ import com.musashi.weatherapp.ui.screen.navgraph.components.WeatherBottomBar
 import com.musashi.weatherapp.ui.screen.summary.SummaryScreen
 import com.musashi.weatherapp.ui.screen.summary.SummaryViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavGraph(
     startDestination: String
@@ -134,8 +132,9 @@ fun NavGraph(
                         nextHourWeather = getNextHourWeather(state = summaryState.value),
                         nextHourWeatherCode = getNextHourWeatherCode(state = summaryState.value),
                         onAddFavoriteClick = { summaryViewModel.addToBookmark() },
-                        changeTheme = { mainViewModel.changeTheme(it) },
-                        changeLanguage = { mainViewModel.changeLanguage(it) }
+                        changeTheme = { theme -> mainViewModel.changeTheme(theme) },
+                        changeLanguage = { locale -> mainViewModel.changeLanguage(locale) },
+                        language = mainViewModel.state.value.appLanguage
                     )
                 }
 

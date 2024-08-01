@@ -23,6 +23,7 @@ class MainViewModel @Inject constructor(
 
     init {
         loadThemeColor()
+        loadAppLanguage()
     }
 
     fun changeTheme(themeName: AppTheme){
@@ -41,13 +42,30 @@ class MainViewModel @Inject constructor(
     }
 
     fun changeLanguage(locale: String){
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
+        viewModelScope.launch {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
+            localUserManager.saveAppLanguage(locale)
+            _state.update { it.copy(appLanguage = locale) }
+        }
     }
 
     private fun loadThemeColor(){
         viewModelScope.launch {
             _state.update {
-                it.copy(themeState = AppTheme.valueOf(localUserManager.readThemeState().first()))
+                it.copy(
+                    themeState = AppTheme.valueOf(localUserManager.readThemeState().first()),
+                    isThemeLoaded = true
+                    )
+            }
+        }
+    }
+    private fun loadAppLanguage(){
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    appLanguage = localUserManager.readAppLanguage().first(),
+                    isLanguageLoaded = true
+                    )
             }
         }
     }

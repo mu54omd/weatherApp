@@ -85,7 +85,7 @@ fun WeatherSearchBar(
                 if (isLoading) {
                     CircularProgressIndicator(modifier = Modifier.size(25.dp))
                 }
-                if(label == "City"){
+                if(label == stringResource(id = R.string.search_bar_city)){
                     cities.forEach { city ->
                         visibilityFavoriteIcon = (city.cityName == textValue) && textValue.isNotEmpty()
                         AnimatedVisibility(

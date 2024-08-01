@@ -15,4 +15,6 @@ object Constants {
     const val IS_BOOKMARKED = "isBookmarked"
 
     const val THEME_COLOR = "themeColor"
+
+    const val APP_LANGUAGE = "appLanguage"
 }

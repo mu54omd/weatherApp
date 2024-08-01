@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
 import com.musashi.weatherapp.ui.screen.common.shimmerEffect
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
@@ -82,9 +83,10 @@ fun WeatherItem(
             shape = MaterialTheme.shapes.medium,
             elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
         ) {
-            Box(modifier = Modifier.background(brush = Brush.verticalGradient(
-                colors = cardColor
-            ))) {
+            Box(
+                modifier = Modifier.background(brush = Brush.verticalGradient(colors = cardColor)),
+                contentAlignment = Alignment.TopCenter
+            ) {
                 Card(
                     modifier = Modifier
                         .width(90.dp)
@@ -128,14 +130,12 @@ fun WeatherItem(
                                 .padding(bottom = 20.dp)
                                 .fillMaxHeight()
                         ) {
-                            Text(
-                                text = value,
-                                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-                            )
-                            Text(
-                                text = unit,
-                                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
-                            )
+                            LeftToRightLayout {
+                                Text(
+                                    text = "$value $unit",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                                )
+                            }
                         }
                     }else{
                         Box(modifier = Modifier

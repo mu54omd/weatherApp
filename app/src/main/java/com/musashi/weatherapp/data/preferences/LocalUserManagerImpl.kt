@@ -39,6 +39,12 @@ class LocalUserManagerImpl(
         }
     }
 
+    override suspend fun saveAppLanguage(language: String) {
+        context.dataStore.edit { setting ->
+            setting[PreferencesKeys.APP_LANGUAGE] = language
+        }
+    }
+
     override fun readSelectedCountry(): Flow<String> {
         return context.dataStore.data.map { preferences ->
             preferences[PreferencesKeys.SELECTED_COUNTRY]?:""
@@ -62,6 +68,13 @@ class LocalUserManagerImpl(
             preferences[PreferencesKeys.THEME_COLOR]?:"Light"
         }
     }
+
+    override fun readAppLanguage(): Flow<String> {
+        return context.dataStore.data.map { preferences ->
+            preferences[PreferencesKeys.APP_LANGUAGE] ?: "en-US"
+        }
+    }
+
 }
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_SETTINGS)
@@ -70,4 +83,5 @@ private object PreferencesKeys{
     val SELECTED_COUNTRY = stringPreferencesKey(name = Constants.SELECTED_COUNTRY)
     val IS_BOOKMARKED = booleanPreferencesKey(name = Constants.IS_BOOKMARKED)
     val THEME_COLOR = stringPreferencesKey(name = Constants.THEME_COLOR)
+    val APP_LANGUAGE = stringPreferencesKey(name = Constants.APP_LANGUAGE)
 }

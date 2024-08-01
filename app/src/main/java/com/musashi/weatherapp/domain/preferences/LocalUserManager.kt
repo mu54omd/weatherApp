@@ -7,9 +7,11 @@ interface LocalUserManager {
     suspend fun saveSelectedCity(city: String)
     suspend fun saveBookmarkState(state: Boolean)
     suspend fun saveThemeState(color: String)
+    suspend fun saveAppLanguage(language: String)
 
     fun readSelectedCountry(): Flow<String>
     fun readSelectedCity(): Flow<String>
     fun readBookmarkState(): Flow<Boolean>
     fun readThemeState(): Flow<String>
+    fun readAppLanguage(): Flow<String>
 }
