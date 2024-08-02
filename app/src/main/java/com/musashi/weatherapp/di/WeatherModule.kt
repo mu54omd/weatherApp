@@ -13,7 +13,6 @@ import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.utils.Constants.BASE_URL
 import com.musashi.weatherapp.utils.Constants.CITY_BOOKMARK_DATABASE_NAME
-import com.musashi.weatherapp.utils.Constants.CITY_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,17 +37,32 @@ object WeatherModule {
         return LocalUserManagerImpl(application)
     }
 
-    //Provide City Database for Hilt
-    @Provides
-    @Singleton
-    fun provideCityDatabase( application: Application):CityDatabase{
-        return Room.databaseBuilder(
+//    //Provide City Database for Hilt
+//    @Provides
+//    @Singleton
+//    fun provideCityDatabase( application: Application):CityDatabase{
+//        return Room
+//            .databaseBuilder(
+//            context = application,
+//            klass = CityDatabase::class.java,
+//            name = CITY_DATABASE_NAME)
+//            .fallbackToDestructiveMigration()
+//            .build()
+//    }
+//Provide City Database for Hilt
+@Provides
+@Singleton
+fun provideCityDatabase( application: Application):CityDatabase{
+    return Room
+        .databaseBuilder(
             context = application,
             klass = CityDatabase::class.java,
-            name = CITY_DATABASE_NAME
-        ).fallbackToDestructiveMigration()
-            .build()
-    }
+            name = "city_db.db"
+        )
+        .fallbackToDestructiveMigration()
+        .createFromAsset("city_db.db")
+        .build()
+}
 
     //Provide City DAO for Hilt
     @Provides

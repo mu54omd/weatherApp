@@ -2,6 +2,7 @@ package com.musashi.weatherapp.ui.screen.summary
 
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
+import com.musashi.weatherapp.domain.model.EmptyCity
 import com.musashi.weatherapp.domain.model.WeatherResponseModel
 
 data class WeatherState(
@@ -16,8 +17,9 @@ data class WeatherState(
     val isCountrySelected: Boolean = false,
     val localCityCountry: Pair<String, String> = Pair("",""),
     val isDefaultCitySet: Boolean = false,
-    val currentCity: CityModel = CityModel(0,"","" ,0.0, 0.0),
+    val currentCity: CityModel = EmptyCity.emptyCity,
     val countries: List<String> = emptyList(),
+    val countriesFa: List<String> = emptyList(),
     val cities: List<CityModel> = emptyList(),
     val weatherStatus: WeatherResponseModel? = null,
     val error: String? = null,

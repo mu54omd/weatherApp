@@ -3,9 +3,9 @@ package com.musashi.weatherapp.ui.screen.summary
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
+import com.musashi.weatherapp.domain.model.EmptyCity
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,7 +31,7 @@ class SummaryViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        createDatabaseFromRawJson(context)
+//        createDatabaseFromRawJson(context)
         getListOfCountries()
         readLocalSetting()
         loadBookmark()
@@ -62,6 +61,7 @@ class SummaryViewModel @Inject constructor(
 
     fun setSelectedAsCurrentCity(city: CityModel){
         _state.update { it.copy(currentCity = city) }
+        getCurrentCityWeather()
     }
 
     fun selectCountry(countryName: String){
@@ -79,14 +79,16 @@ class SummaryViewModel @Inject constructor(
         viewModelScope.launch {
             weatherRepository.getCity(
                 cityName = cityName.replaceFirstChar { char -> char.uppercaseChar() },
-                countryName = countryName.replaceFirstChar { char -> char.uppercaseChar() }
+                countryName = countryName.replaceFirstChar { char -> char.uppercaseChar() },
             )?.let { targetCity ->
                 _state.update {
                     it.copy(
                         currentCity = CityModel(
                             id = targetCity.id,
                             countryName = targetCity.countryName,
+                            countryNameFa = targetCity.countryNameFa,
                             cityName = targetCity.cityName,
+                            cityNameFa = targetCity.cityNameFa,
                             latitude = targetCity.latitude,
                             longitude = targetCity.longitude
                         )
@@ -94,13 +96,7 @@ class SummaryViewModel @Inject constructor(
                 }
             }?: _state.update {
                 it.copy(
-                    currentCity = CityModel(
-                        id = 0,
-                        countryName = "",
-                        cityName = "",
-                        latitude = 0.0,
-                        longitude = 0.0
-                    )
+                    currentCity = EmptyCity.emptyCity
                 )
             }
             getCurrentCityWeather()
@@ -146,49 +142,52 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    private fun createDatabaseFromRawJson(context: Context) {
-
-        _state.update { it.copy(isDatabaseLoaded = false) }
-        viewModelScope.launch {
-            val count = weatherRepository.getTableCount()
-
-            if (count < 47868) {
-                val citiesJsonArray: JSONArray =
-                    context.resources.openRawResource(R.raw.world_cities_with_id).bufferedReader()
-                        .use {
-                            JSONArray(it.readText())
-                        }
-                citiesJsonArray.takeIf { it.length() > 0 }?.let { list ->
-                    for (index in 0 until list.length()) {
-                        val cityObj = list.getJSONObject(index)
-                        weatherRepository.upsertCity(
-                            CityModel(
-                                id = cityObj.getInt("id"),
-                                countryName = cityObj.getString("country"),
-                                cityName = cityObj.getString("city_ascii"),
-                                latitude = cityObj.getDouble("lat"),
-                                longitude = cityObj.getDouble("lng")
-                            )
-                        )
-                    }
-                }
-            }
-            _state.update { it.copy(isDatabaseLoaded = true) }
-        }
-    }
+//    private fun createDatabaseFromRawJson(context: Context) {
+//
+//        _state.update { it.copy(isDatabaseLoaded = false) }
+//        viewModelScope.launch {
+//            val count = weatherRepository.getTableCount()
+//
+//            if (count < 47868) {
+//                val citiesJsonArray: JSONArray =
+//                    context.resources.openRawResource(R.raw.world_cities_with_id).bufferedReader()
+//                        .use {
+//                            JSONArray(it.readText())
+//                        }
+//                citiesJsonArray.takeIf { it.length() > 0 }?.let { list ->
+//                    for (index in 0 until list.length()) {
+//                        val cityObj = list.getJSONObject(index)
+//                        weatherRepository.upsertCity(
+//                            CityModel(
+//                                id = cityObj.getInt("id"),
+//                                countryName = cityObj.getString("country"),
+//                                cityName = cityObj.getString("city_ascii"),
+//                                latitude = cityObj.getDouble("lat"),
+//                                longitude = cityObj.getDouble("lng")
+//                            )
+//                        )
+//                    }
+//                }
+//            }
+//            _state.update { it.copy(isDatabaseLoaded = true) }
+//        }
+//    }
 
     private fun getListOfCountries(){
+        _state.update { it.copy(isDatabaseLoaded = false) }
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    countries = weatherRepository.getCountries().first()
+                    countries = weatherRepository.getCountries().first(),
+                    countriesFa = weatherRepository.getCountriesFa().first(),
                 )
             }
         }
+        _state.update { it.copy(isDatabaseLoaded = true) }
     }
 
     private fun getCurrentCityWeather(){
-        if( state.value.currentCity != CityModel(0, "", "",0.0, 0.0 )) {
+        if( state.value.currentCity != EmptyCity.emptyCity) {
 
             _state.update { it.copy(isWeatherLoading = true) }
             getWeather(

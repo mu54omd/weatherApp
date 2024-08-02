@@ -14,6 +14,7 @@ interface WeatherRepository {
     //From CityDao
     suspend fun getTableCount(): Long
     fun getCountries(): Flow<List<String>>
+    fun getCountriesFa(): Flow<List<String>>
     fun getCities(countryName: String): Flow<List<CityModel>>
     suspend fun getCity(cityName: String, countryName: String): CityModel?
     suspend fun upsertCity(cityModel: CityModel)

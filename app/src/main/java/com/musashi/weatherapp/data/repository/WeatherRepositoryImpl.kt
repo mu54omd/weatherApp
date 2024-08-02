@@ -35,6 +35,10 @@ class WeatherRepositoryImpl @Inject constructor(
         return cityDao.getCountries()
     }
 
+    override fun getCountriesFa(): Flow<List<String>> {
+        return cityDao.getCountriesFa()
+    }
+
     override fun getCities(countryName: String): Flow<List<CityModel>> {
         return cityDao.selectCountry(countryName)
     }

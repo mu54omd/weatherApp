@@ -2,7 +2,6 @@ package com.musashi.weatherapp.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,12 +9,15 @@ import kotlinx.serialization.Serializable
 data class CityModel(
     @PrimaryKey
     val id: Int,
-    @SerializedName("country")
     val countryName: String,
-    @SerializedName("city_ascii")
+    val countryNameFa: String,
     val cityName: String,
-    @SerializedName("lat")
+    val cityNameFa: String?,
     val latitude: Double,
-    @SerializedName("lng")
     val longitude: Double
 )
+
+object EmptyCity{
+//    val emptyCity = CityModel(0,"","",0.0,0.0)
+    val emptyCity = CityModel(0,"","","", "",0.0,0.0)
+}
