@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.screen.common.EmptyScreen
-import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItem
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
@@ -41,24 +40,24 @@ fun DetailedScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            LeftToRightLayout {
-                CityDetails(
-                    weatherCodeImage = returnWeatherCode(
-                        state.weatherStatus?.current?.weatherCode ?: 0
-                    ).imageId,
-                    weatherCodeTitle = returnWeatherCode(
-                        state.weatherStatus?.current?.weatherCode ?: 0
-                    ).stringId,
-                    cityTitle = state.currentCity.cityName,
-                    lat = state.currentCity.latitude,
-                    lng = state.currentCity.longitude,
-                    onFavoriteClick = {
-                        onBookmarkClick()
-                    },
-                    isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault(),
-                    modifier = Modifier.verticalScroll(rememberScrollState())
-                )
-            }
+
+            CityDetails(
+                weatherCodeImage = returnWeatherCode(
+                    state.weatherStatus?.current?.weatherCode ?: 0
+                ).imageId,
+                weatherCodeTitle = returnWeatherCode(
+                    state.weatherStatus?.current?.weatherCode ?: 0
+                ).stringId,
+                cityTitle = state.currentCity.cityName,
+                lat = state.currentCity.latitude,
+                lng = state.currentCity.longitude,
+                onFavoriteClick = {
+                    onBookmarkClick()
+                },
+                isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault(),
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            )
+
             Spacer(modifier = Modifier.height(10.dp))
             WeatherDetailsTitle()
             Spacer(modifier = Modifier.height(10.dp))

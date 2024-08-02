@@ -15,7 +15,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.BookmarkModel
@@ -46,12 +48,21 @@ fun BookmarkList(
                 val city = bookmarksResult[i]
                 AnimatedVisibility(
                     visible = !deletedItem.contains(city),
-                    exit = slideOutHorizontally(
-                        targetOffsetX = { -it },
-                        animationSpec = tween(durationMillis = 300)
-                    ) + shrinkVertically(
-                        animationSpec = tween(delayMillis = 300)
-                    ),
+                    exit = if(LocalLayoutDirection.current == LayoutDirection.Ltr){
+                        slideOutHorizontally(
+                            targetOffsetX = { -it },
+                            animationSpec = tween(durationMillis = 300)
+                        ) + shrinkVertically(
+                            animationSpec = tween(delayMillis = 300)
+                        )
+                    }else{
+                        slideOutHorizontally(
+                            targetOffsetX = { it },
+                            animationSpec = tween(durationMillis = 300)
+                        ) + shrinkVertically(
+                            animationSpec = tween(delayMillis = 300)
+                        )
+                    },
                     enter = fadeIn(
                         animationSpec = tween(durationMillis = 300)
                     )

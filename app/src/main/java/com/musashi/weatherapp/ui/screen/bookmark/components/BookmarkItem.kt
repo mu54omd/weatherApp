@@ -27,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.screen.common.shimmerEffect
@@ -90,10 +92,17 @@ fun BookmarkItem(
                                 contentDescription = stringResource(id = weatherTextId),
                                 modifier = Modifier.size(80.dp)
                             )
-                            Text(
-                                text = "${temperature.toString()}°C",
-                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
-                            )
+                            if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                                Text(
+                                    text = "${temperature.toString()}°C",
+                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
+                                )
+                            }else{
+                                Text(
+                                    text = "${temperature.toString()}°C",
+                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                )
+                            }
                         }else{
                             Box(modifier = Modifier
                                 .size(80.dp)

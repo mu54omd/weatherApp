@@ -30,12 +30,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails as CityDetails1
 
@@ -91,18 +94,36 @@ fun CityDetails(
                 }
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(space = 50.dp)
-                ) {
-                    Text(
-                        text = lat.toString(),
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                    Text(
-                        text = lng.toString(),
-                        style = MaterialTheme.typography.labelLarge
-                    )
+                if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(space = 50.dp)
+                    ) {
+                        Text(
+                            text = lat.toString(),
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                        Text(
+                            text = lng.toString(),
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                    }
+                }else{
+                    LeftToRightLayout {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(space = 50.dp)
+                        ) {
+                            Text(
+                                text = lat.toString(),
+                                style = MaterialTheme.typography.labelMedium
+                            )
+                            Text(
+                                text = lng.toString(),
+                                style = MaterialTheme.typography.labelMedium
+                            )
+                        }
+                    }
                 }
             }
         }

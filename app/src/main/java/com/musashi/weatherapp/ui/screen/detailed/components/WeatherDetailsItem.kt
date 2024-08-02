@@ -13,8 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
@@ -36,30 +38,58 @@ fun WeatherDetailsItem(
         ),
         shape = MaterialTheme.shapes.extraSmall
     ){
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxSize().padding(start = 10.dp, end = 10.dp)
-        ) {
+        if(LocalLayoutDirection.current == LayoutDirection.Rtl) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxSize().padding(start = 10.dp, end = 10.dp)
+            ) {
 
-            Text(
-                text = date,
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-            )
+                Text(
+                    text = date,
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                )
 
-            Text(
-                text = time,
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-            )
+                Text(
+                    text = time,
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                )
 
-            Text(
-                text = "${temp.toString()}°C",
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
-            )
-            Text(
-                text = "${humidity.toString()}%",
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
-            )
+                Text(
+                    text = "${temp.toString()}°C",
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                )
+                Text(
+                    text = "${humidity.toString()}%",
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                )
+            }
+        }else{
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxSize().padding(start = 10.dp, end = 10.dp)
+            ) {
+
+                Text(
+                    text = date,
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                )
+
+                Text(
+                    text = time,
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                )
+
+                Text(
+                    text = "${temp.toString()}°C",
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
+                )
+                Text(
+                    text = "${humidity.toString()}%",
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
+                )
+            }
         }
     }
 }

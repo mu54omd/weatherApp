@@ -32,9 +32,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
@@ -105,7 +107,7 @@ fun WeatherItem(
                     ){
                         Text(
                             text = title,
-                            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                            style = MaterialTheme.typography.bodySmall,
                             color = Color.Black
                         )
                     }
@@ -130,12 +132,18 @@ fun WeatherItem(
                                 .padding(bottom = 20.dp)
                                 .fillMaxHeight()
                         ) {
-                            LeftToRightLayout {
+                            if(LocalLayoutDirection.current == LayoutDirection.Rtl) {
+                                LeftToRightLayout {
+                                    Text(
+                                        text = "$value $unit",
+                                        style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                                    )
+                                }
+                            }else
                                 Text(
-                                    text = "$value $unit",
-                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
-                                )
-                            }
+                                text = "$value $unit",
+                                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                            )
                         }
                     }else{
                         Box(modifier = Modifier

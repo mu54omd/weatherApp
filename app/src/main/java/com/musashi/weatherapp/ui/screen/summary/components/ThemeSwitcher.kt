@@ -56,6 +56,7 @@ fun ThemeSwitcher(
                     .clickable {
                         isExpanded = true
                     },
+                tint = MaterialTheme.colorScheme.primaryContainer
             )
         }
         AnimatedVisibility(
