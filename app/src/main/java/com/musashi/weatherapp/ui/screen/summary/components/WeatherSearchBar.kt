@@ -32,7 +32,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.CityModel
@@ -87,7 +89,7 @@ fun WeatherSearchBar(
                 }
                 if(label == stringResource(id = R.string.search_bar_city)){
                     cities.forEach { city ->
-                        visibilityFavoriteIcon = (city.cityName == textValue) && textValue.isNotEmpty()
+                        visibilityFavoriteIcon = (city.cityName == textValue || city.cityNameFa == textValue) && textValue.isNotEmpty()
                         AnimatedVisibility(
                             visible = visibilityFavoriteIcon,
                             modifier = Modifier.padding(end = 25.dp)
@@ -127,18 +129,34 @@ fun WeatherSearchBar(
                     containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)
                 )
             ) {
+                val isLtr = LocalLayoutDirection.current == LayoutDirection.Ltr
                 LazyColumn(modifier = Modifier.height(100.dp)) {
                     if (textValue.isNotEmpty()) {
                         if (cities.isNotEmpty()) {
-                            items(
-                                cities.filter {
-                                    it.cityName.lowercase().contains(textValue.lowercase())
-                                }.also { if(it.isEmpty()) expandedChange() }
-                            ) { city ->
-                                SuggestionListItem(
-                                    title = city.cityName,
-                                    onSelect = { onSuggestionSelect(it) }
-                                )
+                            if(isLtr){
+                                items(
+                                    cities.filter {
+                                        it.cityName.lowercase().contains(textValue.lowercase())
+                                    }.also { if(it.isEmpty()) expandedChange() }
+                                ) { city ->
+                                    SuggestionListItem(
+                                        title = city.cityName,
+                                        onSelect = { onSuggestionSelect(it) }
+                                    )
+                                }
+                            }else{
+                                items(
+                                    cities.filter {
+                                        it.cityNameFa?.lowercase()?.contains(textValue.lowercase()) == true
+                                    }.also { if(it.isEmpty()) expandedChange() }
+                                ) { city ->
+                                    city.cityNameFa?.let {
+                                        SuggestionListItem(
+                                            title = it,
+                                            onSelect = { onSuggestionSelect(it) }
+                                        )
+                                    }
+                                }
                             }
                         }else if(countries.isNotEmpty()){
                             items(

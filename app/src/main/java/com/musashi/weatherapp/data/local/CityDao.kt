@@ -26,6 +26,6 @@ interface CityDao {
     @Query("SELECT * FROM CityModel WHERE countryName=:countryName OR countryNameFa=:countryName")
     fun selectCountry(countryName: String): Flow<List<CityModel>>
 
-    @Query("SELECT * FROM CityModel WHERE cityName=:cityName AND (countryName=:countryName OR countryNameFa=:countryName)")
+    @Query("SELECT * FROM CityModel WHERE (cityName=:cityName OR cityNameFa=:cityName) AND (countryName=:countryName OR countryNameFa=:countryName)")
     suspend fun selectCity(cityName: String, countryName: String): CityModel?
 }

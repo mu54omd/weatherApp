@@ -137,7 +137,12 @@ fun SummaryScreen(
                 )
                 Spacer(modifier = Modifier.size(10.dp))
                 WeatherStat(
-                    cityName = state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
+                    cityName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                        state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() }
+                    } else {
+                        state.currentCity.cityNameFa
+                    }?: state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
+
                     temperature = state.weatherStatus?.current?.temperature2m ?: 0.0,
                     humidity = state.weatherStatus?.current?.relativeHumidity2m ?: 0,
                     nextHourTemp = nextHourWeather ?: 0.0,

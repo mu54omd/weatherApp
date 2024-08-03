@@ -15,7 +15,9 @@ import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInte
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
@@ -48,7 +50,11 @@ fun DetailedScreen(
                 weatherCodeTitle = returnWeatherCode(
                     state.weatherStatus?.current?.weatherCode ?: 0
                 ).stringId,
-                cityTitle = state.currentCity.cityName,
+                cityTitle = if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                    state.currentCity.cityName
+                } else{
+                    state.currentCity.cityNameFa
+                }?: state.currentCity.cityName,
                 lat = state.currentCity.latitude,
                 lng = state.currentCity.longitude,
                 onFavoriteClick = {

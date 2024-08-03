@@ -57,10 +57,10 @@ fun provideCityDatabase( application: Application):CityDatabase{
         .databaseBuilder(
             context = application,
             klass = CityDatabase::class.java,
-            name = "city_db.db"
+            name = "city_db_edited.db"
         )
         .fallbackToDestructiveMigration()
-        .createFromAsset("city_db.db")
+        .createFromAsset("city_db_edited.db")
         .build()
 }
 

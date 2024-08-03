@@ -1,6 +1,5 @@
 package com.musashi.weatherapp.ui.screen.summary
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.musashi.weatherapp.domain.model.BookmarkModel
@@ -10,7 +9,6 @@ import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -20,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SummaryViewModel @Inject constructor(
-    @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
     private val userLocalUserManager: LocalUserManager
 ): ViewModel() {

@@ -72,8 +72,8 @@ fun BookmarkList(
                             weatherImageId = returnWeatherCode(city.weatherCode).imageId,
                             weatherTextId = returnWeatherCode(city.weatherCode).stringId,
                             temperature = city.temp,
-                            cityName = city.cityModel.cityName,
-                            countryName = city.cityModel.countryName,
+                            cityName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) city.cityModel.cityName else city.cityModel.cityNameFa ?: city.cityModel.cityName,
+                            countryName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) city.cityModel.countryName else city.cityModel.countryNameFa,
                             onDeleteClick = { deletedItem.add(city) },
                             isWeatherLoaded = city.error == null
                         )
