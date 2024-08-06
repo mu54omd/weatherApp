@@ -1,7 +1,11 @@
 package com.musashi.weatherapp.ui.screen.summary
 
+import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.musashi.weatherapp.application.NotificationHandler
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.EmptyCity
@@ -9,6 +13,7 @@ import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -18,6 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SummaryViewModel @Inject constructor(
+    @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
     private val userLocalUserManager: LocalUserManager
 ): ViewModel() {
@@ -27,6 +33,8 @@ class SummaryViewModel @Inject constructor(
     private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
 
+    private val notificationHandler = NotificationHandler(context)
+
     init {
 //        createDatabaseFromRawJson(context)
         getListOfCountries()
@@ -34,6 +42,7 @@ class SummaryViewModel @Inject constructor(
         loadBookmark()
     }
     /////////////////////////////////////////////////Public functions//////////////////////////////////////////////////////
+
     fun addToBookmark(){
         viewModelScope.launch {
             weatherRepository.upsertBookmark(cityModel = state.value.currentCity)
@@ -48,17 +57,24 @@ class SummaryViewModel @Inject constructor(
         loadBookmark()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun onSetDefaultCityClick(){
         if(isCitySetAsDefault(state.value)){
             saveLocalSetting("", "", false)
         }else{
             saveLocalSetting(state.value.currentCity.countryName, state.value.currentCity.cityName, true)
+            showNotification(
+                cityName = state.value.currentCity.cityName,
+                countryName = state.value.currentCity.countryName,
+                temperature = state.value.weatherStatus?.current?.temperature2m?:0.0
+            )
         }
     }
 
     fun setSelectedAsCurrentCity(city: CityModel){
         _state.update { it.copy(currentCity = city) }
         getCurrentCityWeather()
+//        getLocation()
     }
 
     fun selectCountry(countryName: String){
@@ -97,6 +113,7 @@ class SummaryViewModel @Inject constructor(
                 )
             }
             getCurrentCityWeather()
+//           getLocation()
         }
     }
     fun refresh() {
@@ -136,6 +153,7 @@ class SummaryViewModel @Inject constructor(
             }
             selectCountry(state.value.localCityCountry.first)
             selectCity(state.value.localCityCountry.second, state.value.localCityCountry.first)
+
         }
     }
 
@@ -167,6 +185,15 @@ class SummaryViewModel @Inject constructor(
 //                }
 //            }
 //            _state.update { it.copy(isDatabaseLoaded = true) }
+//        }
+//    }
+
+//    private fun getLocation(){
+//        viewModelScope.launch {
+//            weatherRepository
+//                .getLocation(cityName = state.value.currentCity.cityName, countryName = state.value.currentCity.countryName)
+//                .onLeft { error -> _state.update { it.copy(mapApiError = error.error.message) } }
+//                .onRight { response -> _state.update { it.copy(mapApiResult = response) } }
 //        }
 //    }
 
@@ -208,6 +235,15 @@ class SummaryViewModel @Inject constructor(
                 _state.update {
                     it.copy(weatherStatus = weathers, error = null)
                 }
+                if(state.value.isDefaultCitySet){
+                    state.value.weatherStatus?.current?.temperature2m?.let { temperature ->
+                        showNotification(
+                            cityName = state.value.currentCity.cityName,
+                            countryName = state.value.currentCity.countryName,
+                            temperature = temperature
+                        )
+                    }
+                }
             }
         }
     }
@@ -241,6 +277,17 @@ class SummaryViewModel @Inject constructor(
                 }
             }
             _state.update { it.copy(isBookmarkWeatherReceived = true) }
+        }
+    }
+
+    private fun showNotification(cityName: String, countryName: String, temperature: Double) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            notificationHandler.showSimpleNotification(
+                city = cityName,
+                country = countryName,
+                temperature = temperature
+            )
         }
     }
 }

@@ -151,7 +151,6 @@ fun SummaryScreen(
                     modifier = Modifier.fillMaxWidth(),
                     isWeatherLoaded = state.error == null
                 )
-
             }
         }
 

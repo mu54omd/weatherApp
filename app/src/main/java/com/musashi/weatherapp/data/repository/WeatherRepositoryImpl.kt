@@ -4,8 +4,10 @@ import arrow.core.Either
 import com.musashi.weatherapp.data.local.BookmarkDao
 import com.musashi.weatherapp.data.local.CityDao
 import com.musashi.weatherapp.data.mapper.toNetworkError
+import com.musashi.weatherapp.data.remote.MapApi
 import com.musashi.weatherapp.data.remote.WeatherApi
 import com.musashi.weatherapp.domain.model.CityModel
+import com.musashi.weatherapp.domain.model.MapApiModel
 import com.musashi.weatherapp.domain.model.NetworkError
 import com.musashi.weatherapp.domain.model.WeatherResponseModel
 import com.musashi.weatherapp.domain.repository.WeatherRepository
@@ -14,13 +16,28 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi,
+    private val mapApi: MapApi,
     private val cityDao: CityDao,
     private val bookmarkDao: BookmarkDao
 ): WeatherRepository {
 
-    override suspend fun getWeathers(latitude: Double, longitude: Double): Either<NetworkError, WeatherResponseModel> {
+    override suspend fun getWeathers(
+        latitude: Double,
+        longitude: Double
+    ): Either<NetworkError, WeatherResponseModel> {
         return Either.catch {
             weatherApi.getWeathers(latitude = latitude, longitude = longitude)
+        }.mapLeft {
+            it.toNetworkError()
+        }
+    }
+
+    override suspend fun getLocation(
+        cityName: String,
+        countryName: String
+    ): Either<NetworkError, List<MapApiModel>> {
+        return Either.catch {
+            mapApi.getLocation(city = cityName, country = countryName)
         }.mapLeft {
             it.toNetworkError()
         }

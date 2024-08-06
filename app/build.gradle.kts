@@ -112,6 +112,9 @@ dependencies {
 
     //accompanist
     implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
+    //notification
+    implementation("androidx.core:core:1.13.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

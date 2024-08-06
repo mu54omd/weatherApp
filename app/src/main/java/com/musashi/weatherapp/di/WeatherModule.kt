@@ -7,12 +7,14 @@ import com.musashi.weatherapp.data.local.BookmarkDatabase
 import com.musashi.weatherapp.data.local.CityDao
 import com.musashi.weatherapp.data.local.CityDatabase
 import com.musashi.weatherapp.data.preferences.LocalUserManagerImpl
+import com.musashi.weatherapp.data.remote.MapApi
 import com.musashi.weatherapp.data.remote.WeatherApi
 import com.musashi.weatherapp.data.repository.WeatherRepositoryImpl
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
-import com.musashi.weatherapp.utils.Constants.BASE_URL
 import com.musashi.weatherapp.utils.Constants.CITY_BOOKMARK_DATABASE_NAME
+import com.musashi.weatherapp.utils.Constants.MAP_API_BASE_URL
+import com.musashi.weatherapp.utils.Constants.WEATHER_API_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -98,7 +100,7 @@ fun provideCityDatabase( application: Application):CityDatabase{
     @Singleton
     fun provideWeatherApi(): WeatherApi{
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(WEATHER_API_BASE_URL)
             .client(
                 OkHttpClient.Builder().apply {
                     this.addInterceptor(
@@ -121,15 +123,46 @@ fun provideCityDatabase( application: Application):CityDatabase{
             .build()
             .create(WeatherApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideMapApi(): MapApi {
+        return Retrofit.Builder()
+            .baseUrl(MAP_API_BASE_URL)
+            .client(
+                OkHttpClient.Builder().apply {
+                    this.addInterceptor(
+                        HttpLoggingInterceptor().apply {
+                            this.level = HttpLoggingInterceptor.Level.BODY
+                        }
+                    )
+                        .connectTimeout(3,TimeUnit.SECONDS)
+                        .readTimeout(20,TimeUnit.SECONDS)
+                        .writeTimeout(25, TimeUnit.SECONDS)
+                }
+                    .certificatePinner(
+                        CertificatePinner.Builder()
+
+                            .build()
+                    )
+                    .build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(MapApi::class.java)
+    }
+
     @Provides
     @Singleton
     fun provideWeatherRepository(
         weatherApi: WeatherApi,
+        mapApi: MapApi,
         cityDao: CityDao,
         bookmarkDao: BookmarkDao
     ): WeatherRepository{
         return WeatherRepositoryImpl(
             weatherApi = weatherApi,
+            mapApi = mapApi,
             cityDao = cityDao,
             bookmarkDao = bookmarkDao
             )
