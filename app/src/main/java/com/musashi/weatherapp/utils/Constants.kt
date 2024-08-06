@@ -24,6 +24,7 @@ object Constants {
     const val APP_LANGUAGE = "appLanguage"
 
     const val NOTIFICATION_CHANNEL_ID = "notification_channel_id"
+    const val NOTIFICATION_ID = 1
     const val NOTIFICATION_NAME = "Notification Name"
 
 }

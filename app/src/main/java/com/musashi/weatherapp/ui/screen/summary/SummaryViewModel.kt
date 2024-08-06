@@ -12,6 +12,7 @@ import com.musashi.weatherapp.domain.model.EmptyCity
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
+import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -59,16 +60,30 @@ class SummaryViewModel @Inject constructor(
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun onSetDefaultCityClick(){
-        if(isCitySetAsDefault(state.value)){
+        if (isCitySetAsDefault(state.value)) {
             saveLocalSetting("", "", false)
-        }else{
-            saveLocalSetting(state.value.currentCity.countryName, state.value.currentCity.cityName, true)
             showNotification(
-                cityName = state.value.currentCity.cityName,
-                countryName = state.value.currentCity.countryName,
-                temperature = state.value.weatherStatus?.current?.temperature2m?:0.0
+                title = "Default city is cleared",
+                content = "",
+                weatherCode = returnWeatherCode(
+                    state.value.weatherStatus?.current?.weatherCode ?: 0
+                ).imageId
+            )
+        } else {
+            saveLocalSetting(
+                state.value.currentCity.countryName,
+                state.value.currentCity.cityName,
+                true
+            )
+            showNotification(
+                title = "${state.value.currentCity.cityName} is the default city.",
+                content = "Current temperature: ${state.value.weatherStatus?.current?.temperature2m}°C",
+                weatherCode = returnWeatherCode(
+                    state.value.weatherStatus?.current?.weatherCode ?: 0
+                ).imageId
             )
         }
+
     }
 
     fun setSelectedAsCurrentCity(city: CityModel){
@@ -235,15 +250,6 @@ class SummaryViewModel @Inject constructor(
                 _state.update {
                     it.copy(weatherStatus = weathers, error = null)
                 }
-                if(state.value.isDefaultCitySet){
-                    state.value.weatherStatus?.current?.temperature2m?.let { temperature ->
-                        showNotification(
-                            cityName = state.value.currentCity.cityName,
-                            countryName = state.value.currentCity.countryName,
-                            temperature = temperature
-                        )
-                    }
-                }
             }
         }
     }
@@ -280,13 +286,16 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    private fun showNotification(cityName: String, countryName: String, temperature: Double) {
-
+    private fun showNotification(
+        title: String,
+        content: String,
+        weatherCode: Int,
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             notificationHandler.showSimpleNotification(
-                city = cityName,
-                country = countryName,
-                temperature = temperature
+                title = title,
+                content = content,
+                weatherCode = weatherCode
             )
         }
     }
