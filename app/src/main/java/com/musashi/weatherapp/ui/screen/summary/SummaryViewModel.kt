@@ -5,7 +5,10 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.musashi.weatherapp.application.NotificationHandler
+import com.musashi.weatherapp.application.ReminderWorker
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.EmptyCity
@@ -20,6 +23,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,6 +38,8 @@ class SummaryViewModel @Inject constructor(
     private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
 
+    private val workManager = WorkManager.getInstance(context)
+
     private val notificationHandler = NotificationHandler(context)
 
     init {
@@ -41,8 +47,19 @@ class SummaryViewModel @Inject constructor(
         getListOfCountries()
         readLocalSetting()
         loadBookmark()
+        scheduleReminder(1, TimeUnit.MINUTES)
     }
     /////////////////////////////////////////////////Public functions//////////////////////////////////////////////////////
+
+    private fun scheduleReminder(
+        duration: Long,
+        unit: TimeUnit
+    ){
+        val myWorkRequestBuilder = PeriodicWorkRequestBuilder<ReminderWorker>(duration, unit, 15, TimeUnit.SECONDS)
+
+        workManager.enqueue(myWorkRequestBuilder.build())
+    }
+
 
     fun addToBookmark(){
         viewModelScope.launch {
