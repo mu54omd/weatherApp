@@ -1,18 +1,22 @@
 package com.musashi.weatherapp.ui.screen.detailed
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInternet4
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -23,7 +27,7 @@ import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.screen.common.EmptyScreen
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
-import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItem
+import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
 import com.musashi.weatherapp.ui.screen.summary.WeatherState
 
@@ -35,26 +39,22 @@ fun DetailedScreen(
     isCitySetAsDefault: () -> Boolean,
     isErrorOccurred: Boolean
 ) {
+    var isExpanded1 by rememberSaveable { mutableStateOf(true) }
+    var isExpanded2 by rememberSaveable { mutableStateOf(false) }
+    var isExpanded3 by rememberSaveable { mutableStateOf(false) }
+
     if(state.currentCity.cityName != "") {
         Column(
             modifier = modifier
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.Top,
         ) {
 
             CityDetails(
-                weatherCodeImage = returnWeatherCode(
-                    state.weatherStatus?.current?.weatherCode ?: 0
-                ).imageId,
-                weatherCodeTitle = returnWeatherCode(
-                    state.weatherStatus?.current?.weatherCode ?: 0
-                ).stringId,
-                cityTitle = if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
-                    state.currentCity.cityName
-                } else{
-                    state.currentCity.cityNameFa
-                }?: state.currentCity.cityName,
+                weatherCodeImage = returnWeatherCode(state.weatherStatus?.current?.weatherCode ?: 0).imageId,
+                weatherCodeTitle = returnWeatherCode(state.weatherStatus?.current?.weatherCode ?: 0).stringId,
+                cityTitle = if(LocalLayoutDirection.current == LayoutDirection.Ltr) { state.currentCity.cityName } else{ state.currentCity.cityNameFa }?: state.currentCity.cityName,
                 lat = state.currentCity.latitude,
                 lng = state.currentCity.longitude,
                 onFavoriteClick = {
@@ -64,27 +64,73 @@ fun DetailedScreen(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
-            WeatherDetailsTitle()
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             if(!isErrorOccurred) {
-                LazyColumn() {
-                    val currentHour = state.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
-                    val nextHourIndex =
-                        state.weatherStatus?.hourly?.time?.indexOf(currentHour)?.plus(1)
-                    state.weatherStatus?.hourly?.let { status ->
-                        itemsIndexed(status.time) { index, item ->
-                            if (index >= nextHourIndex!!) {
-                                WeatherDetailsItem(
-                                    date = item.split("T")[0],
-                                    time = item.split("T")[1],
-                                    temp = status.temperature2m[index],
-                                    humidity = status.relativeHumidity2m[index]
-                                )
-                            }
+                val currentHour = state.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
+                val currentIndex = state.weatherStatus?.hourly?.time?.indexOf(currentHour)
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(start = 5.dp, end = 5.dp)
+                    ,
+
+                ) {
+                    WeatherDetailsTitle(
+                        time = stringResource(R.string.today),
+                        isExpanded = isExpanded1,
+                        onTitleClick = {
+                            isExpanded1 = !isExpanded1
+                        }
+                    )
+                    AnimatedVisibility(visible = isExpanded1) {
+                        Spacer(modifier = Modifier.height(5.dp))
+                        if (currentIndex != null) {
+                            WeatherDetailsItemList(
+                                state = state,
+                                dayConditionStart = 0,
+                                dayConditionEnd = 23,
+                                currentIndex = currentIndex
+                            )
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+                    WeatherDetailsTitle(
+                        time = stringResource(R.string.tomorrow),
+                        isExpanded = isExpanded2,
+                        onTitleClick = {
+                            isExpanded2 = !isExpanded2
+                        }
+                    )
+                    AnimatedVisibility(visible = isExpanded2) {
+                        Spacer(modifier = Modifier.height(5.dp))
+                        WeatherDetailsItemList(
+                            state = state,
+                            dayConditionStart = 24,
+                            dayConditionEnd = 47,
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+                    WeatherDetailsTitle(
+                        time = stringResource(R.string.theـdayـafterـtomorrow),
+                        isExpanded = isExpanded3,
+                        onTitleClick = {
+                            isExpanded3 = !isExpanded3
+                        }
+                    )
+                    AnimatedVisibility(visible = isExpanded3) {
+                        Spacer(modifier = Modifier.height(5.dp))
+                        WeatherDetailsItemList(
+                            state = state,
+                            dayConditionStart = 48,
+                            dayConditionEnd = 71,
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(20.dp))
+
                 }
+
             }else{
 
                 EmptyScreen(

@@ -39,5 +39,10 @@
     <string name="delete_bookmark">Delete Bookmark</string>
     <string name="nothing_is_here">Nothing is Here!</string>
     <string name="no_city_selected">No City Selected!</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="theـdayـafterـtomorrow">The Day After Tomorrow</string>
+    <string name="set_default_city_notification">has been set as default.</string>
+    <string name="clear_default_city_notification">Default city is now clear!</string>
 
 </resources>

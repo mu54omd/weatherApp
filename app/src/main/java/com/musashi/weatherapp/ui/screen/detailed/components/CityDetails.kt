@@ -40,6 +40,9 @@ import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
+import java.util.Date
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails as CityDetails1
 
 @Composable
@@ -56,7 +59,7 @@ fun CityDetails(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(200.dp)
+            .height(250.dp)
             .padding(start = 20.dp, end = 20.dp),
     ) {
         Card(
@@ -124,6 +127,19 @@ fun CityDetails(
                             )
                         }
                     }
+                }
+                if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                    Text(
+                        text = Date().toString().split(" ")[0] + " " +
+                                Date().toString().split(" ")[1] + " " +
+                                Date().toString().split(" ")[2] + " " +
+                                Date().toString().split(" ")[5],
+                        style = MaterialTheme.typography.labelSmall)
+                }else{
+                    Text(
+                        text = PersianDateFormat("l d F Y").format(PersianDate()),
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
             }
         }

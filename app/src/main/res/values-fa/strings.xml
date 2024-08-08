@@ -40,4 +40,9 @@
     <string name="delete_bookmark">پاک کردن نشانک</string>
     <string name="nothing_is_here">هیچی اینجا نیست!</string>
     <string name="no_city_selected">شهری انتخاب نشده!</string>
+    <string name="today">امروز</string>
+    <string name="tomorrow">فردا</string>
+    <string name="theـdayـafterـtomorrow">پس فردا</string>
+    <string name="set_default_city_notification">به عنوان پیشفرض انتخاب شده است.</string>
+    <string name="clear_default_city_notification">شهری به عنوان پیش فرض تعیین نشده است.</string>
 </resources>

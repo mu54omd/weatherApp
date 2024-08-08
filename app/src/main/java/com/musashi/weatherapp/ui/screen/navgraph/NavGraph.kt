@@ -143,7 +143,7 @@ fun NavGraph(
                         state = summaryState.value,
                         onBookmarkClick = { summaryViewModel.onSetDefaultCityClick() },
                         isCitySetAsDefault = { isCitySetAsDefault(state = summaryState.value) },
-                        isErrorOccurred = summaryState.value.error != null
+                        isErrorOccurred = summaryState.value.error != null,
                     )
                 }
 

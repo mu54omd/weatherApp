@@ -47,7 +47,7 @@ class SummaryViewModel @Inject constructor(
         getListOfCountries()
         readLocalSetting()
         loadBookmark()
-        scheduleReminder(1, TimeUnit.MINUTES)
+//        scheduleReminder(1, TimeUnit.MINUTES)
     }
     /////////////////////////////////////////////////Public functions//////////////////////////////////////////////////////
 

@@ -53,6 +53,8 @@ android {
     }
 }
 
+
+
 kapt {
     correctErrorTypes = true
 }
@@ -118,6 +120,10 @@ dependencies {
 
     //work manager
     implementation(libs.androidx.work.runtime)
+
+    //change calendar
+    implementation("com.github.samanzamani:PersianDate:1.7.1")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
