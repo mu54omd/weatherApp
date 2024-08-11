@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.common.EmptyScreen
+import com.musashi.weatherapp.ui.common.WeatherLineChart
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
@@ -43,6 +44,10 @@ fun DetailedScreen(
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
     var isExpanded3 by rememberSaveable { mutableStateOf(false) }
     var isExpanded4 by rememberSaveable { mutableStateOf(false) }
+    val times = mutableListOf<String>()
+    state.weatherStatus?.hourly?.time?.forEach {
+        times += it.split("T")[1].split(":")[0]
+    }
 
     if(state.currentCity.cityName != "") {
         Column(
@@ -138,14 +143,20 @@ fun DetailedScreen(
                     )
                     AnimatedVisibility(visible = isExpanded4) {
                         Spacer(modifier = Modifier.height(5.dp))
-
+                        state.weatherStatus?.hourly?.let { hourlyStatus ->
+                            WeatherLineChart(
+                                xValues = times.subList(0,24),
+                                yValues = hourlyStatus.temperature2m,
+                                zValues = hourlyStatus.relativeHumidity2m.map { it.toDouble() },
+                                wValues = hourlyStatus.apparentTemperature
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.height(20.dp))
 
                 }
 
             }else{
-
                 EmptyScreen(
                     messageText = state.error.toString(),
                     messageImage = Icons.Default.SignalWifiStatusbarConnectedNoInternet4
