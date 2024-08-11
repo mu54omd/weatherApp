@@ -25,6 +25,7 @@ fun WeatherStat(
     modifier: Modifier = Modifier,
     cityName: String,
     temperature: Double,
+    apparentTemperature: Double,
     humidity: Int,
     nextHourTemp: Double,
     currentWeatherCode: Int,
@@ -46,44 +47,62 @@ fun WeatherStat(
         Row(
 
         ) {
-            WeatherItem(
-                cardColor = listOf(
-                    MaterialTheme.colorScheme.primaryContainer,
-                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
-                ),
-                shimmerColor =MaterialTheme.colorScheme.secondaryContainer,
-                image = returnWeatherCode(currentWeatherCode).imageId,
-                title = stringResource(R.string.now_temp),
-                value = temperature.toString(), unit = "°C",
-                offsetMillis = 0,
-                isWeatherLoaded = isWeatherLoaded
-            )
-            WeatherItem(
-                cardColor = listOf(
-                    MaterialTheme.colorScheme.tertiaryContainer,
-                    MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+            Column {
+
+                WeatherItem(
+                    cardColor = listOf(
+                        MaterialTheme.colorScheme.primaryContainer,
+                        MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
                     ),
-                shimmerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                image = returnHumidityImage(humidity),
-                title = stringResource(R.string.humidity),
-                value = humidity.toString(),
-                unit = "%",
-                offsetMillis = 200,
-                isWeatherLoaded = isWeatherLoaded
-            )
-            WeatherItem(
-                cardColor = listOf(
-                    MaterialTheme.colorScheme.primaryContainer,
-                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
+                    shimmerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    image = returnWeatherCode(currentWeatherCode).imageId,
+                    title = stringResource(R.string.now_temp),
+                    value = temperature.toString(), unit = "°C",
+                    offsetMillis = 0,
+                    isWeatherLoaded = isWeatherLoaded
+                )
+                WeatherItem(
+                    cardColor = listOf(
+                        MaterialTheme.colorScheme.tertiaryContainer,
+                        MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
                     ),
-                shimmerColor = MaterialTheme.colorScheme.primaryContainer,
-                image = returnWeatherCode(nextHourWeatherCode).imageId,
-                title = stringResource(R.string.next_hour_temp),
-                value = nextHourTemp.toString(),
-                unit = "°C",
-                offsetMillis = 500,
-                isWeatherLoaded = isWeatherLoaded
-            )
+                    shimmerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    image = returnHumidityImage(humidity),
+                    title = stringResource(R.string.humidity),
+                    value = humidity.toString(),
+                    unit = "%",
+                    offsetMillis = 200,
+                    isWeatherLoaded = isWeatherLoaded
+                )
+            }
+            Column {
+                WeatherItem(
+                    cardColor = listOf(
+                        MaterialTheme.colorScheme.primaryContainer,
+                        MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
+                    ),
+                    shimmerColor = MaterialTheme.colorScheme.primaryContainer,
+                    image = returnWeatherCode(nextHourWeatherCode).imageId,
+                    title = stringResource(R.string.next_hour_temp),
+                    value = nextHourTemp.toString(),
+                    unit = "°C",
+                    offsetMillis = 500,
+                    isWeatherLoaded = isWeatherLoaded
+                )
+                WeatherItem(
+                    cardColor = listOf(
+                        MaterialTheme.colorScheme.tertiaryContainer,
+                        MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+                    ),
+                    shimmerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    image = returnWeatherCode(currentWeatherCode).imageId,
+                    title = stringResource(R.string.apparent_temp),
+                    value = apparentTemperature.toString(),
+                    unit = "°C",
+                    offsetMillis = 500,
+                    isWeatherLoaded = isWeatherLoaded
+                )
+            }
         }
     }
 }
@@ -95,6 +114,7 @@ private fun WeatherStatPreview() {
         WeatherStat(
             cityName = "Tehran",
             temperature = 22.4,
+            apparentTemperature = 34.2,
             humidity = 74,
             nextHourTemp = 23.3,
             currentWeatherCode = 1,

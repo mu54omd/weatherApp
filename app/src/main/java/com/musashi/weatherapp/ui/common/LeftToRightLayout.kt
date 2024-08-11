@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.common
+package com.musashi.weatherapp.ui.common
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

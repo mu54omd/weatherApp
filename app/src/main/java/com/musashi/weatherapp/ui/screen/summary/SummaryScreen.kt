@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.activity.AppTheme
-import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
+import com.musashi.weatherapp.ui.common.LeftToRightLayout
 import com.musashi.weatherapp.ui.screen.summary.components.LanguagePicker
 import com.musashi.weatherapp.ui.screen.summary.components.LoadingDialog
 import com.musashi.weatherapp.ui.screen.summary.components.SummaryTopBar
@@ -144,6 +144,7 @@ fun SummaryScreen(
                     }?: state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
 
                     temperature = state.weatherStatus?.current?.temperature2m ?: 0.0,
+                    apparentTemperature = state.weatherStatus?.current?.apparentTemperature ?: 0.0,
                     humidity = state.weatherStatus?.current?.relativeHumidity2m ?: 0,
                     nextHourTemp = nextHourWeather ?: 0.0,
                     currentWeatherCode = state.weatherStatus?.current?.weatherCode ?: 0,

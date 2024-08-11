@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
-import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
+import com.musashi.weatherapp.ui.common.LeftToRightLayout
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
@@ -59,7 +59,7 @@ fun CityDetails(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(230.dp)
             .padding(start = 20.dp, end = 20.dp),
     ) {
         Card(
@@ -172,14 +172,14 @@ fun CityDetails(
 @Preview
 @Composable
 private fun CityDetailsPreview() {
-    WeatherAppTheme() {
+    WeatherAppTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
             CityDetails1(
                 isCitySetAsDefault = true,
                 onFavoriteClick = {},
                 weatherCodeImage = R.drawable.clear_sky,
                 weatherCodeTitle = R.string.clear_sky,
-                cityTitle = "Tonekabon",
+                cityTitle = "Qom",
                 lat = 36.8163,
                 lng = 50.8738
 

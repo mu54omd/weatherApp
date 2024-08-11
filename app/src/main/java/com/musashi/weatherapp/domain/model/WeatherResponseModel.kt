@@ -1,7 +1,6 @@
 package com.musashi.weatherapp.domain.model
 
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

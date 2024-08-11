@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.common
+package com.musashi.weatherapp.ui.common
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -25,7 +25,8 @@ import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 @Composable
 fun Modifier.shimmerEffect(
     enable: Boolean = true,
-    color: Color = MaterialTheme.colorScheme.primaryContainer
+    color: Color = MaterialTheme.colorScheme.primaryContainer,
+    initialDelay: Int = 0
 ) = composed {
     if(enable) {
         val transition = rememberInfiniteTransition(label = "")
@@ -33,7 +34,10 @@ fun Modifier.shimmerEffect(
             initialValue = 0.2f,
             targetValue = 0.9f,
             animationSpec = infiniteRepeatable(
-                animation = tween(durationMillis = 500),
+                animation = tween(
+                    durationMillis = 500,
+                    delayMillis = initialDelay,
+                ),
                 repeatMode = RepeatMode.Reverse
             ),
             label = ""
@@ -58,7 +62,8 @@ private fun ShimmerEffectPreview() {
                         .clip(shape = MaterialTheme.shapes.medium)
                         .shimmerEffect(
                             enable = true,
-                            MaterialTheme.colorScheme.tertiaryContainer
+                            MaterialTheme.colorScheme.errorContainer,
+                            initialDelay = 30,
                         )
                 )
             }

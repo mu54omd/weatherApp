@@ -24,8 +24,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
+import com.musashi.weatherapp.ui.common.EmptyScreen
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
-import com.musashi.weatherapp.ui.screen.common.EmptyScreen
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
@@ -42,6 +42,7 @@ fun DetailedScreen(
     var isExpanded1 by rememberSaveable { mutableStateOf(true) }
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
     var isExpanded3 by rememberSaveable { mutableStateOf(false) }
+    var isExpanded4 by rememberSaveable { mutableStateOf(false) }
 
     if(state.currentCity.cityName != "") {
         Column(
@@ -126,6 +127,18 @@ fun DetailedScreen(
                             dayConditionStart = 48,
                             dayConditionEnd = 71,
                         )
+                    }
+                    Spacer(modifier = Modifier.height(20.dp))
+                    WeatherDetailsTitle(
+                        time = stringResource(R.string.charts),
+                        isExpanded = isExpanded4,
+                        onTitleClick = {
+                            isExpanded4 = !isExpanded4
+                        }
+                    )
+                    AnimatedVisibility(visible = isExpanded4) {
+                        Spacer(modifier = Modifier.height(5.dp))
+
                     }
                     Spacer(modifier = Modifier.height(20.dp))
 

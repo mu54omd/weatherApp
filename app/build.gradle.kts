@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
@@ -21,6 +22,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
@@ -43,9 +48,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -122,7 +125,12 @@ dependencies {
     implementation(libs.androidx.work.runtime)
 
     //change calendar
-    implementation("com.github.samanzamani:PersianDate:1.7.1")
+    implementation(libs.persiandate)
+
+    //vico plotting chart
+//    implementation(libs.vico.compose)
+//    implementation(libs.vico.compose.m3)
+
 
 
     testImplementation(libs.junit)

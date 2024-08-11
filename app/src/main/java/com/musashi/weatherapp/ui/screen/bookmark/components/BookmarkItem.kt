@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
@@ -35,7 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
-import com.musashi.weatherapp.ui.screen.common.shimmerEffect
+import com.musashi.weatherapp.ui.common.shimmerEffect
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
@@ -105,9 +106,16 @@ fun BookmarkItem(
                             }
                         }else{
                             Box(modifier = Modifier
-                                .size(80.dp)
-                                .clip(shape = MaterialTheme.shapes.extraLarge)
+                                .padding(5.dp)
+                                .size(60.dp)
+                                .clip(shape = MaterialTheme.shapes.medium)
                                 .shimmerEffect())
+                            Box(modifier = Modifier
+                                .width(60.dp)
+                                .height(15.dp)
+                                .clip(shape = MaterialTheme.shapes.extraLarge)
+                                .shimmerEffect(initialDelay = 10)
+                            )
                         }
                     }
                     Column(
@@ -147,7 +155,7 @@ private fun BookmarkItemPreview() {
             temperature = 13.4,
             cityName = "City",
             countryName = "Country",
-            isWeatherLoaded = true
+            isWeatherLoaded = false
         )
     }
 }

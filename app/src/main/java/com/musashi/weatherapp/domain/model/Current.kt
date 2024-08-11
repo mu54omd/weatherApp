@@ -5,8 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Current(
+    @SerializedName("apparent_temperature")
+    val apparentTemperature: Double,
     val interval: Int,
-    val rain: Double,
     @SerializedName("relative_humidity_2m")
     val relativeHumidity2m: Int,
     @SerializedName("temperature_2m")

@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Hourly(
+    @SerializedName("apparent_temperature")
+    val apparentTemperature: List<Double>,
     @SerializedName("temperature_2m")
     val temperature2m: List<Double>,
     @SerializedName("relative_humidity_2m")

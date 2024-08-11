@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.activity.AppTheme
-import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
+import com.musashi.weatherapp.ui.common.LeftToRightLayout
 
 @Composable
 fun SummaryTopBar(

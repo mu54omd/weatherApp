@@ -39,8 +39,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
-import com.musashi.weatherapp.ui.screen.common.LeftToRightLayout
-import com.musashi.weatherapp.ui.screen.common.shimmerEffect
+import com.musashi.weatherapp.ui.common.LeftToRightLayout
+import com.musashi.weatherapp.ui.common.shimmerEffect
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
@@ -146,13 +146,28 @@ fun WeatherItem(
                             )
                         }
                     }else{
-                        Box(modifier = Modifier
-                            .size(80.dp)
-                            .clip(shape = MaterialTheme.shapes.large)
-                            .shimmerEffect(
-                                color = shimmerColor
+                        Column {
+
+                            Box(
+                                modifier = Modifier
+                                    .padding(bottom = 5.dp)
+                                    .size(80.dp)
+                                    .clip(shape = MaterialTheme.shapes.large)
+                                    .shimmerEffect(
+                                        color = shimmerColor
+                                    )
                             )
-                        )
+                            Box(
+                                modifier = Modifier
+                                    .width(70.dp)
+                                    .height(15.dp)
+                                    .clip(shape = MaterialTheme.shapes.large)
+                                    .shimmerEffect(
+                                        color = shimmerColor,
+                                        initialDelay = 20
+                                    )
+                            )
+                        }
                     }
                 }
             }
@@ -175,7 +190,7 @@ private fun WeatherItemPreview() {
             value = "value",
             unit = "unit",
             offsetMillis = 5,
-            isWeatherLoaded = true
+            isWeatherLoaded = false
         )
     }
     

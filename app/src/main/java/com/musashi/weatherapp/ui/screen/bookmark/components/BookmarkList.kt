@@ -23,7 +23,7 @@ import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
-import com.musashi.weatherapp.ui.screen.common.EmptyScreen
+import com.musashi.weatherapp.ui.common.EmptyScreen
 
 @Composable
 fun BookmarkList(

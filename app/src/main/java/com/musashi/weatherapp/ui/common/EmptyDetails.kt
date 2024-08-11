@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.common
+package com.musashi.weatherapp.ui.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
