@@ -47,4 +47,5 @@
     <string name="clear_default_city_notification">شهری به عنوان پیش فرض تعیین نشده است.</string>
     <string name="apparent_temp">دمای محسوس</string>
     <string name="charts">نمودارها</string>
+    <string name="hour">ساعت</string>
 </resources>

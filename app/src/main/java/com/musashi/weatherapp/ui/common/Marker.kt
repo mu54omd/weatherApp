@@ -36,7 +36,7 @@ internal fun rememberMarker(
   val labelBackgroundShape = Shape.markerCornered(Corner.FullyRounded)
   val labelBackground =
     rememberShapeComponent(
-      color = MaterialTheme.colorScheme.surfaceBright,
+      color = MaterialTheme.colorScheme.surfaceContainer,
       shape = labelBackgroundShape,
       shadow =
         rememberShadow(

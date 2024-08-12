@@ -31,6 +31,8 @@ import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
 import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.utils.Constants.TIME_EN
+import com.musashi.weatherapp.utils.Constants.TIME_FA
 
 @Composable
 fun DetailedScreen(
@@ -44,10 +46,6 @@ fun DetailedScreen(
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
     var isExpanded3 by rememberSaveable { mutableStateOf(false) }
     var isExpanded4 by rememberSaveable { mutableStateOf(false) }
-    val times = mutableListOf<String>()
-    state.weatherStatus?.hourly?.time?.forEach {
-        times += it.split("T")[1].split(":")[0]
-    }
 
     if(state.currentCity.cityName != "") {
         Column(
@@ -145,7 +143,7 @@ fun DetailedScreen(
                         Spacer(modifier = Modifier.height(5.dp))
                         state.weatherStatus?.hourly?.let { hourlyStatus ->
                             WeatherLineChart(
-                                xValues = times.subList(0,24),
+                                xValues = if(LocalLayoutDirection.current == LayoutDirection.Ltr) TIME_EN else TIME_FA,
                                 yValues = hourlyStatus.temperature2m,
                                 zValues = hourlyStatus.relativeHumidity2m.map { it.toDouble() },
                                 wValues = hourlyStatus.apparentTemperature

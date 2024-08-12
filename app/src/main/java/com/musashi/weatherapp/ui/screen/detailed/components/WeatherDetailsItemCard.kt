@@ -1,7 +1,6 @@
 package com.musashi.weatherapp.ui.screen.detailed.components
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -66,10 +66,10 @@ fun WeatherDetailsItemCard(
                         MaterialTheme.typography.bodySmall
                 )
             }
-            Image(
+            Icon(
                 painter = painterResource(id = weatherIcon),
                 contentDescription = "",
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier.size(50.dp),
             )
             Text(
                 text = "${temperature}°C",

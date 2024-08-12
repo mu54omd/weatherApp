@@ -31,7 +31,6 @@ class NotificationHandler(private val context: Context) {
                 .setColorized(true)
                 .setColor(0x009452)
                 .setAutoCancel(true)
-                .setOngoing(true)
                 .build()  // finalizes the creation
 
             notificationManager.notify(NOTIFICATION_ID, notification)
