@@ -1,3 +1,4 @@
+package com.musashi.weatherapp.ui.common
 
 import android.graphics.Color
 import android.text.Layout

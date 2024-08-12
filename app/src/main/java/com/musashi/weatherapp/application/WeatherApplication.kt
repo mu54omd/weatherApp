@@ -9,7 +9,7 @@ import com.musashi.weatherapp.utils.Constants.NOTIFICATION_NAME
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class WeatherApplication(): Application(){
+class WeatherApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()

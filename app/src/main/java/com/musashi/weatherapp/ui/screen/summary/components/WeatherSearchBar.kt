@@ -153,7 +153,7 @@ fun WeatherSearchBar(
                                     city.cityNameFa?.let {
                                         SuggestionListItem(
                                             title = it,
-                                            onSelect = { onSuggestionSelect(it) }
+                                            onSelect = { item -> onSuggestionSelect(item) }
                                         )
                                     }
                                 }

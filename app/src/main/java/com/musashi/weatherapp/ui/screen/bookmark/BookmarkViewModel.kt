@@ -6,7 +6,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(
-): ViewModel() {
-
-}
+): ViewModel()
 

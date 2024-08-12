@@ -96,7 +96,7 @@ data class BottomNavigationItem(
 @Preview
 @Composable
 private fun WeatherBottomBarPreview() {
-    WeatherAppTheme() {
+    WeatherAppTheme {
         Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             WeatherBottomBar(
                 items = listOf(

@@ -72,7 +72,7 @@ fun WeatherDetailsItemCard(
                 modifier = Modifier.size(50.dp)
             )
             Text(
-                text = "${temperature.toString()}°C",
+                text = "${temperature}°C",
                 style =
                 if(LocalLayoutDirection.current == LayoutDirection.Ltr)
                     MaterialTheme.typography.bodyMedium
@@ -80,7 +80,7 @@ fun WeatherDetailsItemCard(
                     MaterialTheme.typography.bodySmall
                 )
             Text(
-                text = "${humidity.toString()}%",
+                text = "$humidity%",
                 style =
                 if(LocalLayoutDirection.current == LayoutDirection.Ltr)
                     MaterialTheme.typography.bodyMedium

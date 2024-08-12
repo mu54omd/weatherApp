@@ -59,7 +59,7 @@ fun WeatherDetailsTitle(
 @Preview
 @Composable
 private fun WeatherDetailsPreview() {
-    WeatherAppTheme() {
+    WeatherAppTheme {
         WeatherDetailsTitle(
             time = "Time",
             isExpanded = true,

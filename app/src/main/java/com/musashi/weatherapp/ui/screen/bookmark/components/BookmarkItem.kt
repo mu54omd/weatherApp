@@ -95,12 +95,12 @@ fun BookmarkItem(
                             )
                             if(LocalLayoutDirection.current == LayoutDirection.Ltr) {
                                 Text(
-                                    text = "${temperature.toString()}°C",
+                                    text = "${temperature}°C",
                                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
                                 )
                             }else{
                                 Text(
-                                    text = "${temperature.toString()}°C",
+                                    text = "${temperature}°C",
                                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
                                 )
                             }
@@ -146,7 +146,7 @@ fun BookmarkItem(
 @Preview
 @Composable
 private fun BookmarkItemPreview() {
-    WeatherAppTheme() {
+    WeatherAppTheme {
         BookmarkItem(
             onBookmarkCardClick = {},
             onDeleteClick = {},

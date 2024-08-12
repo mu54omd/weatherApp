@@ -83,11 +83,11 @@ fun SummaryScreen(
                 WeatherSearchBar(
                     label = stringResource(R.string.search_bar_country),
                     textValue = textValueCountry,
-                    onValueChange = {
-                        textValueCountry = it
+                    onValueChange = { country ->
+                        textValueCountry = country
                         scope.launch {
                             delay(500)
-                            selectCountry(it)
+                            selectCountry(country)
                         }
                         expandedCountry = textValueCountry.isNotEmpty()
                         textValueCity = ""
@@ -114,11 +114,11 @@ fun SummaryScreen(
                 WeatherSearchBar(
                     label = stringResource(id = R.string.search_bar_city),
                     textValue = textValueCity,
-                    onValueChange = {
-                        textValueCity = it
+                    onValueChange = { city ->
+                        textValueCity = city
                         scope.launch {
                             delay(500)
-                            changeCity(it, textValueCountry)
+                            changeCity(city, textValueCountry)
                         }
                         expandedCity = textValueCity.isNotEmpty()
                     },

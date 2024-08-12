@@ -51,7 +51,7 @@ fun Modifier.shimmerEffect(
 @Preview
 @Composable
 private fun ShimmerEffectPreview() {
-    WeatherAppTheme() {
+    WeatherAppTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
             Row(
                 modifier = Modifier.fillMaxWidth().height(50.dp)

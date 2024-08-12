@@ -44,9 +44,7 @@ fun WeatherStat(
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Row(
-
-        ) {
+        Row {
             Column {
 
                 WeatherItem(
