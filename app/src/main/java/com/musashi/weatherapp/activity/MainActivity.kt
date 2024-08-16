@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             val mainViewModel : MainViewModel = hiltViewModel()
             val state = mainViewModel.state.collectAsState().value
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -44,15 +43,17 @@ class MainActivity : AppCompatActivity() {
             splashScreen.apply {
                 setKeepOnScreenCondition(
                     condition = {
-                        !state.isThemeLoaded && !state.isLanguageLoaded
+                        !state.isThemeLoaded || !state.isLanguageLoaded
                     }
                 )
             }
-
             WeatherAppTheme(
                 appTheme = state.themeState
             ) {
-                NavGraph(startDestination = Route.SummaryScreen.route)
+                NavGraph(
+                    startDestination = Route.SummaryScreen.route,
+                    mainViewModel = mainViewModel
+                )
             }
 
         }

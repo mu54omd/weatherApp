@@ -162,7 +162,7 @@ fun SummaryScreen(
 @Preview
 @Composable
 fun ModifiedPreview(modifier: Modifier = Modifier) {
-    var isSelected = false
+    val isSelected = remember { mutableStateOf(false) }
     LeftToRightLayout {
         Box(
             contentAlignment = Alignment.Center,
@@ -173,9 +173,9 @@ fun ModifiedPreview(modifier: Modifier = Modifier) {
 
             ) {
             LanguagePicker(
-                isChecked = isSelected,
+                isChecked = isSelected.value,
                 onCheckedClick = {
-                    isSelected = !isSelected
+                    isSelected.value = !isSelected.value
                 },
                 modifier = Modifier.align(Alignment.CenterStart)
             )

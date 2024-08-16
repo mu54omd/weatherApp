@@ -18,6 +18,7 @@ import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -149,9 +150,14 @@ class SummaryViewModel @Inject constructor(
         }
     }
     fun refresh() {
-        if(state.value.error != null) {
-            loadBookmark()
-            getCurrentCityWeather()
+        viewModelScope.launch {
+            _state.update { it.copy(isRefreshing = true) }
+            if (state.value.error != null) {
+                loadBookmark()
+                getCurrentCityWeather()
+            }
+            delay(500)
+            _state.update { it.copy(isRefreshing = false) }
         }
     }
     /////////////////////////////////////////////////Private functions//////////////////////////////////////////////////////

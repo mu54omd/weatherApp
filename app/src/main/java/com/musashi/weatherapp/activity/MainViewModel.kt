@@ -43,9 +43,9 @@ class MainViewModel @Inject constructor(
 
     fun changeLanguage(locale: String){
         viewModelScope.launch {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
-            localUserManager.saveAppLanguage(locale)
             _state.update { it.copy(appLanguage = locale) }
+            localUserManager.saveAppLanguage(locale)
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
         }
     }
 
@@ -54,7 +54,7 @@ class MainViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     themeState = AppTheme.valueOf(localUserManager.readThemeState().first()),
-                    isThemeLoaded = true
+                    isThemeLoaded = true,
                     )
             }
         }

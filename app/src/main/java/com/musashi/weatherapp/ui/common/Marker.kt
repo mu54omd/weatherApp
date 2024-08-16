@@ -1,10 +1,13 @@
 package com.musashi.weatherapp.ui.common
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.text.Layout
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.compose.cartesian.axis.rememberAxisGuidelineComponent
 import com.patrykandpatrick.vico.compose.common.component.fixed
@@ -32,6 +35,8 @@ import com.patrykandpatrick.vico.core.common.shape.Shape
 internal fun rememberMarker(
   labelPosition: DefaultCartesianMarker.LabelPosition = DefaultCartesianMarker.LabelPosition.Top,
   showIndicator: Boolean = true,
+  typefaceFa: Typeface,
+  typefaceEn: Typeface
 ): CartesianMarker {
   val labelBackgroundShape = Shape.markerCornered(Corner.FullyRounded)
   val labelBackground =
@@ -51,6 +56,7 @@ internal fun rememberMarker(
       padding = Dimensions.of(8.dp, 4.dp),
       background = labelBackground,
       minWidth = TextComponent.MinWidth.fixed(40.dp),
+      typeface = if(LocalLayoutDirection.current == LayoutDirection.Rtl) typefaceFa else typefaceEn
     )
   val indicatorFrontComponent = rememberShapeComponent(MaterialTheme.colorScheme.surface, Shape.Pill)
   val indicatorCenterComponent = rememberShapeComponent(shape = Shape.Pill)
