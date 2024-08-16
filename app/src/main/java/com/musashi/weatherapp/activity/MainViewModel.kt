@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.musashi.weatherapp.domain.preferences.LocalUserManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -42,8 +43,8 @@ class MainViewModel @Inject constructor(
     }
 
     fun changeLanguage(locale: String){
+        _state.update { it.copy(appLanguage = locale) }
         viewModelScope.launch {
-            _state.update { it.copy(appLanguage = locale) }
             localUserManager.saveAppLanguage(locale)
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
         }
@@ -54,8 +55,13 @@ class MainViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     themeState = AppTheme.valueOf(localUserManager.readThemeState().first()),
-                    isThemeLoaded = true,
                     )
+            }
+            delay(500)
+            _state.update {
+                it.copy(
+                    isThemeLoaded = true,
+                )
             }
         }
     }

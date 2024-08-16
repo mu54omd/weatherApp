@@ -47,9 +47,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 )
             }
-            WeatherAppTheme(
-                appTheme = state.themeState
-            ) {
+            val appTheme = state.themeState
+            WeatherAppTheme(appTheme = appTheme) {
                 NavGraph(
                     startDestination = Route.SummaryScreen.route,
                     mainViewModel = mainViewModel
