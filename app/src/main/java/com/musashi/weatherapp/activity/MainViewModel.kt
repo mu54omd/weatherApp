@@ -23,8 +23,7 @@ class MainViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        loadThemeColor()
-        loadAppLanguage()
+        loadThemeColorAndAppLanguage()
     }
 
     fun changeTheme(themeName: AppTheme){
@@ -50,29 +49,18 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun loadThemeColor(){
+    private fun loadThemeColorAndAppLanguage(){
         viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    themeState = AppTheme.valueOf(localUserManager.readThemeState().first()),
-                    )
-            }
-            delay(500)
-            _state.update {
-                it.copy(
-                    isThemeLoaded = true,
+            _state.update { it.copy(
+                themeState = AppTheme.valueOf(localUserManager.readThemeState().first()),
+                appLanguage = localUserManager.readAppLanguage().first()
                 )
             }
-        }
-    }
-    private fun loadAppLanguage(){
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    appLanguage = localUserManager.readAppLanguage().first(),
-                    isLanguageLoaded = true
-                    )
-            }
+            delay(500)
+            _state.update { it.copy(
+                isThemeLoaded = true,
+                isLanguageLoaded = true
+            ) }
         }
     }
 }
