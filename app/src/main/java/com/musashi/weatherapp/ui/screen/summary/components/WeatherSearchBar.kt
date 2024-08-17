@@ -3,6 +3,7 @@ package com.musashi.weatherapp.ui.screen.summary.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -79,6 +80,7 @@ fun WeatherSearchBar(
                         contentDescription = stringResource(R.string.clear),
                         modifier = Modifier.clickable {
                             onClearClicked()
+
                         }
                     )
                 }
@@ -124,50 +126,53 @@ fun WeatherSearchBar(
             enabled = isEnabled
         )
         AnimatedVisibility(visible = expanded) {
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)
-                )
-            ) {
-                val isLtr = LocalLayoutDirection.current == LayoutDirection.Ltr
-                LazyColumn(modifier = Modifier.height(100.dp)) {
-                    if (textValue.isNotEmpty()) {
-                        if (cities.isNotEmpty()) {
-                            if(isLtr){
+            Box(modifier = Modifier) {
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)
+                    )
+                ) {
+                    val isLtr = LocalLayoutDirection.current == LayoutDirection.Ltr
+                    LazyColumn(modifier = Modifier.height(100.dp)) {
+                        if (textValue.isNotEmpty()) {
+                            if (cities.isNotEmpty()) {
+                                if (isLtr) {
+                                    items(
+                                        cities.filter {
+                                            it.cityName.lowercase().contains(textValue.lowercase())
+                                        }.also { if (it.isEmpty()) expandedChange() }
+                                    ) { city ->
+                                        SuggestionListItem(
+                                            title = city.cityName,
+                                            onSelect = { onSuggestionSelect(it) }
+                                        )
+                                    }
+                                } else {
+                                    items(
+                                        cities.filter {
+                                            it.cityNameFa?.lowercase()
+                                                ?.contains(textValue.lowercase()) == true
+                                        }.also { if (it.isEmpty()) expandedChange() }
+                                    ) { city ->
+                                        city.cityNameFa?.let {
+                                            SuggestionListItem(
+                                                title = it,
+                                                onSelect = { item -> onSuggestionSelect(item) }
+                                            )
+                                        }
+                                    }
+                                }
+                            } else if (countries.isNotEmpty()) {
                                 items(
-                                    cities.filter {
-                                        it.cityName.lowercase().contains(textValue.lowercase())
-                                    }.also { if(it.isEmpty()) expandedChange() }
-                                ) { city ->
+                                    countries.filter {
+                                        it.lowercase().contains(textValue.lowercase())
+                                    }.also { if (it.isEmpty()) expandedChange() }
+                                ) { country ->
                                     SuggestionListItem(
-                                        title = city.cityName,
+                                        title = country,
                                         onSelect = { onSuggestionSelect(it) }
                                     )
                                 }
-                            }else{
-                                items(
-                                    cities.filter {
-                                        it.cityNameFa?.lowercase()?.contains(textValue.lowercase()) == true
-                                    }.also { if(it.isEmpty()) expandedChange() }
-                                ) { city ->
-                                    city.cityNameFa?.let {
-                                        SuggestionListItem(
-                                            title = it,
-                                            onSelect = { item -> onSuggestionSelect(item) }
-                                        )
-                                    }
-                                }
-                            }
-                        }else if(countries.isNotEmpty()){
-                            items(
-                                countries.filter {
-                                    it.lowercase().contains(textValue.lowercase())
-                                }.also { if(it.isEmpty()) expandedChange() }
-                            ) { country ->
-                                SuggestionListItem(
-                                    title = country,
-                                    onSelect = { onSuggestionSelect(it) }
-                                )
                             }
                         }
                     }

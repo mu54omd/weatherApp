@@ -3,18 +3,36 @@
     <string name="app_name">هواشناسی</string>
 
     <string name="clear_sky">آسمان صاف</string>
-    <string name="drizzle">نم نم باران</string>
+    <string name="fog_depositing_rime">مه یخ زده</string>
+    <string name="drizzle_light">باران ریز کم</string>
+    <string name="partly_cloudy">نیمه ابری</string>
+    <string name="overcast">ابری</string>
     <string name="fog">مه</string>
-    <string name="freezing_drizzle">نم نم باران و برف</string>
-    <string name="freezing_rain">باران یخ زده</string>
-    <string name="mainly_clear">کمی ابری</string>
-    <string name="rain">بارانی</string>
-    <string name="rain_shower">باران شدید</string>
-    <string name="snow_fall">بارش برف</string>
-    <string name="snow_grain">بارش ریز برف </string>
-    <string name="snow_shower">بارش شدید برف</string>
-    <string name="thunder">رعد و برق</string>
 
+    <string name="mainly_clear">کمی ابری</string>
+    <string name="drizzle_moderate">باران ریز متوسط</string>
+    <string name="drizzle_dense">باران ریز شدید</string>
+    <string name="freezing_drizzle_light">باران ریز منجمد کم</string>
+    <string name="freezing_drizzle_dense">باران ریز منجمد شدید</string>
+    <string name="rain_slight">باران کوتاه مدت ملایم</string>
+    <string name="rain_moderate">باران کوتاه مدت متوسط</string>
+    <string name="rain_heavy">باران کوتاه مدت شدید</string>
+    <string name="freezing_rain_light">باران منجمد سبک</string>
+    <string name="freezing_rain_heavy">باران منجمد سنگین</string>
+    <string name="snowfall_slight">بارش کوتاه مدت و ملایم برف</string>
+    <string name="snowfall_moderate">براش کوتاه مدت و متوسط برف</string>
+    <string name="snowfall_heavy">بارش کوتاه مدت و سنگین برف</string>
+    <string name="rain_shower_slight">باران طولانی ملایم</string>
+    <string name="rain_shower_moderate">باران طولانی متوسط</string>
+    <string name="rain_shower_violent">باران طولانی شدید</string>
+    <string name="snow_shower_slight">برف طولانی ملایم</string>
+    <string name="snow_shower_heavy">برف طولانی سنگین</string>
+    <string name="snow_grain">بارش ریز برف </string>
+
+    <string name="thunderstorm_slight">رعد و برق و طوفان کم</string>
+    <string name="thunderstorm_moderate">رعد و برق و طوفان نسبتا شدید</string>
+    <string name="thunderstorm_slight_hail">"رعد و برق و طوفان همراه با رگبار "</string>
+    <string name="thunderstorm_heavy_hail">رعد و برق و طوفان شدید همراه با رگبار</string>
     <string name="humidity_low">رطوبت کم</string>
     <string name="humidity_medium">رطوبت متوسط</string>
     <string name="humidity_very_low">رطوبت خیلی کم</string>

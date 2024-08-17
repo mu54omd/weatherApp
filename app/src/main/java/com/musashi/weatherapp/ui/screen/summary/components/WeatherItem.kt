@@ -185,7 +185,7 @@ private fun WeatherItemPreview() {
                 MaterialTheme.colorScheme.secondaryContainer,
             ),
             shimmerColor = MaterialTheme.colorScheme.primaryContainer,
-            image = R.drawable.snow_fall,
+            image = R.drawable.snowfall_heavy,
             title = "title",
             value = "value",
             unit = "unit",

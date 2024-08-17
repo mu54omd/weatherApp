@@ -2,17 +2,46 @@
     <string name="app_name">Weather App</string>
 
     <string name="clear_sky">Clear Sky</string>
-    <string name="drizzle">Drizzle</string>
-    <string name="fog">Fog</string>
-    <string name="freezing_drizzle">Freezing Drizzle</string>
-    <string name="freezing_rain">Freezing Rain</string>
     <string name="mainly_clear">Mainly Clear</string>
-    <string name="rain">Rain</string>
-    <string name="rain_shower">Rain Shower</string>
-    <string name="snow_fall">Snowfall</string>
+    <string name="partly_cloudy">Partly Cloudy</string>
+    <string name="overcast">Overcast</string>
+
+    <string name="fog">Fog</string>
+    <string name="fog_depositing_rime">Depositing Rime Fog</string>
+
+    <string name="drizzle_light">Drizzle: Light</string>
+    <string name="drizzle_moderate">Drizzle: Moderate</string>
+    <string name="drizzle_dense">Drizzle: Dense</string>
+
+    <string name="freezing_drizzle_light">Freezing Drizzle: Light</string>
+    <string name="freezing_drizzle_dense">Freezing Drizzle: Dense</string>
+
+    <string name="rain_slight">Rain: Slight</string>
+    <string name="rain_moderate">Rain: Moderate</string>
+    <string name="rain_heavy">Rain: Heavy</string>
+
+    <string name="freezing_rain_light">Freezing Rain: Light</string>
+    <string name="freezing_rain_heavy">Freezing Rain: Heavy</string>
+
+    <string name="snowfall_slight">Snowfall: Slight</string>
+    <string name="snowfall_moderate">Snowfall: Moderate</string>
+    <string name="snowfall_heavy">Snowfall: Heavy</string>
+
+
+    <string name="rain_shower_slight">Rain Shower: Slight</string>
+    <string name="rain_shower_moderate">Rain Shower: Moderate</string>
+    <string name="rain_shower_violent">Rain Shower: Violent</string>
+
+    <string name="snow_shower_slight">Snow Shower: Slight</string>
+    <string name="snow_shower_heavy">Snow Shower: Heavy</string>
+
     <string name="snow_grain">Snow Grain</string>
-    <string name="snow_shower">Snow Shower</string>
-    <string name="thunder">Thunder</string>
+
+    <string name="thunderstorm_slight">Thunderstorm: Slight</string>
+    <string name="thunderstorm_moderate">Thunderstorm: Moderate</string>
+
+    <string name="thunderstorm_slight_hail">Thunderstorm: Slight Hail</string>
+    <string name="thunderstorm_heavy_hail">Thunderstorm: Heavy Hail</string>
 
     <string name="humidity_low">Humidity Low</string>
     <string name="humidity_medium">Humidity Medium</string>
@@ -47,5 +76,6 @@
     <string name="apparent_temp">Real feel</string>
     <string name="charts">Charts</string>
     <string name="hour">Hour</string>
+
 
 </resources>

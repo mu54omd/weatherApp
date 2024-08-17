@@ -105,6 +105,8 @@ fun SummaryScreen(
                     onClearClicked = {
                         textValueCountry = ""
                         textValueCity = ""
+                        expandedCountry = false
+                        expandedCity = false
                     },
                     onAddFavoriteClick = {}
                 )
@@ -132,7 +134,10 @@ fun SummaryScreen(
                         changeCity(title, textValueCountry)
                     },
                     isEnabled = state.isCountrySelected && textValueCountry.isNotEmpty(),
-                    onClearClicked = { textValueCity = ""},
+                    onClearClicked = {
+                        textValueCity = ""
+                        expandedCity = false
+                                     },
                     onAddFavoriteClick = onAddFavoriteClick
                 )
                 Spacer(modifier = Modifier.size(10.dp))

@@ -150,8 +150,8 @@ private fun BookmarkItemPreview() {
         BookmarkItem(
             onBookmarkCardClick = {},
             onDeleteClick = {},
-            weatherImageId = R.drawable.snow_fall,
-            weatherTextId = R.string.snow_fall,
+            weatherImageId = R.drawable.snowfall_heavy,
+            weatherTextId = R.string.snowfall_heavy,
             temperature = 13.4,
             cityName = "City",
             countryName = "Country",
