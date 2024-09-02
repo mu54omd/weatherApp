@@ -4,7 +4,8 @@ import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.EmptyCity
 import com.musashi.weatherapp.domain.model.MapApiModel
-import com.musashi.weatherapp.domain.model.WeatherResponseModel
+import com.musashi.weatherapp.domain.model.WeatherCurrentResponseModel
+import com.musashi.weatherapp.domain.model.WeatherFullResponseModel
 
 data class WeatherState(
     val isBookmarkListLoaded: Boolean = false,
@@ -22,8 +23,10 @@ data class WeatherState(
     val countries: List<String> = emptyList(),
     val countriesFa: List<String> = emptyList(),
     val cities: List<CityModel> = emptyList(),
-    val weatherStatus: WeatherResponseModel? = null,
-    val error: String? = null,
+    val weatherFullStatus: WeatherFullResponseModel? = null,
+    val weatherCurrentStatus: WeatherCurrentResponseModel? = null,
+    val errorCurrent: String? = null,
+    val errorHourly: String? = null,
     val bookmarkedCities: List<CityModel> = emptyList(),
     val result: List<BookmarkModel> = emptyList(),
 

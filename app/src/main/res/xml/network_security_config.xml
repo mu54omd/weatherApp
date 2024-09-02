@@ -4,6 +4,7 @@
         <trust-anchors>
             <certificates src="@raw/open_meteo" />
             <certificates src="@raw/longma_openstreetmap"/>
+<!--            <certificates src="system"/>-->
         </trust-anchors>
     </base-config>
 </network-security-config>

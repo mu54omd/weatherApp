@@ -148,14 +148,14 @@ fun SummaryScreen(
                         state.currentCity.cityNameFa
                     }?: state.currentCity.cityName.replaceFirstChar { char -> char.uppercaseChar() },
 
-                    temperature = state.weatherStatus?.current?.temperature2m ?: 0.0,
-                    apparentTemperature = state.weatherStatus?.current?.apparentTemperature ?: 0.0,
-                    humidity = state.weatherStatus?.current?.relativeHumidity2m ?: 0,
+                    temperature = state.weatherCurrentStatus?.current?.temperature2m ?: 0.0,
+                    apparentTemperature = state.weatherCurrentStatus?.current?.apparentTemperature ?: 0.0,
+                    humidity = state.weatherCurrentStatus?.current?.relativeHumidity2m ?: 0,
                     nextHourTemp = nextHourWeather ?: 0.0,
-                    currentWeatherCode = state.weatherStatus?.current?.weatherCode ?: 0,
+                    currentWeatherCode = state.weatherCurrentStatus?.current?.weatherCode ?: 0,
                     nextHourWeatherCode = nextHourWeatherCode ?: 0,
                     modifier = Modifier.fillMaxWidth(),
-                    isWeatherLoaded = state.error == null
+                    isWeatherLoaded = state.errorCurrent == null
                 )
             }
         }

@@ -9,7 +9,8 @@ import com.musashi.weatherapp.data.remote.WeatherApi
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.MapApiModel
 import com.musashi.weatherapp.domain.model.NetworkError
-import com.musashi.weatherapp.domain.model.WeatherResponseModel
+import com.musashi.weatherapp.domain.model.WeatherCurrentResponseModel
+import com.musashi.weatherapp.domain.model.WeatherFullResponseModel
 import com.musashi.weatherapp.domain.repository.WeatherRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -21,12 +22,23 @@ class WeatherRepositoryImpl @Inject constructor(
     private val bookmarkDao: BookmarkDao
 ): WeatherRepository {
 
-    override suspend fun getWeathers(
+    override suspend fun getFullWeathers(
         latitude: Double,
         longitude: Double
-    ): Either<NetworkError, WeatherResponseModel> {
+    ): Either<NetworkError, WeatherFullResponseModel> {
         return Either.catch {
-            weatherApi.getWeathers(latitude = latitude, longitude = longitude)
+            weatherApi.getFullWeathers(latitude = latitude, longitude = longitude)
+        }.mapLeft {
+            it.toNetworkError()
+        }
+    }
+
+    override suspend fun getCurrentWeathers(
+        latitude: Double,
+        longitude: Double
+    ): Either<NetworkError, WeatherCurrentResponseModel> {
+        return Either.catch {
+            weatherApi.getCurrentWeathers(latitude = latitude, longitude = longitude)
         }.mapLeft {
             it.toNetworkError()
         }

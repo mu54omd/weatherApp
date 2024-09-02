@@ -84,7 +84,7 @@ class SummaryViewModel @Inject constructor(
                 title = "Default city is cleared",
                 content = "",
                 weatherCode = returnWeatherCode(
-                    state.value.weatherStatus?.current?.weatherCode ?: 0
+                    state.value.weatherCurrentStatus?.current?.weatherCode ?: 0
                 ).imageId
             )
         } else {
@@ -95,9 +95,9 @@ class SummaryViewModel @Inject constructor(
             )
             showNotification(
                 title = "${state.value.currentCity.cityName} is the default city.",
-                content = "Current temperature: ${state.value.weatherStatus?.current?.temperature2m}°C",
+                content = "Current temperature: ${state.value.weatherCurrentStatus?.current?.temperature2m}°C",
                 weatherCode = returnWeatherCode(
-                    state.value.weatherStatus?.current?.weatherCode ?: 0
+                    state.value.weatherCurrentStatus?.current?.weatherCode ?: 0
                 ).imageId
             )
         }
@@ -152,7 +152,7 @@ class SummaryViewModel @Inject constructor(
     fun refresh() {
         viewModelScope.launch {
             _state.update { it.copy(isRefreshing = true) }
-            if (state.value.error != null) {
+            if (state.value.errorHourly != null || state.value.errorCurrent != null) {
                 loadBookmark()
                 getCurrentCityWeather()
             }
@@ -252,7 +252,11 @@ class SummaryViewModel @Inject constructor(
         if( state.value.currentCity != EmptyCity.emptyCity) {
 
             _state.update { it.copy(isWeatherLoading = true) }
-            getWeather(
+            getCurrentWeather(
+                latitude = state.value.currentCity.latitude,
+                longitude = state.value.currentCity.longitude
+            )
+            getHourlyWeather(
                 latitude = state.value.currentCity.latitude,
                 longitude = state.value.currentCity.longitude
             )
@@ -260,18 +264,34 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    private fun getWeather(latitude: Double, longitude: Double){
+    private fun getHourlyWeather(latitude: Double, longitude: Double){
         viewModelScope.launch {
-            weatherRepository.getWeathers(
+            weatherRepository.getFullWeathers(
                 latitude = latitude,
                 longitude = longitude,
             ).onLeft { error ->
                 _state.update {
-                    it.copy(error = error.error.message)
+                    it.copy(errorHourly = error.error.message)
                 }
             }.onRight { weathers ->
                 _state.update {
-                    it.copy(weatherStatus = weathers, error = null)
+                    it.copy(weatherFullStatus = weathers, errorHourly = null)
+                }
+            }
+        }
+    }
+    private fun getCurrentWeather(latitude: Double, longitude: Double){
+        viewModelScope.launch {
+            weatherRepository.getCurrentWeathers(
+                latitude = latitude,
+                longitude = longitude,
+            ).onLeft { error ->
+                _state.update {
+                    it.copy(errorCurrent = error.error.message)
+                }
+            }.onRight { weather ->
+                _state.update {
+                    it.copy(weatherCurrentStatus = weather, errorCurrent = null)
                 }
             }
         }
@@ -294,7 +314,7 @@ class SummaryViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isBookmarkWeatherReceived = false) }
             state.value.bookmarkedCities.forEach { city ->
-                weatherRepository.getWeathers(
+                weatherRepository.getCurrentWeathers(
                     latitude = city.latitude,
                     longitude = city.longitude,
                 ).onLeft { error ->

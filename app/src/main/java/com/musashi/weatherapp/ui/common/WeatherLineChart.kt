@@ -132,7 +132,7 @@ fun WeatherLineChart(
             ChipsButton(
                 onClick = { selectedDay.value = dayOption[2] },
                 isSelected = selectedDay.value == dayOption[2],
-                text = R.string.theـdayـafterـtomorrow
+                text = R.string.the_day_after_tomorrow
             )
         }
         Row(

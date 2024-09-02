@@ -46,6 +46,7 @@ fun DetailedScreen(
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
     var isExpanded3 by rememberSaveable { mutableStateOf(false) }
     var isExpanded4 by rememberSaveable { mutableStateOf(false) }
+    
 
     if(state.currentCity.cityName != "") {
         Column(
@@ -56,8 +57,8 @@ fun DetailedScreen(
         ) {
 
             CityDetails(
-                weatherCodeImage = returnWeatherCode(state.weatherStatus?.current?.weatherCode ?: 0).imageId,
-                weatherCodeTitle = returnWeatherCode(state.weatherStatus?.current?.weatherCode ?: 0).stringId,
+                weatherCodeImage = returnWeatherCode(state.weatherCurrentStatus?.current?.weatherCode ?: 0).imageId,
+                weatherCodeTitle = returnWeatherCode(state.weatherCurrentStatus?.current?.weatherCode ?: 0).stringId,
                 cityTitle = if(LocalLayoutDirection.current == LayoutDirection.Ltr) { state.currentCity.cityName } else{ state.currentCity.cityNameFa }?: state.currentCity.cityName,
                 lat = state.currentCity.latitude,
                 lng = state.currentCity.longitude,
@@ -70,14 +71,13 @@ fun DetailedScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
             if(!isErrorOccurred) {
-                val currentHour = state.weatherStatus?.current?.time?.split(":")?.get(0) + ":00"
-                val currentIndex = state.weatherStatus?.hourly?.time?.indexOf(currentHour)
+                val currentTime = state.weatherCurrentStatus?.current?.time?.split(":")?.get(0) + ":00"
+                val currentIndex = state.weatherFullStatus?.hourly?.time?.indexOf(currentTime) ?: 0
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
                         .padding(start = 5.dp, end = 5.dp)
                     ,
-
                 ) {
                     WeatherDetailsTitle(
                         time = stringResource(R.string.today),
@@ -86,16 +86,15 @@ fun DetailedScreen(
                             isExpanded1 = !isExpanded1
                         }
                     )
+
                     AnimatedVisibility(visible = isExpanded1) {
                         Spacer(modifier = Modifier.height(5.dp))
-                        if (currentIndex != null) {
-                            WeatherDetailsItemList(
-                                state = state,
-                                dayConditionStart = 0,
-                                dayConditionEnd = 23,
-                                currentIndex = currentIndex
-                            )
-                        }
+                        WeatherDetailsItemList(
+                            state = state,
+                            dayConditionStart = 0,
+                            dayConditionEnd = 23,
+                            currentIndex = currentIndex
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -117,7 +116,7 @@ fun DetailedScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
                     WeatherDetailsTitle(
-                        time = stringResource(R.string.theـdayـafterـtomorrow),
+                        time = stringResource(R.string.the_day_after_tomorrow),
                         isExpanded = isExpanded3,
                         onTitleClick = {
                             isExpanded3 = !isExpanded3
@@ -141,7 +140,7 @@ fun DetailedScreen(
                     )
                     AnimatedVisibility(visible = isExpanded4) {
                         Spacer(modifier = Modifier.height(5.dp))
-                        state.weatherStatus?.hourly?.let { hourlyStatus ->
+                        state.weatherFullStatus?.hourly?.let { hourlyStatus ->
                             WeatherLineChart(
                                 xValues = if(LocalLayoutDirection.current == LayoutDirection.Ltr) TIME_EN else TIME_FA,
                                 yValues = hourlyStatus.temperature2m,
@@ -156,7 +155,7 @@ fun DetailedScreen(
 
             }else{
                 EmptyScreen(
-                    messageText = state.error.toString(),
+                    messageText = state.errorHourly.toString(),
                     messageImage = Icons.Default.SignalWifiStatusbarConnectedNoInternet4
                     )
             }

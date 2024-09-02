@@ -30,7 +30,7 @@ fun WeatherDetailsItemList(
         verticalAlignment = Alignment.CenterVertically,
         state = rememberLazyListState(initialFirstVisibleItemIndex = if(currentIndex != 1000) currentIndex else 0)
     ) {
-        state.weatherStatus?.hourly?.let { status ->
+        state.weatherFullStatus?.hourly?.let { status ->
             itemsIndexed(status.time) { index, item ->
                 if(index in dayConditionStart..dayConditionEnd){
                     WeatherDetailsItemCard(

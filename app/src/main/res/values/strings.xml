@@ -70,12 +70,15 @@
     <string name="no_city_selected">No City Selected!</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
-    <string name="theـdayـafterـtomorrow">The Day After Tomorrow</string>
+    <string name="the_day_after_tomorrow">The Day After Tomorrow</string>
     <string name="set_default_city_notification">has been set as default.</string>
     <string name="clear_default_city_notification">Default city is now clear!</string>
     <string name="apparent_temp">Real feel</string>
     <string name="charts">Charts</string>
     <string name="hour">Hour</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="made_by_rage_and_hatred">Made by rage and hatred!</string>
 
 
 </resources>
