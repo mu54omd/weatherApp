@@ -1,5 +1,8 @@
 package com.musashi.weatherapp.ui.screen.navgraph
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -48,9 +52,10 @@ import com.musashi.weatherapp.activity.MainViewModel
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
+import com.musashi.weatherapp.ui.screen.About.AboutScreen
+import com.musashi.weatherapp.ui.screen.Settings.SettingsScreen
 import com.musashi.weatherapp.ui.screen.bookmark.BookmarkScreen
 import com.musashi.weatherapp.ui.screen.detailed.DetailedScreen
-import com.musashi.weatherapp.ui.screen.navgraph.components.AboutDialog
 import com.musashi.weatherapp.ui.screen.navgraph.components.BottomNavigationItem
 import com.musashi.weatherapp.ui.screen.navgraph.components.WeatherBottomBar
 import com.musashi.weatherapp.ui.screen.summary.SummaryScreen
@@ -91,6 +96,7 @@ fun NavGraph(
             else -> 0
         }
     }
+    var isBottomBarVisible by remember { mutableStateOf(true) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -111,7 +117,11 @@ fun NavGraph(
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.settings)) },
                     icon = { Icon(imageVector = Icons.Default.Settings, contentDescription = stringResource(R.string.settings))},
-                    onClick = { drawerScope.launch { drawerState.close() }},
+                    onClick = {
+                        drawerScope.launch { drawerState.close() }
+                        navigateToTab(navController = navController, route = Route.SettingsScreen.route)
+                        isBottomBarVisible = false
+                        },
                     selected = false,
                     modifier = Modifier.width(250.dp)
                 )
@@ -121,6 +131,7 @@ fun NavGraph(
                     onClick = {
                         drawerScope.launch { drawerState.close() }
                         navigateToTab(navController = navController, route = Route.AboutScreen.route)
+                        isBottomBarVisible = false
                         },
                     selected = false,
                     modifier = Modifier.width(250.dp)
@@ -131,30 +142,36 @@ fun NavGraph(
     ) {
         Scaffold(
             bottomBar = {
-                WeatherBottomBar(
-                    items = bottomNavigationItem,
-                    selected = selectedItem,
-                    onItemClick = { index ->
-                        when (index) {
-                            0 -> navigateToTab(
-                                navController = navController,
-                                route = Route.SummaryScreen.route
-                            )
-
-                            1 -> navigateToTab(
-                                navController = navController,
-                                route = Route.DetailedScreen.route
-                            )
-
-                            2 -> {
-                                navigateToTab(
+                AnimatedVisibility(
+                    visible = isBottomBarVisible,
+                    enter = slideInVertically(initialOffsetY = { it }),
+                    exit = slideOutVertically(targetOffsetY = { it })
+                ) {
+                    WeatherBottomBar(
+                        items = bottomNavigationItem,
+                        selected = selectedItem,
+                        onItemClick = { index ->
+                            when (index) {
+                                0 -> navigateToTab(
                                     navController = navController,
-                                    route = Route.BookmarkScreen.route
+                                    route = Route.SummaryScreen.route
                                 )
+
+                                1 -> navigateToTab(
+                                    navController = navController,
+                                    route = Route.DetailedScreen.route
+                                )
+
+                                2 -> {
+                                    navigateToTab(
+                                        navController = navController,
+                                        route = Route.BookmarkScreen.route
+                                    )
+                                }
                             }
                         }
-                    }
-                )
+                    )
+                }
             },
             topBar = {},
         ) {
@@ -228,10 +245,26 @@ fun NavGraph(
                     }
 
                     composable(route = Route.SettingsScreen.route){
-
+                        SettingsScreen(
+                            onBackButtonClick = {
+                                navigateToTab(
+                                    navController = navController,
+                                    route = Route.SummaryScreen.route
+                                )
+                                isBottomBarVisible = true
+                            }
+                        )
                     }
                     composable(route = Route.AboutScreen.route){
-                        AboutDialog()
+                        AboutScreen(
+                            onBackButtonClick = {
+                                navigateToTab(
+                                    navController = navController,
+                                    route = Route.SummaryScreen.route
+                                )
+                                isBottomBarVisible = true
+                            }
+                        )
                     }
                 }
             }
