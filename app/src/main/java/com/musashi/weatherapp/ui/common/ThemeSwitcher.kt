@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.summary.components
+package com.musashi.weatherapp.ui.common
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandHorizontally

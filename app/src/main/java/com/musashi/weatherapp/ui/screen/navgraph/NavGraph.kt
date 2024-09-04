@@ -52,12 +52,12 @@ import com.musashi.weatherapp.activity.MainViewModel
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
-import com.musashi.weatherapp.ui.screen.About.AboutScreen
-import com.musashi.weatherapp.ui.screen.Settings.SettingsScreen
+import com.musashi.weatherapp.ui.screen.about.AboutScreen
 import com.musashi.weatherapp.ui.screen.bookmark.BookmarkScreen
 import com.musashi.weatherapp.ui.screen.detailed.DetailedScreen
 import com.musashi.weatherapp.ui.screen.navgraph.components.BottomNavigationItem
 import com.musashi.weatherapp.ui.screen.navgraph.components.WeatherBottomBar
+import com.musashi.weatherapp.ui.screen.settings.SettingsScreen
 import com.musashi.weatherapp.ui.screen.summary.SummaryScreen
 import com.musashi.weatherapp.ui.screen.summary.SummaryViewModel
 import kotlinx.coroutines.launch
@@ -93,10 +93,10 @@ fun NavGraph(
             Route.SummaryScreen.route -> 0
             Route.DetailedScreen.route -> 1
             Route.BookmarkScreen.route -> 2
-            else -> 0
+            else -> 3
         }
     }
-    var isBottomBarVisible by remember { mutableStateOf(true) }
+    var isBottomBarVisible by rememberSaveable { mutableStateOf(true) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -106,7 +106,7 @@ fun NavGraph(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_launcher_foreground),
-                    contentDescription = "Logo",
+                    contentDescription = stringResource(R.string.logo),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer,
                     modifier = Modifier.size(250.dp)
                 )
@@ -116,7 +116,7 @@ fun NavGraph(
                 )
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.settings)) },
-                    icon = { Icon(imageVector = Icons.Default.Settings, contentDescription = stringResource(R.string.settings))},
+                    icon = { Icon(imageVector = Icons.Default.Settings, contentDescription = stringResource(R.string.settings)) },
                     onClick = {
                         drawerScope.launch { drawerState.close() }
                         navigateToTab(navController = navController, route = Route.SettingsScreen.route)
@@ -127,7 +127,7 @@ fun NavGraph(
                 )
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.about)) },
-                    icon = { Icon(imageVector = Icons.Default.Boy, contentDescription = stringResource(R.string.about))},
+                    icon = { Icon(imageVector = Icons.Default.Boy, contentDescription = stringResource(R.string.about)) },
                     onClick = {
                         drawerScope.launch { drawerState.close() }
                         navigateToTab(navController = navController, route = Route.AboutScreen.route)
@@ -247,14 +247,19 @@ fun NavGraph(
                     composable(route = Route.SettingsScreen.route){
                         SettingsScreen(
                             onBackButtonClick = {
-                                navigateToTab(
-                                    navController = navController,
-                                    route = Route.SummaryScreen.route
-                                )
+                                navigateToTab( navController = navController, route = Route.SummaryScreen.route)
                                 isBottomBarVisible = true
-                            }
+                            },
+                            onThemeColorClick = { theme -> mainViewModel.changeTheme(theme) },
+                            onLanguageClick = { locale -> mainViewModel.changeLanguage(locale) },
+                            onForecastDaysClick = { forecastDays ->
+                                summaryViewModel.changeForecastDays(forecastDays)
+                                },
+                            language = mainViewModel.state.value.appLanguage,
+                            forecastDays = summaryState.value.forecastDays
                         )
                     }
+
                     composable(route = Route.AboutScreen.route){
                         AboutScreen(
                             onBackButtonClick = {

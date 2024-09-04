@@ -1,8 +1,10 @@
 package com.musashi.weatherapp.ui.screen.detailed
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -12,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInternet4
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,14 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.common.EmptyScreen
 import com.musashi.weatherapp.ui.common.WeatherLineChart
+import com.musashi.weatherapp.ui.helper.getDateFromNow
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
+import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemListMoreDays
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
 import com.musashi.weatherapp.ui.screen.summary.WeatherState
 import com.musashi.weatherapp.utils.Constants.TIME_EN
@@ -46,7 +52,8 @@ fun DetailedScreen(
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
     var isExpanded3 by rememberSaveable { mutableStateOf(false) }
     var isExpanded4 by rememberSaveable { mutableStateOf(false) }
-    
+    var isExpanded5 by rememberSaveable { mutableStateOf(false) }
+
 
     if(state.currentCity.cityName != "") {
         Column(
@@ -132,13 +139,118 @@ fun DetailedScreen(
                     }
                     Spacer(modifier = Modifier.height(20.dp))
                     WeatherDetailsTitle(
-                        time = stringResource(R.string.charts),
+                        time = stringResource(R.string.next_days),
                         isExpanded = isExpanded4,
                         onTitleClick = {
                             isExpanded4 = !isExpanded4
                         }
                     )
                     AnimatedVisibility(visible = isExpanded4) {
+                        if(state.forecastDays != 3) {
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.Top,
+                                modifier = Modifier.padding(start = 20.dp, end = 20.dp).horizontalScroll(rememberScrollState())
+                            ) {
+                                Spacer(modifier = Modifier.height(5.dp))
+                                WeatherDetailsItemListMoreDays(
+                                    dateText = getDateFromNow(3),
+                                    state = state,
+                                    dayConditionStart = 72,
+                                    dayConditionEnd = 95,
+                                )
+                                Spacer(modifier = Modifier.height(5.dp))
+                                WeatherDetailsItemListMoreDays(
+                                    dateText = getDateFromNow(4),
+                                    state = state,
+                                    dayConditionStart = 96,
+                                    dayConditionEnd = 119,
+                                )
+                                Spacer(modifier = Modifier.height(5.dp))
+                                WeatherDetailsItemListMoreDays(
+                                    dateText = getDateFromNow(5),
+                                    state = state,
+                                    dayConditionStart = 120,
+                                    dayConditionEnd = 143,
+                                )
+                                Spacer(modifier = Modifier.height(5.dp))
+                                WeatherDetailsItemListMoreDays(
+                                    dateText = getDateFromNow(6),
+                                    state = state,
+                                    dayConditionStart = 144,
+                                    dayConditionEnd = 167,
+                                )
+                                if (state.forecastDays == 14) {
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(7),
+                                        state = state,
+                                        dayConditionStart = 168,
+                                        dayConditionEnd = 191,
+                                    )
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(8),
+                                        state = state,
+                                        dayConditionStart = 192,
+                                        dayConditionEnd = 215,
+                                    )
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(9),
+                                        state = state,
+                                        dayConditionStart = 216,
+                                        dayConditionEnd = 239,
+                                    )
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(10),
+                                        state = state,
+                                        dayConditionStart = 240,
+                                        dayConditionEnd = 263,
+                                    )
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(11),
+                                        state = state,
+                                        dayConditionStart = 264,
+                                        dayConditionEnd = 287,
+                                    )
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(12),
+                                        state = state,
+                                        dayConditionStart = 288,
+                                        dayConditionEnd = 311,
+                                    )
+                                    Spacer(modifier = Modifier.height(5.dp))
+                                    WeatherDetailsItemListMoreDays(
+                                        dateText = getDateFromNow(13),
+                                        state = state,
+                                        dayConditionStart = 312,
+                                        dayConditionEnd = 335,
+                                    )
+                                }
+                            }
+                        }else{
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.padding(start = 40.dp, end = 40.dp)
+                            ) {
+                                Text(text = stringResource(R.string.next_days_forecast_text), textAlign = TextAlign.Center)
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(20.dp))
+                    WeatherDetailsTitle(
+                        time = stringResource(R.string.charts),
+                        isExpanded = isExpanded5,
+                        onTitleClick = {
+                            isExpanded5 = !isExpanded5
+                        }
+                    )
+                    AnimatedVisibility(visible = isExpanded5) {
                         Spacer(modifier = Modifier.height(5.dp))
                         state.weatherFullStatus?.hourly?.let { hourlyStatus ->
                             WeatherLineChart(

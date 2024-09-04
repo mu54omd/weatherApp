@@ -12,7 +12,7 @@ interface WeatherRepository {
 
 
     //WeatherApi
-    suspend fun getFullWeathers(latitude: Double, longitude: Double): Either<NetworkError, WeatherFullResponseModel>
+    suspend fun getFullWeathers(latitude: Double, longitude: Double, forecastDays: Int): Either<NetworkError, WeatherFullResponseModel>
     suspend fun getCurrentWeathers(latitude: Double, longitude: Double): Either<NetworkError, WeatherCurrentResponseModel>
 
     //MapApi

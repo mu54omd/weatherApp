@@ -80,6 +80,19 @@
     <string name="about">About</string>
     <string name="made_by_rage_and_hatred">Made by rage and hatred!</string>
     <string name="back">Back</string>
+    <string name="theme_color">Theme Color</string>
+    <string name="language">Language</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="red">Red</string>
+    <string name="yellow">Yellow</string>
+    <string name="black">Black</string>
+    <string name="persian">Persian</string>
+    <string name="english">English</string>
+    <string name="logo">Logo</string>
+    <string name="forecast_days">Forecast Days</string>
+    <string name="next_days">Next Days</string>
+    <string name="next_days_forecast_text">Please increase forecast days to see more days.</string>
 
 
 </resources>

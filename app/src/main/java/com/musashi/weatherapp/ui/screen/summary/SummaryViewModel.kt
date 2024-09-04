@@ -79,7 +79,7 @@ class SummaryViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.N)
     fun onSetDefaultCityClick(){
         if (isCitySetAsDefault(state.value)) {
-            saveLocalSetting("", "", false)
+            saveLocalSetting("", "", false, state.value.forecastDays)
             showNotification(
                 title = "Default city is cleared",
                 content = "",
@@ -89,9 +89,10 @@ class SummaryViewModel @Inject constructor(
             )
         } else {
             saveLocalSetting(
-                state.value.currentCity.countryName,
-                state.value.currentCity.cityName,
-                true
+                country = state.value.currentCity.countryName,
+                city = state.value.currentCity.cityName,
+                state = true,
+                forecastDays = state.value.forecastDays
             )
             showNotification(
                 title = "${state.value.currentCity.cityName} is the default city.",
@@ -101,6 +102,17 @@ class SummaryViewModel @Inject constructor(
                 ).imageId
             )
         }
+
+    }
+
+    fun changeForecastDays(forecastDays: Int){
+        _state.update {
+            it.copy(forecastDays = forecastDays)
+        }
+        viewModelScope.launch {
+            userLocalUserManager.saveForecastDays(forecastDays = forecastDays)
+        }
+        getCurrentCityWeather()
 
     }
 
@@ -161,15 +173,17 @@ class SummaryViewModel @Inject constructor(
         }
     }
     /////////////////////////////////////////////////Private functions//////////////////////////////////////////////////////
-    private fun saveLocalSetting(country: String, city: String, state: Boolean){
+    private fun saveLocalSetting(country: String, city: String, state: Boolean, forecastDays: Int){
         viewModelScope.launch {
             userLocalUserManager.saveSelectedCity(city = city)
             userLocalUserManager.saveSelectedCountry(country = country)
             userLocalUserManager.saveBookmarkState(state = state)
+            userLocalUserManager.saveForecastDays(forecastDays = forecastDays)
             _state.update {
                 it.copy(
                     isDefaultCitySet = state,
-                    localCityCountry = Pair(first = country, second = city)
+                    localCityCountry = Pair(first = country, second = city),
+                    forecastDays = forecastDays
                 )
             }
         }
@@ -180,18 +194,19 @@ class SummaryViewModel @Inject constructor(
             val country =  userLocalUserManager.readSelectedCountry().first()
             val city =  userLocalUserManager.readSelectedCity().first()
             val bookmarkState = userLocalUserManager.readBookmarkState().first()
+            val forecastDays = userLocalUserManager.readForecastDays().first()
             _state.update {
                 it.copy(
                     localCityCountry = Pair(
                         first = country,
                         second = city
                     ),
-                    isDefaultCitySet = bookmarkState
+                    isDefaultCitySet = bookmarkState,
+                    forecastDays = forecastDays
                 )
             }
             selectCountry(state.value.localCityCountry.first)
             selectCity(state.value.localCityCountry.second, state.value.localCityCountry.first)
-
         }
     }
 
@@ -258,17 +273,19 @@ class SummaryViewModel @Inject constructor(
             )
             getHourlyWeather(
                 latitude = state.value.currentCity.latitude,
-                longitude = state.value.currentCity.longitude
+                longitude = state.value.currentCity.longitude,
+                forecastDays = state.value.forecastDays
             )
             _state.update { it.copy(isWeatherLoading = false) }
         }
     }
 
-    private fun getHourlyWeather(latitude: Double, longitude: Double){
+    private fun getHourlyWeather(latitude: Double, longitude: Double, forecastDays: Int){
         viewModelScope.launch {
             weatherRepository.getFullWeathers(
                 latitude = latitude,
                 longitude = longitude,
+                forecastDays = forecastDays
             ).onLeft { error ->
                 _state.update {
                     it.copy(errorHourly = error.error.message)

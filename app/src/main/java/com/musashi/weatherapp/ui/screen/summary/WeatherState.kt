@@ -29,6 +29,7 @@ data class WeatherState(
     val errorHourly: String? = null,
     val bookmarkedCities: List<CityModel> = emptyList(),
     val result: List<BookmarkModel> = emptyList(),
+    val forecastDays: Int = 3,
 
     //state related to map api
     val mapApiResult: List<MapApiModel> = emptyList(),

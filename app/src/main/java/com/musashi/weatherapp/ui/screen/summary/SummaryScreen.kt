@@ -28,11 +28,11 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.activity.AppTheme
+import com.musashi.weatherapp.ui.common.LanguagePicker
 import com.musashi.weatherapp.ui.common.LeftToRightLayout
-import com.musashi.weatherapp.ui.screen.summary.components.LanguagePicker
+import com.musashi.weatherapp.ui.common.ThemeSwitcher
 import com.musashi.weatherapp.ui.screen.summary.components.LoadingDialog
 import com.musashi.weatherapp.ui.screen.summary.components.SummaryTopBar
-import com.musashi.weatherapp.ui.screen.summary.components.ThemeSwitcher
 import com.musashi.weatherapp.ui.screen.summary.components.WeatherSearchBar
 import com.musashi.weatherapp.ui.screen.summary.components.WeatherStat
 import kotlinx.coroutines.delay

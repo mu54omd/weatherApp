@@ -24,10 +24,11 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getFullWeathers(
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        forecastDays: Int,
     ): Either<NetworkError, WeatherFullResponseModel> {
         return Either.catch {
-            weatherApi.getFullWeathers(latitude = latitude, longitude = longitude)
+            weatherApi.getFullWeathers(latitude = latitude, longitude = longitude, forecastDays = forecastDays)
         }.mapLeft {
             it.toNetworkError()
         }

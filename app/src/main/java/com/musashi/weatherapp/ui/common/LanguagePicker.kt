@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.summary.components
+package com.musashi.weatherapp.ui.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -20,7 +20,7 @@ fun LanguagePicker(
 ) {
     Switch(
         checked = isChecked,
-        onCheckedChange = {onCheckedClick()},
+        onCheckedChange = { onCheckedClick() },
         thumbContent = {
             when(isChecked){
                 true -> Box{Text(text = "Fa", color = MaterialTheme.colorScheme.onSurface)}

@@ -70,4 +70,17 @@
     <string name="about">درباره</string>
     <string name="made_by_rage_and_hatred">ساخته شده با خشم و نفرت!</string>
     <string name="back">بازگشت</string>
+    <string name="theme_color">رنگ پوسته</string>
+    <string name="language">زبان</string>
+    <string name="green">سبز</string>
+    <string name="blue">آبی</string>
+    <string name="red">قرمز</string>
+    <string name="yellow">زرد</string>
+    <string name="black">مشکی</string>
+    <string name="persian">فارسی</string>
+    <string name="english">انگلیسی</string>
+    <string name="logo">لوگو</string>
+    <string name="forecast_days">روزهای پیش بینی</string>
+    <string name="next_days">روزهای بعد</string>
+    <string name="next_days_forecast_text">جهت دیدن روزهای بیشتر لطفا تعداد روزهای پیش بینی را افزایش دهید.</string>
 </resources>

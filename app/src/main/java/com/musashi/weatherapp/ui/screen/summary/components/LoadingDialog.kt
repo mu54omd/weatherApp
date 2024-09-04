@@ -29,7 +29,6 @@ fun LoadingDialog(modifier: Modifier = Modifier) {
             ) {
                 CircularProgressIndicator()
             }
-
         }
 }
 @Preview

@@ -49,6 +49,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
+
     private fun loadThemeColorAndAppLanguage(){
         viewModelScope.launch {
             _state.update { it.copy(

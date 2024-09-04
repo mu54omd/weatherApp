@@ -5,7 +5,7 @@ object Constants {
     const val TIME_ZONE = "auto"
     const val HOURLY = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code"
     const val CURRENT = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code"
-    const val FORECAST_DAYS = 3
+    const val FORECAST_DAYS = "forecast_days"
     const val CITY_BOOKMARK_DATABASE_NAME = "city_bm_db"
 
     const val MAP_API_BASE_URL = "https://nominatim.openstreetmap.org/"
@@ -32,6 +32,9 @@ object Constants {
     val TIME_FA = listOf(
         "۰۰:۰۰","۰۱:۰۰","۰۲:۰۰","۰۳:۰۰","۰۴:۰۰","۰۵:۰۰","۰۶:۰۰","۰۷:۰۰","۰۸:۰۰","۰۹:۰۰","۱۰:۰۰","۱۱:۰۰","۱۲:۰۰","۱۳:۰۰","۱۴:۰۰","۱۵:۰۰","۱۶:۰۰","۱۷:۰۰","۱۸:۰۰","۱۹:۰۰","۲۰:۰۰","۲۱:۰۰","۲۲:۰۰","۲۳:۰۰",
     )
+
+    val forecastMenuEn = listOf("3", "7", "14")
+    val forecastMenuFa = listOf("۳", "۷", "۱۴")
 
 
 }
