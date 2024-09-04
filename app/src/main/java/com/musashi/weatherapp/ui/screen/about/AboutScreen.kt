@@ -1,5 +1,6 @@
 package com.musashi.weatherapp.ui.screen.about
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,9 @@ fun AboutScreen(
     modifier: Modifier = Modifier,
     onBackButtonClick: () -> Unit
 ) {
+    BackHandler {
+        onBackButtonClick()
+    }
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()

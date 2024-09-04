@@ -14,6 +14,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInternet4
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -54,6 +56,9 @@ fun DetailedScreen(
     var isExpanded4 by rememberSaveable { mutableStateOf(false) }
     var isExpanded5 by rememberSaveable { mutableStateOf(false) }
 
+    var tabIndex by rememberSaveable { mutableStateOf(0) }
+
+    val tabs = listOf(stringResource(R.string.today), stringResource(R.string.tomorrow), stringResource(R.string.the_day_after_tomorrow))
 
     if(state.currentCity.cityName != "") {
         Column(
@@ -75,6 +80,18 @@ fun DetailedScreen(
                 isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault(),
                 modifier = Modifier.verticalScroll(rememberScrollState())
             )
+            TabRow(
+                selectedTabIndex = tabIndex,
+                modifier = Modifier,
+            ) {
+                tabs.forEachIndexed{ index, title ->
+                    Tab(
+                        text = { Text(text =  title) },
+                        selected = tabIndex == index,
+                        onClick = { tabIndex = index}
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(20.dp))
             if(!isErrorOccurred) {
@@ -86,56 +103,20 @@ fun DetailedScreen(
                         .padding(start = 5.dp, end = 5.dp)
                     ,
                 ) {
-                    WeatherDetailsTitle(
-                        time = stringResource(R.string.today),
-                        isExpanded = isExpanded1,
-                        onTitleClick = {
-                            isExpanded1 = !isExpanded1
-                        }
-                    )
-
-                    AnimatedVisibility(visible = isExpanded1) {
-                        Spacer(modifier = Modifier.height(5.dp))
-                        WeatherDetailsItemList(
-                            state = state,
-                            dayConditionStart = 0,
-                            dayConditionEnd = 23,
-                            currentIndex = currentIndex
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(20.dp))
-                    WeatherDetailsTitle(
-                        time = stringResource(R.string.tomorrow),
-                        isExpanded = isExpanded2,
-                        onTitleClick = {
-                            isExpanded2 = !isExpanded2
-                        }
-                    )
-                    AnimatedVisibility(visible = isExpanded2) {
-                        Spacer(modifier = Modifier.height(5.dp))
-                        WeatherDetailsItemList(
-                            state = state,
-                            dayConditionStart = 24,
-                            dayConditionEnd = 47,
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(20.dp))
-                    WeatherDetailsTitle(
-                        time = stringResource(R.string.the_day_after_tomorrow),
-                        isExpanded = isExpanded3,
-                        onTitleClick = {
-                            isExpanded3 = !isExpanded3
-                        }
-                    )
-                    AnimatedVisibility(visible = isExpanded3) {
-                        Spacer(modifier = Modifier.height(5.dp))
-                        WeatherDetailsItemList(
+                    when(tabIndex){
+                        0 -> WeatherDetailsItemList(
+                                state = state,
+                                dayConditionStart = 0,
+                                dayConditionEnd = 23,
+                                currentIndex = currentIndex)
+                        1 -> WeatherDetailsItemList(
+                                state = state,
+                                dayConditionStart = 24,
+                                dayConditionEnd = 47,)
+                        2 -> WeatherDetailsItemList(
                             state = state,
                             dayConditionStart = 48,
-                            dayConditionEnd = 71,
-                        )
+                            dayConditionEnd = 71,)
                     }
                     Spacer(modifier = Modifier.height(20.dp))
                     WeatherDetailsTitle(

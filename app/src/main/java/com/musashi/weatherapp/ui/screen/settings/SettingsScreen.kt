@@ -1,5 +1,6 @@
 package com.musashi.weatherapp.ui.screen.settings
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,7 +42,9 @@ fun SettingsScreen(
     language: String,
     forecastDays: Int
 ) {
-
+    BackHandler {
+        onBackButtonClick()
+    }
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
     ) {
