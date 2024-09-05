@@ -1,10 +1,8 @@
 package com.musashi.weatherapp.ui.screen.detailed
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,6 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInternet4
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -35,8 +34,8 @@ import com.musashi.weatherapp.ui.common.WeatherLineChart
 import com.musashi.weatherapp.ui.helper.getDateFromNow
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
+import com.musashi.weatherapp.ui.screen.detailed.components.NextDayWeatherSelector
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
-import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemListMoreDays
 import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
 import com.musashi.weatherapp.ui.screen.summary.WeatherState
 import com.musashi.weatherapp.utils.Constants.TIME_EN
@@ -50,13 +49,13 @@ fun DetailedScreen(
     isCitySetAsDefault: () -> Boolean,
     isErrorOccurred: Boolean
 ) {
-    var isExpanded1 by rememberSaveable { mutableStateOf(true) }
+
+    var isExpanded1 by rememberSaveable { mutableStateOf(false) }
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
-    var isExpanded3 by rememberSaveable { mutableStateOf(false) }
-    var isExpanded4 by rememberSaveable { mutableStateOf(false) }
-    var isExpanded5 by rememberSaveable { mutableStateOf(false) }
 
     var tabIndex by rememberSaveable { mutableStateOf(0) }
+
+    var selectedDay by rememberSaveable { mutableStateOf(0) }
 
     val tabs = listOf(stringResource(R.string.today), stringResource(R.string.tomorrow), stringResource(R.string.the_day_after_tomorrow))
 
@@ -121,97 +120,31 @@ fun DetailedScreen(
                     Spacer(modifier = Modifier.height(20.dp))
                     WeatherDetailsTitle(
                         time = stringResource(R.string.next_days),
-                        isExpanded = isExpanded4,
+                        isExpanded = isExpanded1,
                         onTitleClick = {
-                            isExpanded4 = !isExpanded4
+                            isExpanded1 = !isExpanded1
                         }
                     )
-                    AnimatedVisibility(visible = isExpanded4) {
+                    AnimatedVisibility(visible = isExpanded1) {
                         if(state.forecastDays != 3) {
-                            Row(
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.Top,
-                                modifier = Modifier.padding(start = 20.dp, end = 20.dp).horizontalScroll(rememberScrollState())
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
                             ) {
-                                Spacer(modifier = Modifier.height(5.dp))
-                                WeatherDetailsItemListMoreDays(
-                                    dateText = getDateFromNow(3),
-                                    state = state,
-                                    dayConditionStart = 72,
-                                    dayConditionEnd = 95,
-                                )
-                                Spacer(modifier = Modifier.height(5.dp))
-                                WeatherDetailsItemListMoreDays(
-                                    dateText = getDateFromNow(4),
-                                    state = state,
-                                    dayConditionStart = 96,
-                                    dayConditionEnd = 119,
-                                )
-                                Spacer(modifier = Modifier.height(5.dp))
-                                WeatherDetailsItemListMoreDays(
-                                    dateText = getDateFromNow(5),
-                                    state = state,
-                                    dayConditionStart = 120,
-                                    dayConditionEnd = 143,
-                                )
-                                Spacer(modifier = Modifier.height(5.dp))
-                                WeatherDetailsItemListMoreDays(
-                                    dateText = getDateFromNow(6),
-                                    state = state,
-                                    dayConditionStart = 144,
-                                    dayConditionEnd = 167,
-                                )
-                                if (state.forecastDays == 14) {
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(7),
-                                        state = state,
-                                        dayConditionStart = 168,
-                                        dayConditionEnd = 191,
-                                    )
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(8),
-                                        state = state,
-                                        dayConditionStart = 192,
-                                        dayConditionEnd = 215,
-                                    )
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(9),
-                                        state = state,
-                                        dayConditionStart = 216,
-                                        dayConditionEnd = 239,
-                                    )
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(10),
-                                        state = state,
-                                        dayConditionStart = 240,
-                                        dayConditionEnd = 263,
-                                    )
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(11),
-                                        state = state,
-                                        dayConditionStart = 264,
-                                        dayConditionEnd = 287,
-                                    )
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(12),
-                                        state = state,
-                                        dayConditionStart = 288,
-                                        dayConditionEnd = 311,
-                                    )
-                                    Spacer(modifier = Modifier.height(5.dp))
-                                    WeatherDetailsItemListMoreDays(
-                                        dateText = getDateFromNow(13),
-                                        state = state,
-                                        dayConditionStart = 312,
-                                        dayConditionEnd = 335,
-                                    )
+                                ScrollableTabRow(
+                                    selectedTabIndex = selectedDay,
+                                    edgePadding = 0.dp
+                                ) {
+                                    for (i in 3 until state.forecastDays) {
+                                        Tab(
+                                            text = { Text(text = getDateFromNow(i)) },
+                                            selected = selectedDay == i - 3,
+                                            onClick = { selectedDay = i - 3 }
+                                        )
+                                    }
                                 }
+                                Spacer(modifier = Modifier.height(30.dp))
+                                NextDayWeatherSelector(state = state, selectedDay = selectedDay)
                             }
                         }else{
                             Column(
@@ -226,12 +159,12 @@ fun DetailedScreen(
                     Spacer(modifier = Modifier.height(20.dp))
                     WeatherDetailsTitle(
                         time = stringResource(R.string.charts),
-                        isExpanded = isExpanded5,
+                        isExpanded = isExpanded2,
                         onTitleClick = {
-                            isExpanded5 = !isExpanded5
+                            isExpanded2 = !isExpanded2
                         }
                     )
-                    AnimatedVisibility(visible = isExpanded5) {
+                    AnimatedVisibility(visible = isExpanded2) {
                         Spacer(modifier = Modifier.height(5.dp))
                         state.weatherFullStatus?.hourly?.let { hourlyStatus ->
                             WeatherLineChart(

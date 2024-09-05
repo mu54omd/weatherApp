@@ -10,9 +10,9 @@ fun getDateFromNow(days: Int): String{
     var result = ""
     result =
         if(LocalLayoutDirection.current == LayoutDirection.Ltr){
-            PersianDate().addDays(days).dayEnglishName().toString()
+            PersianDate().addDays(days).toDate().toString().split(" ").subList(0, 3).joinToString(separator = " ")
         } else {
-            PersianDate().addDays(days).dayName().toString()
+            PersianDate().addDays(days).toString().split(" ").subList(0, 3).joinToString(separator = " ")
         }
     return result
 }
