@@ -14,5 +14,7 @@ data class CurrentUnits(
     val temperature2m: String,
     val time: String,
     @SerializedName("weather_code")
-    val weatherCode: String
+    val weatherCode: String,
+    @SerializedName("is_day")
+    val isDay: String
 )

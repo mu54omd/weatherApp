@@ -69,8 +69,8 @@ fun DetailedScreen(
         ) {
 
             CityDetails(
-                weatherCodeImage = returnWeatherCode(state.weatherCurrentStatus?.current?.weatherCode ?: 0).imageId,
-                weatherCodeTitle = returnWeatherCode(state.weatherCurrentStatus?.current?.weatherCode ?: 0).stringId,
+                weatherCodeImage = returnWeatherCode(state.weatherCurrentStatus?.current?.weatherCode ?: 0, state.weatherCurrentStatus?.current?.isDay ?: 1).imageId,
+                weatherCodeTitle = returnWeatherCode(state.weatherCurrentStatus?.current?.weatherCode ?: 0, state.weatherCurrentStatus?.current?.isDay ?: 1).stringId,
                 cityTitle = if(LocalLayoutDirection.current == LayoutDirection.Ltr) { state.currentCity.cityName } else{ state.currentCity.cityNameFa }?: state.currentCity.cityName,
                 lat = state.currentCity.latitude,
                 lng = state.currentCity.longitude,

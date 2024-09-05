@@ -84,7 +84,8 @@ class SummaryViewModel @Inject constructor(
                 title = "Default city is cleared",
                 content = "",
                 weatherCode = returnWeatherCode(
-                    state.value.weatherCurrentStatus?.current?.weatherCode ?: 0
+                    state.value.weatherCurrentStatus?.current?.weatherCode ?: 0,
+                    isDay = state.value.weatherCurrentStatus?.current?.isDay ?: 1
                 ).imageId
             )
         } else {
@@ -98,7 +99,8 @@ class SummaryViewModel @Inject constructor(
                 title = "${state.value.currentCity.cityName} is the default city.",
                 content = "Current temperature: ${state.value.weatherCurrentStatus?.current?.temperature2m}°C",
                 weatherCode = returnWeatherCode(
-                    state.value.weatherCurrentStatus?.current?.weatherCode ?: 0
+                    state.value.weatherCurrentStatus?.current?.weatherCode ?: 0,
+                    isDay = state.value.weatherCurrentStatus?.current?.isDay ?: 1
                 ).imageId
             )
         }
@@ -335,10 +337,10 @@ class SummaryViewModel @Inject constructor(
                     latitude = city.latitude,
                     longitude = city.longitude,
                 ).onLeft { error ->
-                    result += BookmarkModel(city, 0.0, 0, error = error.error.message)
+                    result += BookmarkModel(city, 0.0, 0, error = error.error.message, isDay = 1)
                     _state.update { it.copy(result = result) }
                 }.onRight { weathers ->
-                    result += BookmarkModel(city, weathers.current.temperature2m, weathers.current.weatherCode, error = null)
+                    result += BookmarkModel(city, weathers.current.temperature2m, weathers.current.weatherCode, error = null, isDay = weathers.current.isDay)
                     _state.update { it.copy(result = result) }
                 }
             }

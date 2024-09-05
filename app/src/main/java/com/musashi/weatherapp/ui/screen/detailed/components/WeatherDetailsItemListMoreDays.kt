@@ -39,6 +39,7 @@ fun WeatherDetailsItemListMoreDays(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         TextButton(
             onClick = { isLazyRowVisible = !isLazyRowVisible },
@@ -67,7 +68,7 @@ fun WeatherDetailsItemListMoreDays(
                         if (index in dayConditionStart..dayConditionEnd) {
                             WeatherDetailsItemMoreDaysCard(
                                 time = item.split("T")[1],
-                                weatherIcon = returnWeatherCode(status.weatherCode[index]).imageId,
+                                weatherIcon = returnWeatherCode(status.weatherCode[index], status.isDay[index]).imageId,
                                 temperature = status.temperature2m[index],
                             )
                         }

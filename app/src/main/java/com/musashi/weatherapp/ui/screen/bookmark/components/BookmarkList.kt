@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
-import com.musashi.weatherapp.ui.helper.returnWeatherCode
 import com.musashi.weatherapp.ui.common.EmptyScreen
+import com.musashi.weatherapp.ui.helper.returnWeatherCode
 
 @Composable
 fun BookmarkList(
@@ -69,8 +69,8 @@ fun BookmarkList(
                 ) {
                         BookmarkItem(
                             onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
-                            weatherImageId = returnWeatherCode(city.weatherCode).imageId,
-                            weatherTextId = returnWeatherCode(city.weatherCode).stringId,
+                            weatherImageId = returnWeatherCode(city.weatherCode, isDay = city.isDay).imageId,
+                            weatherTextId = returnWeatherCode(city.weatherCode, isDay = city.isDay).stringId,
                             temperature = city.temp,
                             cityName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) city.cityModel.cityName else city.cityModel.cityNameFa ?: city.cityModel.cityName,
                             countryName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) city.cityModel.countryName else city.cityModel.countryNameFa,

@@ -49,6 +49,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.musashi.weatherapp.R
 import com.musashi.weatherapp.activity.MainViewModel
+import com.musashi.weatherapp.ui.helper.getNextHourTime
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
@@ -214,6 +215,7 @@ fun NavGraph(
                             },
                             nextHourWeather = getNextHourWeather(state = summaryState.value),
                             nextHourWeatherCode = getNextHourWeatherCode(state = summaryState.value),
+                            isNextHourDay = getNextHourTime(state = summaryState.value),
                             onAddFavoriteClick = { summaryViewModel.addToBookmark() },
                             changeTheme = { theme -> mainViewModel.changeTheme(theme) },
                             changeLanguage = { locale -> mainViewModel.changeLanguage(locale) },

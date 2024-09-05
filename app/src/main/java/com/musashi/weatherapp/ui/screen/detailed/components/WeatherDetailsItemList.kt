@@ -35,7 +35,7 @@ fun WeatherDetailsItemList(
                 if(index in dayConditionStart..dayConditionEnd){
                     WeatherDetailsItemCard(
                         time = item.split("T")[1],
-                        weatherIcon = returnWeatherCode(status.weatherCode[index]).imageId,
+                        weatherIcon = returnWeatherCode(status.weatherCode[index], status.isDay[index]).imageId,
                         temperature = status.temperature2m[index],
                         humidity = status.relativeHumidity2m[index]
                     )

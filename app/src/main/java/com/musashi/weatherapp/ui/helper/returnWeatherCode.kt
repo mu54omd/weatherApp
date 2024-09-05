@@ -2,11 +2,11 @@ package com.musashi.weatherapp.ui.helper
 
 import com.musashi.weatherapp.domain.model.WeatherCodeModel
 
-fun returnWeatherCode(weatherCode: Int): WeatherCodeModel{
+fun returnWeatherCode(weatherCode: Int, isDay: Int): WeatherCodeModel{
     val codeModel = when(weatherCode){
-        0 -> WeatherCodeModel.ClearSky
-        1 -> WeatherCodeModel.MainlyClear
-        2 -> WeatherCodeModel.PartlyCloudy
+        0 -> if(isDay == 1) WeatherCodeModel.ClearSky else WeatherCodeModel.ClearSkyNight
+        1 -> if(isDay == 1) WeatherCodeModel.MainlyClear else WeatherCodeModel.MainlyClearNight
+        2 -> if(isDay == 1) WeatherCodeModel.PartlyCloudy else WeatherCodeModel.PartlyCloudyNight
         3 -> WeatherCodeModel.Overcast
         45 -> WeatherCodeModel.Fog
         48 -> WeatherCodeModel.FogDepositingRime

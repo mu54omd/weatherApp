@@ -29,7 +29,9 @@ fun WeatherStat(
     humidity: Int,
     nextHourTemp: Double,
     currentWeatherCode: Int,
+    isNowDay: Int,
     nextHourWeatherCode: Int,
+    isNextHourDay: Int,
     isWeatherLoaded: Boolean,
 ) {
 
@@ -53,7 +55,7 @@ fun WeatherStat(
                         MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
                     ),
                     shimmerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    image = returnWeatherCode(currentWeatherCode).imageId,
+                    image = returnWeatherCode(currentWeatherCode, isNowDay).imageId,
                     title = stringResource(R.string.now_temp),
                     value = temperature.toString(), unit = "°C",
                     offsetMillis = 0,
@@ -80,7 +82,7 @@ fun WeatherStat(
                         MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
                     ),
                     shimmerColor = MaterialTheme.colorScheme.primaryContainer,
-                    image = returnWeatherCode(nextHourWeatherCode).imageId,
+                    image = returnWeatherCode(nextHourWeatherCode, isNextHourDay).imageId,
                     title = stringResource(R.string.next_hour_temp),
                     value = nextHourTemp.toString(),
                     unit = "°C",
@@ -93,7 +95,7 @@ fun WeatherStat(
                         MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
                     ),
                     shimmerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                    image = returnWeatherCode(currentWeatherCode).imageId,
+                    image = returnWeatherCode(currentWeatherCode, isNowDay).imageId,
                     title = stringResource(R.string.apparent_temp),
                     value = apparentTemperature.toString(),
                     unit = "°C",
@@ -117,7 +119,9 @@ private fun WeatherStatPreview() {
             nextHourTemp = 23.3,
             currentWeatherCode = 1,
             nextHourWeatherCode = 1,
-            isWeatherLoaded = false
+            isWeatherLoaded = false,
+            isNowDay = 1,
+            isNextHourDay = 0
         )
     }
 

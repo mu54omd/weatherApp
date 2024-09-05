@@ -16,7 +16,7 @@ interface WeatherApi {
         @Query("hourly") hourly: String = HOURLY,
         @Query("current") current: String = CURRENT,
         @Query("timezone") timezone: String = TIME_ZONE,
-        @Query("forecast_days") forecastDays: Int
+        @Query("forecast_days") forecastDays: Int,
     ): WeatherFullResponseModel
 
     @GET("forecast?")

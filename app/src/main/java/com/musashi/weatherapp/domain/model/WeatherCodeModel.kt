@@ -4,8 +4,11 @@ import com.musashi.weatherapp.R
 
 enum class WeatherCodeModel(val imageId: Int, val stringId: Int) {
     ClearSky(R.drawable.clear_sky, R.string.clear_sky),
+    ClearSkyNight(R.drawable.clear_sky_night, R.string.clear_sky),
     MainlyClear(R.drawable.mainly_clear, R.string.mainly_clear),
+    MainlyClearNight(R.drawable.mainly_clear_night, R.string.mainly_clear),
     PartlyCloudy(R.drawable.partly_cloudy, R.string.partly_cloudy),
+    PartlyCloudyNight(R.drawable.partly_cloudy_night, R.string.partly_cloudy),
     Overcast(R.drawable.overcast, R.string.overcast),
     Fog(R.drawable.fog, R.string.fog),
     FogDepositingRime(R.drawable.fog_depositing_rime, R.string.fog_depositing_rime),

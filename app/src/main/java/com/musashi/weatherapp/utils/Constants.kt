@@ -3,8 +3,8 @@ package com.musashi.weatherapp.utils
 object Constants {
     const val WEATHER_API_BASE_URL = "https://api.open-meteo.com/v1/"
     const val TIME_ZONE = "auto"
-    const val HOURLY = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code"
-    const val CURRENT = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code"
+    const val HOURLY = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day"
+    const val CURRENT = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day"
     const val FORECAST_DAYS = "forecast_days"
     const val CITY_BOOKMARK_DATABASE_NAME = "city_bm_db"
 

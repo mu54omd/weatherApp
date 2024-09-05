@@ -49,6 +49,7 @@ fun SummaryScreen(
     onAddFavoriteClick: () -> Unit,
     nextHourWeather: Double?,
     nextHourWeatherCode: Int?,
+    isNextHourDay: Int?,
     changeTheme: (AppTheme) -> Unit,
     changeLanguage: (String) -> Unit,
     language: String,
@@ -153,7 +154,9 @@ fun SummaryScreen(
                     humidity = state.weatherCurrentStatus?.current?.relativeHumidity2m ?: 0,
                     nextHourTemp = nextHourWeather ?: 0.0,
                     currentWeatherCode = state.weatherCurrentStatus?.current?.weatherCode ?: 0,
+                    isNowDay = state.weatherCurrentStatus?.current?.isDay?: 1,
                     nextHourWeatherCode = nextHourWeatherCode ?: 0,
+                    isNextHourDay = isNextHourDay?: 1,
                     modifier = Modifier.fillMaxWidth(),
                     isWeatherLoaded = state.errorCurrent == null
                 )
