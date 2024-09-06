@@ -21,7 +21,7 @@ fun WeatherDetailsItemListMoreDays(
 
 ) {
     LazyRow(
-        modifier = Modifier.width(350.dp),
+        modifier = Modifier.width(300.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
         state = rememberLazyListState(initialFirstVisibleItemIndex = if (currentIndex != 1000) currentIndex else 0)

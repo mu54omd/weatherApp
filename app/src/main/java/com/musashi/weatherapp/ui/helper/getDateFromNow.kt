@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 @Composable
 fun getDateFromNow(days: Int): String{
@@ -12,7 +13,7 @@ fun getDateFromNow(days: Int): String{
         if(LocalLayoutDirection.current == LayoutDirection.Ltr){
             PersianDate().addDays(days).toDate().toString().split(" ").subList(0, 3).joinToString(separator = " ")
         } else {
-            PersianDate().addDays(days).toString().split(" ").subList(0, 3).joinToString(separator = " ")
+            PersianDateFormat("l d F").format(PersianDate().addDays(days))
         }
     return result
 }

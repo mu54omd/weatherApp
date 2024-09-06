@@ -22,13 +22,14 @@ fun WeatherDetailsItemList(
     currentIndex: Int = 1000,
 
 ) {
+    val lazyState = rememberLazyListState(initialFirstVisibleItemIndex = if(currentIndex != 1000) currentIndex else 0)
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        state = rememberLazyListState(initialFirstVisibleItemIndex = if(currentIndex != 1000) currentIndex else 0)
+        state = lazyState
     ) {
         state.weatherFullStatus?.hourly?.let { status ->
             itemsIndexed(status.time) { index, item ->
@@ -37,7 +38,7 @@ fun WeatherDetailsItemList(
                         time = item.split("T")[1],
                         weatherIcon = returnWeatherCode(status.weatherCode[index], status.isDay[index]).imageId,
                         temperature = status.temperature2m[index],
-                        humidity = status.relativeHumidity2m[index]
+                        humidity = status.relativeHumidity2m[index],
                     )
                 }
             }

@@ -67,7 +67,7 @@ fun SummaryScreen(
                 onChangeLanguage = { changeLanguage(it) },
                 onChangeTheme = { changeTheme(it) }
             )
-        }
+        },
     ) {
         if(!state.isDatabaseLoaded){
             LoadingDialog()
@@ -79,6 +79,7 @@ fun SummaryScreen(
                     .fillMaxSize()
                     .padding(top = it.calculateTopPadding(), start = 30.dp, end = 30.dp)
                     .verticalScroll(rememberScrollState())
+
             ) {
 
                 WeatherSearchBar(

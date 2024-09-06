@@ -10,9 +10,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Boy
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -80,9 +77,9 @@ fun NavGraph(
 
     val bottomNavigationItem = remember {
         listOf(
-            BottomNavigationItem(icon = Icons.Outlined.Home, text = R.string.home),
-            BottomNavigationItem(icon = Icons.Outlined.Search, text = R.string.details),
-            BottomNavigationItem(icon = Icons.Outlined.FavoriteBorder, text = R.string.favorites),
+            BottomNavigationItem(icon = R.drawable.home_icon, text = R.string.home),
+            BottomNavigationItem(icon = R.drawable.details_icon, text = R.string.details),
+            BottomNavigationItem(icon = R.drawable.favorite_icon, text = R.string.favorites),
         )
     }
     val backstackState = navController.currentBackStackEntryAsState().value

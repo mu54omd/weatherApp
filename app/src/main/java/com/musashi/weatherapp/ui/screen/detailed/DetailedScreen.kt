@@ -2,22 +2,29 @@ package com.musashi.weatherapp.ui.screen.detailed
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.SignalWifiStatusbarConnectedNoInternet4
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -53,12 +60,13 @@ fun DetailedScreen(
     var isExpanded1 by rememberSaveable { mutableStateOf(false) }
     var isExpanded2 by rememberSaveable { mutableStateOf(false) }
 
-    var tabIndex by rememberSaveable { mutableStateOf(0) }
+    var tabIndex by rememberSaveable { mutableIntStateOf(0) }
 
-    var selectedDay by rememberSaveable { mutableStateOf(0) }
+    var selectedDay by rememberSaveable { mutableIntStateOf(0) }
 
     val tabs = listOf(stringResource(R.string.today), stringResource(R.string.tomorrow), stringResource(R.string.the_day_after_tomorrow))
 
+    val pagerStateTobTab = rememberPagerState { tabs.size }
     if(state.currentCity.cityName != "") {
         Column(
             modifier = modifier
@@ -94,28 +102,50 @@ fun DetailedScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
             if(!isErrorOccurred) {
-                val currentTime = state.weatherCurrentStatus?.current?.time?.split(":")?.get(0) + ":00"
-                val currentIndex = state.weatherFullStatus?.hourly?.time?.indexOf(currentTime) ?: 0
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
                         .padding(start = 5.dp, end = 5.dp)
-                    ,
                 ) {
-                    when(tabIndex){
-                        0 -> WeatherDetailsItemList(
-                                state = state,
-                                dayConditionStart = 0,
-                                dayConditionEnd = 23,
-                                currentIndex = currentIndex)
-                        1 -> WeatherDetailsItemList(
-                                state = state,
-                                dayConditionStart = 24,
-                                dayConditionEnd = 47,)
-                        2 -> WeatherDetailsItemList(
-                            state = state,
-                            dayConditionStart = 48,
-                            dayConditionEnd = 71,)
+                    LaunchedEffect(
+                        key1 = tabIndex
+                    ) {
+                        pagerStateTobTab.animateScrollToPage(tabIndex)
+                    }
+                    LaunchedEffect(
+                        key1 = pagerStateTobTab.currentPage,
+                        key2 = pagerStateTobTab.isScrollInProgress
+                    ) {
+                        if(!pagerStateTobTab.isScrollInProgress)
+                            tabIndex = pagerStateTobTab.currentPage
+                    }
+
+                    HorizontalPager(
+                        state = pagerStateTobTab,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        index ->
+                        Box(modifier = Modifier.height(175.dp), contentAlignment = Alignment.Center) {
+                            when (index) {
+                                0 -> WeatherDetailsItemList(
+                                    state = state,
+                                    dayConditionStart = 0,
+                                    dayConditionEnd = 23,
+                                )
+
+                                1 -> WeatherDetailsItemList(
+                                    state = state,
+                                    dayConditionStart = 24,
+                                    dayConditionEnd = 47,
+                                )
+
+                                2 -> WeatherDetailsItemList(
+                                    state = state,
+                                    dayConditionStart = 48,
+                                    dayConditionEnd = 71,
+                                )
+                            }
+                        }
                     }
                     Spacer(modifier = Modifier.height(20.dp))
                     WeatherDetailsTitle(
@@ -131,13 +161,26 @@ fun DetailedScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
+
                                 ScrollableTabRow(
                                     selectedTabIndex = selectedDay,
                                     edgePadding = 0.dp
                                 ) {
                                     for (i in 3 until state.forecastDays) {
                                         Tab(
-                                            text = { Text(text = getDateFromNow(i)) },
+                                            text = {
+                                                if(LocalLayoutDirection.current == LayoutDirection.Rtl)
+                                                {
+                                                    Text(
+                                                        text = getDateFromNow(i),
+                                                        style = MaterialTheme.typography.labelMedium
+                                                    )
+                                                } else {
+                                                    Text(
+                                                        text = getDateFromNow(i),
+                                                    )
+                                                }
+                                                   },
                                             selected = selectedDay == i - 3,
                                             onClick = { selectedDay = i - 3 }
                                         )

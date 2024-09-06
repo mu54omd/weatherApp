@@ -8,7 +8,6 @@ fun NextDayWeatherSelector(
     state: WeatherState,
     selectedDay: Int,
 ) {
-
     when (selectedDay) {
         0 -> WeatherDetailsItemListMoreDays(
             state = state,
