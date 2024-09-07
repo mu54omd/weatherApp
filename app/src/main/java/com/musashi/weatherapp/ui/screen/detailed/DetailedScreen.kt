@@ -30,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -87,8 +88,10 @@ fun DetailedScreen(
                 isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault(),
                 modifier = Modifier.verticalScroll(rememberScrollState())
             )
+            Spacer(modifier = Modifier.height(20.dp))
             TabRow(
                 selectedTabIndex = tabIndex,
+                containerColor = Color.Transparent,
                 modifier = Modifier,
             ) {
                 tabs.forEachIndexed{ index, title ->
@@ -164,6 +167,7 @@ fun DetailedScreen(
 
                                 ScrollableTabRow(
                                     selectedTabIndex = selectedDay,
+                                    containerColor = Color.Transparent,
                                     edgePadding = 0.dp
                                 ) {
                                     for (i in 3 until state.forecastDays) {

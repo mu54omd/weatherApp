@@ -3,6 +3,8 @@ package com.musashi.weatherapp.ui.screen.navgraph
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,6 +37,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -177,7 +182,22 @@ fun NavGraph(
                 isRefreshing = summaryState.value.isRefreshing,
                 state = pullRefreshState,
                 onRefresh = summaryViewModel::refresh,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.linearGradient(
+                            listOf(
+                                MaterialTheme.colorScheme.background,
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.1f),
+                                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f),
+                                MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+                                MaterialTheme.colorScheme.background,
+                            ),
+                            start = Offset.Zero,
+                            end = Offset.Infinite
+                        )
+                    ),
                 indicator = {
                     PullToRefreshDefaults.Indicator(
                         state = pullRefreshState,
@@ -188,6 +208,13 @@ fun NavGraph(
                     )
                 }
             ) {
+                Image(
+                    painterResource(R.drawable.background),
+                    contentDescription = "Background",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                    alpha = 0.05f
+                )
                 NavHost(
                     navController = navController,
                     startDestination = startDestination,

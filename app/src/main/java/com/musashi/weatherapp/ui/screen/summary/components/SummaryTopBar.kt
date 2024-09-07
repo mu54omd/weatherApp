@@ -15,6 +15,7 @@ import com.musashi.weatherapp.ui.common.ThemeSwitcher
 
 @Composable
 fun SummaryTopBar(
+    modifier: Modifier = Modifier,
     isLanguageChecked : Boolean,
     onChangeLanguage: (String) -> Unit,
     onChangeTheme: (AppTheme) -> Unit
@@ -23,7 +24,7 @@ fun SummaryTopBar(
     LeftToRightLayout {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .height(50.dp)
                 .padding(top = 20.dp, start = 40.dp, end = 40.dp),

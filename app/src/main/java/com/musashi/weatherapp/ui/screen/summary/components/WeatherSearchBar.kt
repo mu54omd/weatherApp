@@ -1,6 +1,7 @@
 package com.musashi.weatherapp.ui.screen.summary.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Place
@@ -67,7 +69,13 @@ fun WeatherSearchBar(
             value = textValue,
             label = { Text(text = label) },
             onValueChange = { onValueChange(it) },
-            modifier = Modifier.width(300.dp),
+            modifier = Modifier
+                .width(300.dp)
+                .border(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.5f),
+                    shape = RoundedCornerShape(50.dp)
+                ),
             leadingIcon = {
                 if(textValue.isEmpty()) {
                     Icon(
@@ -121,7 +129,10 @@ fun WeatherSearchBar(
             colors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
+                disabledIndicatorColor = Color.Transparent,
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
             ),
             enabled = isEnabled
         )
