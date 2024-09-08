@@ -5,5 +5,5 @@ data class BookmarkModel(
     val temp: Double,
     val weatherCode: Int,
     val isDay: Int,
-    val error: String?
+    val error: Int?
 )

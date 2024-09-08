@@ -83,4 +83,7 @@
     <string name="forecast_days">روزهای پیش بینی</string>
     <string name="next_days">روزهای بعد</string>
     <string name="next_days_forecast_text">جهت دیدن روزهای بیشتر لطفا تعداد روزهای پیش بینی را افزایش دهید.</string>
+    <string name="network_error">خطای شبکه</string>
+    <string name="unknown_error">خطای نامشخص</string>
+    <string name="unknown_response">پاسخ نامشخص</string>
 </resources>
