@@ -227,15 +227,17 @@ fun DetailedScreen(
                 }
 
             }else{
-                EmptyScreen(
-                    messageText = state.errorHourly.toString(),
-                    messageImage = Icons.Default.SignalWifiStatusbarConnectedNoInternet4
+                state.errorHourly?.let {
+                    EmptyScreen(
+                        messageText = it,
+                        messageImage = Icons.Default.SignalWifiStatusbarConnectedNoInternet4
                     )
+                }
             }
         }
     }else{
         EmptyScreen(
-            messageText = stringResource(R.string.no_city_selected),
+            messageText = R.string.no_city_selected,
             messageImage = Icons.Default.LocationOff
             )
     }

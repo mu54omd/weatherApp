@@ -1,6 +1,7 @@
 package com.musashi.weatherapp.ui.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,13 +17,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.musashi.weatherapp.R
 import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
 fun EmptyScreen(
     modifier: Modifier = Modifier,
-    messageText: String,
+    @StringRes messageText: Int,
     messageImage: ImageVector
 ) {
     Column(
@@ -32,9 +35,9 @@ fun EmptyScreen(
     ) {
         Icon(
             imageVector = messageImage,
-            contentDescription = messageText,
+            contentDescription = stringResource(messageText),
         )
-        Text(text = messageText)
+        Text(text = stringResource(messageText))
     }
 }
 
@@ -45,7 +48,7 @@ private fun EmptyDetailsPreview() {
     WeatherAppTheme {
         Surface(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             EmptyScreen(
-                messageText = "No City Selected!",
+                messageText = R.string.no_city_selected,
                 messageImage = Icons.Default.WrongLocation
             )
         }
