@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.detailed
+package com.musashi.weatherapp.ui.screen.details
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
@@ -41,10 +41,10 @@ import com.musashi.weatherapp.ui.common.EmptyScreen
 import com.musashi.weatherapp.ui.common.WeatherLineChart
 import com.musashi.weatherapp.ui.helper.getDateFromNow
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
-import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails
-import com.musashi.weatherapp.ui.screen.detailed.components.NextDayWeatherSelector
-import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsItemList
-import com.musashi.weatherapp.ui.screen.detailed.components.WeatherDetailsTitle
+import com.musashi.weatherapp.ui.screen.details.components.CityDetails
+import com.musashi.weatherapp.ui.screen.details.components.NextDayWeatherSelector
+import com.musashi.weatherapp.ui.screen.details.components.WeatherDetailsItemList
+import com.musashi.weatherapp.ui.screen.details.components.WeatherDetailsTitle
 import com.musashi.weatherapp.ui.screen.summary.WeatherState
 import com.musashi.weatherapp.utils.Constants.TIME_EN
 import com.musashi.weatherapp.utils.Constants.TIME_FA

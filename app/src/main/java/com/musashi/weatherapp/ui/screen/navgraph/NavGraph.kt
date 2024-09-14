@@ -57,7 +57,7 @@ import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
 import com.musashi.weatherapp.ui.screen.about.AboutScreen
 import com.musashi.weatherapp.ui.screen.bookmark.BookmarkScreen
-import com.musashi.weatherapp.ui.screen.detailed.DetailedScreen
+import com.musashi.weatherapp.ui.screen.details.DetailedScreen
 import com.musashi.weatherapp.ui.screen.navgraph.components.BottomNavigationItem
 import com.musashi.weatherapp.ui.screen.navgraph.components.WeatherBottomBar
 import com.musashi.weatherapp.ui.screen.settings.SettingsScreen
