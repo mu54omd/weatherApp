@@ -5,10 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.musashi.weatherapp.application.NotificationHandler
-import com.musashi.weatherapp.application.ReminderWorker
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.EmptyCity
@@ -24,7 +21,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,33 +30,18 @@ class SummaryViewModel @Inject constructor(
     private val userLocalUserManager: LocalUserManager
 ): ViewModel() {
 
-
     /////////////////////////////////////////////////Initialization//////////////////////////////////////////////////////
     private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
 
-    private val workManager = WorkManager.getInstance(context)
-
     private val notificationHandler = NotificationHandler(context)
 
     init {
-//        createDatabaseFromRawJson(context)
         getListOfCountries()
         readLocalSetting()
         loadBookmark()
-//        scheduleReminder(1, TimeUnit.MINUTES)
     }
     /////////////////////////////////////////////////Public functions//////////////////////////////////////////////////////
-
-    private fun scheduleReminder(
-        duration: Long,
-        unit: TimeUnit
-    ){
-        val myWorkRequestBuilder = PeriodicWorkRequestBuilder<ReminderWorker>(duration, unit, 15, TimeUnit.SECONDS)
-
-        workManager.enqueue(myWorkRequestBuilder.build())
-    }
-
 
     fun addToBookmark(){
         viewModelScope.launch {
@@ -121,7 +102,6 @@ class SummaryViewModel @Inject constructor(
     fun setSelectedAsCurrentCity(city: CityModel){
         _state.update { it.copy(currentCity = city) }
         getCurrentCityWeather()
-//        getLocation()
     }
 
     fun selectCountry(countryName: String){
@@ -160,7 +140,6 @@ class SummaryViewModel @Inject constructor(
                 )
             }
             getCurrentCityWeather()
-//           getLocation()
         }
     }
     fun refresh() {
@@ -179,7 +158,7 @@ class SummaryViewModel @Inject constructor(
         viewModelScope.launch {
             userLocalUserManager.saveSelectedCity(city = city)
             userLocalUserManager.saveSelectedCountry(country = country)
-            userLocalUserManager.saveBookmarkState(state = state)
+            userLocalUserManager.saveDefaultCityState(state = state)
             userLocalUserManager.saveForecastDays(forecastDays = forecastDays)
             _state.update {
                 it.copy(
@@ -195,7 +174,7 @@ class SummaryViewModel @Inject constructor(
         viewModelScope.launch {
             val country =  userLocalUserManager.readSelectedCountry().first()
             val city =  userLocalUserManager.readSelectedCity().first()
-            val bookmarkState = userLocalUserManager.readBookmarkState().first()
+            val defaultCityState = userLocalUserManager.readDefaultCityState().first()
             val forecastDays = userLocalUserManager.readForecastDays().first()
             _state.update {
                 it.copy(
@@ -203,7 +182,7 @@ class SummaryViewModel @Inject constructor(
                         first = country,
                         second = city
                     ),
-                    isDefaultCitySet = bookmarkState,
+                    isDefaultCitySet = defaultCityState,
                     forecastDays = forecastDays
                 )
             }
@@ -211,46 +190,6 @@ class SummaryViewModel @Inject constructor(
             selectCity(state.value.localCityCountry.second, state.value.localCityCountry.first)
         }
     }
-
-//    private fun createDatabaseFromRawJson(context: Context) {
-//
-//        _state.update { it.copy(isDatabaseLoaded = false) }
-//        viewModelScope.launch {
-//            val count = weatherRepository.getTableCount()
-//
-//            if (count < 47868) {
-//                val citiesJsonArray: JSONArray =
-//                    context.resources.openRawResource(R.raw.world_cities_with_id).bufferedReader()
-//                        .use {
-//                            JSONArray(it.readText())
-//                        }
-//                citiesJsonArray.takeIf { it.length() > 0 }?.let { list ->
-//                    for (index in 0 until list.length()) {
-//                        val cityObj = list.getJSONObject(index)
-//                        weatherRepository.upsertCity(
-//                            CityModel(
-//                                id = cityObj.getInt("id"),
-//                                countryName = cityObj.getString("country"),
-//                                cityName = cityObj.getString("city_ascii"),
-//                                latitude = cityObj.getDouble("lat"),
-//                                longitude = cityObj.getDouble("lng")
-//                            )
-//                        )
-//                    }
-//                }
-//            }
-//            _state.update { it.copy(isDatabaseLoaded = true) }
-//        }
-//    }
-
-//    private fun getLocation(){
-//        viewModelScope.launch {
-//            weatherRepository
-//                .getLocation(cityName = state.value.currentCity.cityName, countryName = state.value.currentCity.countryName)
-//                .onLeft { error -> _state.update { it.copy(mapApiError = error.error.message) } }
-//                .onRight { response -> _state.update { it.copy(mapApiResult = response) } }
-//        }
-//    }
 
     private fun getListOfCountries(){
         _state.update { it.copy(isDatabaseLoaded = false) }

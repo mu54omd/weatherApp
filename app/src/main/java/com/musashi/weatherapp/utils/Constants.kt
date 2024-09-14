@@ -2,23 +2,18 @@ package com.musashi.weatherapp.utils
 
 object Constants {
     const val WEATHER_API_BASE_URL = "https://api.open-meteo.com/v1/"
+    const val WEATHER_API_ENDPOINT = "forecast?"
     const val TIME_ZONE = "auto"
     const val HOURLY = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day"
     const val CURRENT = "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day"
     const val FORECAST_DAYS = "forecast_days"
-    const val CITY_BOOKMARK_DATABASE_NAME = "city_bm_db"
 
-    const val MAP_API_BASE_URL = "https://nominatim.openstreetmap.org/"
-    const val FORMAT = "json"
-    const val LIMIT = 5
-    const val ADDRESS_DETAILS = 1
+    const val CITY_BOOKMARK_DATABASE_NAME = "city_bm_db"
 
     const val USER_SETTINGS = "userSettings"
     const val SELECTED_CITY = "selectedCity"
-    const val SELECTED_COUNTRY = "selectedCOUNTRY"
-    const val IS_BOOKMARKED = "isBookmarked"
-
-
+    const val SELECTED_COUNTRY = "selectedCountry"
+    const val IS_DEFAULT_CITY_SAVED = "isDefaultCitySaved"
     const val THEME_COLOR = "themeColor"
     const val APP_LANGUAGE = "appLanguage"
 

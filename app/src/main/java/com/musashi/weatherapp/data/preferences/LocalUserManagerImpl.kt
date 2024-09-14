@@ -28,9 +28,9 @@ class LocalUserManagerImpl(
         }
     }
 
-    override suspend fun saveBookmarkState(state: Boolean) {
+    override suspend fun saveDefaultCityState(state: Boolean) {
         context.dataStore.edit { setting ->
-            setting[PreferencesKeys.IS_BOOKMARKED] = state
+            setting[PreferencesKeys.Is_DEFAULT_CITY_SAVED] = state
         }
     }
 
@@ -64,9 +64,9 @@ class LocalUserManagerImpl(
         }
     }
 
-    override fun readBookmarkState(): Flow<Boolean> {
+    override fun readDefaultCityState(): Flow<Boolean> {
         return context.dataStore.data.map { preferences ->
-            preferences[PreferencesKeys.IS_BOOKMARKED]?:false
+            preferences[PreferencesKeys.Is_DEFAULT_CITY_SAVED]?:false
         }
     }
 
@@ -94,7 +94,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 private object PreferencesKeys {
     val SELECTED_CITY = stringPreferencesKey(name = Constants.SELECTED_CITY)
     val SELECTED_COUNTRY = stringPreferencesKey(name = Constants.SELECTED_COUNTRY)
-    val IS_BOOKMARKED = booleanPreferencesKey(name = Constants.IS_BOOKMARKED)
+    val Is_DEFAULT_CITY_SAVED = booleanPreferencesKey(name = Constants.IS_DEFAULT_CITY_SAVED)
     val THEME_COLOR = stringPreferencesKey(name = Constants.THEME_COLOR)
     val APP_LANGUAGE = stringPreferencesKey(name = Constants.APP_LANGUAGE)
     val FORECAST_DAYS = intPreferencesKey(name = Constants.FORECAST_DAYS)

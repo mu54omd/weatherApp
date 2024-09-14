@@ -3,7 +3,6 @@ package com.musashi.weatherapp.ui.screen.summary
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.domain.model.EmptyCity
-import com.musashi.weatherapp.domain.model.MapApiModel
 import com.musashi.weatherapp.domain.model.WeatherCurrentResponseModel
 import com.musashi.weatherapp.domain.model.WeatherFullResponseModel
 
@@ -31,7 +30,4 @@ data class WeatherState(
     val result: List<BookmarkModel> = emptyList(),
     val forecastDays: Int = 3,
 
-    //state related to map api
-    val mapApiResult: List<MapApiModel> = emptyList(),
-    val mapApiError: String? = null,
 )

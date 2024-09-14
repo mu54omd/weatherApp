@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.detailed.components
+package com.musashi.weatherapp.ui.screen.details.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.DrawableRes
@@ -43,7 +43,7 @@ import com.musashi.weatherapp.ui.theme.WeatherAppTheme
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import java.util.Date
-import com.musashi.weatherapp.ui.screen.detailed.components.CityDetails as CityDetails1
+import com.musashi.weatherapp.ui.screen.details.components.CityDetails as CityDetails1
 
 @Composable
 fun CityDetails(

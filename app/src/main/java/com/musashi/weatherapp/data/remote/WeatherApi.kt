@@ -5,11 +5,12 @@ import com.musashi.weatherapp.domain.model.WeatherFullResponseModel
 import com.musashi.weatherapp.utils.Constants.CURRENT
 import com.musashi.weatherapp.utils.Constants.HOURLY
 import com.musashi.weatherapp.utils.Constants.TIME_ZONE
+import com.musashi.weatherapp.utils.Constants.WEATHER_API_ENDPOINT
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApi {
-    @GET("forecast?")
+    @GET(WEATHER_API_ENDPOINT)
     suspend fun getFullWeathers(
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,
@@ -19,7 +20,7 @@ interface WeatherApi {
         @Query("forecast_days") forecastDays: Int,
     ): WeatherFullResponseModel
 
-    @GET("forecast?")
+    @GET(WEATHER_API_ENDPOINT)
     suspend fun getCurrentWeathers(
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,

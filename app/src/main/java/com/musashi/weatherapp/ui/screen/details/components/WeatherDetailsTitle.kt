@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.detailed.components
+package com.musashi.weatherapp.ui.screen.details.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
