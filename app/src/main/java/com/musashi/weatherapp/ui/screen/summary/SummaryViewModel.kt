@@ -50,11 +50,13 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    fun deleteFromBookmark(city: CityModel){
+    fun deleteFromBookmark(cities: List<CityModel>){
         viewModelScope.launch {
-            weatherRepository.deleteBookmark(cityModel = city)
+            cities.forEach { city ->
+                weatherRepository.deleteBookmark(cityModel = city)
+            }
+            loadBookmark()
         }
-        loadBookmark()
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

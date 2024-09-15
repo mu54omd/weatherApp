@@ -15,7 +15,7 @@ fun BookmarkScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
     onBookmarkCardClick: (CityModel) -> Unit,
-    onDeleteClick: (CityModel) -> Unit,
+    onDeleteClick: (List<CityModel>) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

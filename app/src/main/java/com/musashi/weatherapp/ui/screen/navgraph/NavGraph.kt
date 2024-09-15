@@ -259,7 +259,7 @@ fun NavGraph(
                     composable(route = Route.BookmarkScreen.route) {
                         BookmarkScreen(
                             state = summaryState.value,
-                            onDeleteClick = { city -> summaryViewModel.deleteFromBookmark(city) },
+                            onDeleteClick = { cities -> summaryViewModel.deleteFromBookmark(cities) },
                             onBookmarkCardClick = { city ->
                                 summaryViewModel.setSelectedAsCurrentCity(city)
                                 navigateToTab(
