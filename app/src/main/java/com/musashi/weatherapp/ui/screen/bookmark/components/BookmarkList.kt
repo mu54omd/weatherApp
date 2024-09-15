@@ -31,9 +31,10 @@ fun BookmarkList(
     bookmarkedCity: List<CityModel>,
     bookmarksResult: List<BookmarkModel>,
     onBookmarkCardClick: (CityModel) -> Unit,
-    onDeleteClick: (List<CityModel>) -> Unit,
+    onDeleteClick: (BookmarkModel) -> Unit,
 ) {
-    val deletedItem = remember { mutableStateListOf<CityModel>() }
+    val bookmarksResultShadow = bookmarksResult
+    val deletedItem = remember { mutableStateListOf<BookmarkModel>() }
     if(bookmarkedCity.isEmpty()){
         EmptyScreen(
             messageText = R.string.nothing_is_here,
@@ -45,13 +46,13 @@ fun BookmarkList(
             contentPadding = PaddingValues(all = 10.dp)
         ) {
             items(
-                items = bookmarksResult,
+                items = bookmarksResultShadow,
                 key = {
                     item -> item.cityModel.id
                 }
             ) { item ->
                 AnimatedVisibility(
-                    visible = !deletedItem.contains(item.cityModel),
+                    visible = !deletedItem.contains(item),
                     exit = if(LocalLayoutDirection.current == LayoutDirection.Ltr){
                         slideOutHorizontally(
                             targetOffsetX = { -it },
@@ -85,15 +86,20 @@ fun BookmarkList(
                             cityName = if (LocalLayoutDirection.current == LayoutDirection.Ltr) item.cityModel.cityName else item.cityModel.cityNameFa
                                 ?: item.cityModel.cityName,
                             countryName = if (LocalLayoutDirection.current == LayoutDirection.Ltr) item.cityModel.countryName else item.cityModel.countryNameFa,
-                            onDeleteClick = { deletedItem.add(item.cityModel) },
+                            onDeleteClick = {
+                                deletedItem.add(item)
+                                //onDeleteClick(item)
+                            },
                             isWeatherLoaded = item.error == null
                         )
                 }
             }
         }
-        DisposableEffect(key1 = deletedItem) {
+        DisposableEffect(key1 = Unit) {
             onDispose {
-                onDeleteClick(deletedItem)
+                deletedItem.forEach {
+                    onDeleteClick(it)
+                }
             }
         }
     }

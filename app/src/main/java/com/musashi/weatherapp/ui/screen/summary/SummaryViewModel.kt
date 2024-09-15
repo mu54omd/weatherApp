@@ -50,13 +50,15 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    fun deleteFromBookmark(cities: List<CityModel>){
+    fun deleteFromBookmark(item: BookmarkModel){
+        val bookmarkedItems: MutableList<BookmarkModel> = state.value.result.toMutableList()
+        bookmarkedItems.remove(item)
         viewModelScope.launch {
-            cities.forEach { city ->
-                weatherRepository.deleteBookmark(cityModel = city)
-            }
-            loadBookmark()
+            weatherRepository.deleteBookmark(cityModel = item.cityModel)
+            _state.update { it.copy(result = bookmarkedItems) }
+            loadBookmark(flag = "delete")
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -257,13 +259,13 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    private fun loadBookmark(){
+    private fun loadBookmark(flag: String = "add"){
         viewModelScope.launch {
             _state.update { it.copy(
                 bookmarkedCities = weatherRepository.getBookmark().first(),
                 isBookmarkListLoaded = true,
             ) }
-            if(state.value.isBookmarkListLoaded) {
+            if(state.value.isBookmarkListLoaded && flag == "add") {
                 getBookmarkedCityWeather()
             }
         }
