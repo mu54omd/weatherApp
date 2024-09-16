@@ -1,6 +1,6 @@
 package com.musashi.weatherapp.ui.helper
 
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 fun getNextHourWeatherCode(state: WeatherState): Int?{
     val nextHourIndex = getNextHourIndex(state)

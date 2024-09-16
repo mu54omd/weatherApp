@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 @Composable
 fun WeatherDetailsItemList(
@@ -21,7 +21,7 @@ fun WeatherDetailsItemList(
     dayConditionEnd: Int,
     currentIndex: Int = 1000,
 
-) {
+    ) {
     val lazyState = rememberLazyListState(initialFirstVisibleItemIndex = if(currentIndex != 1000) currentIndex else 0)
     LazyRow(
         modifier = modifier

@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.ui.screen.bookmark.components.BookmarkList
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 @Composable
 fun BookmarkScreen(

@@ -45,7 +45,7 @@ import com.musashi.weatherapp.ui.screen.details.components.CityDetails
 import com.musashi.weatherapp.ui.screen.details.components.NextDayWeatherSelector
 import com.musashi.weatherapp.ui.screen.details.components.WeatherDetailsItemList
 import com.musashi.weatherapp.ui.screen.details.components.WeatherDetailsTitle
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 import com.musashi.weatherapp.utils.Constants.TIME_EN
 import com.musashi.weatherapp.utils.Constants.TIME_FA
 

@@ -1,7 +1,7 @@
 package com.musashi.weatherapp.ui.screen.details.components
 
 import androidx.compose.runtime.Composable
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 @Composable
 fun NextDayWeatherSelector(

@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.summary
+package com.musashi.weatherapp.ui.screen
 
 import android.content.Context
 import android.os.Build
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SummaryViewModel @Inject constructor(
+class WeatherViewModel @Inject constructor(
     @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
     private val userLocalUserManager: LocalUserManager
