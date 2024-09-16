@@ -48,6 +48,14 @@ fun AboutScreen(
                 end.linkTo(parent.end, margin = 50.dp)
             }
         ) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(stringResource(R.string.app_name))
+                Text("  -  " + stringResource(R.string.version))
+                Text(stringResource(R.string.app_version))
+            }
             Text(stringResource(R.string.made_by_rage_and_hatred))
             Row {
                 Icon(imageVector = Icons.Default.Celebration, contentDescription = "Celebration")

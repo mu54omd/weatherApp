@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">هواشناسی</string>
 
+    <string name="app_version">۱.۰.۰</string>
     <string name="clear_sky">آسمان صاف</string>
     <string name="fog_depositing_rime">مه یخ زده</string>
     <string name="drizzle_light">باران ریز کم</string>
@@ -68,7 +69,7 @@
     <string name="hour">ساعت</string>
     <string name="settings">تنظیمات</string>
     <string name="about">درباره</string>
-    <string name="made_by_rage_and_hatred">ساخته شده با خشم و نفرت!</string>
+    <string name="made_by_rage_and_hatred">ساخته شده با عشق!</string>
     <string name="back">بازگشت</string>
     <string name="theme_color">رنگ پوسته</string>
     <string name="language">زبان</string>
@@ -86,4 +87,5 @@
     <string name="network_error">خطای شبکه</string>
     <string name="unknown_error">خطای نامشخص</string>
     <string name="unknown_response">پاسخ نامشخص</string>
+    <string name="version">"ویرایش: "</string>
 </resources>
