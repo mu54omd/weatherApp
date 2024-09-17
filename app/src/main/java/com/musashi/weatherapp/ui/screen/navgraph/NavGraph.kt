@@ -250,7 +250,7 @@ fun NavGraph(
                     composable(route = Route.DetailedScreen.route) {
                         DetailedScreen(
                             state = summaryState.value,
-                            onBookmarkClick = { weatherViewModel.onSetDefaultCityClick() },
+                            onSetDefaultCityClick = { weatherViewModel.onSetDefaultCityClick() },
                             isCitySetAsDefault = { isCitySetAsDefault(state = summaryState.value) },
                             isErrorOccurred = summaryState.value.errorHourly != null,
                         )
