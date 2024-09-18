@@ -20,10 +20,11 @@ We use the Open-Meteo API; it is an open-source weather API with a free tariff f
 * [**Vico**](https://patrykandpatrick.com/vico/wiki/): A light and extensible chart library for Android.
 
 ## Medium articles about this app
-[Part 1: App Architecture and API Setup]()
 
-[Part 2: Local database, Local preferences and States]()
+[Part 1: App Architecture and API Setup](https://medium.com/@owmo13/forecasting-weather-with-open-meteo-api-using-jetpack-compose-7e58387f10e1)
 
-[Part 3: ViewModels, Screens, and the rest of the story]()
+[Part 2: Local database, Local preferences and States](https://medium.com/@owmo13/forecasting-weather-with-open-meteo-api-using-jetpack-compose-7f7f72e4963e)
+
+[Part 3: ViewModels, Screens, and the rest of the story](https://medium.com/@owmo13/forecasting-weather-with-open-meteo-api-using-jetpack-compose-5c99da611181)
   
 
