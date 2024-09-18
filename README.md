@@ -1,4 +1,5 @@
-# A Simple and sample Weather App
+#   ![icon](https://github.com/user-attachments/assets/5f0d048e-ad81-46c5-8927-0cf499c54c7c) A Simple and sample Weather App
+ 
 
 A Simple/sample weather app that use [open-meteo](https://open-meteo.com) based on Jetpack Compose!
 This app will allow users to pick a city and see what the weather situation is right now, hourly, and for the next several days. ⁤The architecture of our app is based on Google's recommended app architecture, which comprises three distinct layers - Domain, Data, and UI.
