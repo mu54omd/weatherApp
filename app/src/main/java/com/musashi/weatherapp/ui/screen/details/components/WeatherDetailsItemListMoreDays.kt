@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 @Composable
 fun WeatherDetailsItemListMoreDays(
@@ -19,7 +19,7 @@ fun WeatherDetailsItemListMoreDays(
     dayConditionEnd: Int,
     currentIndex: Int = 1000,
 
-) {
+    ) {
     LazyRow(
         modifier = Modifier.width(300.dp),
         verticalAlignment = Alignment.CenterVertically,

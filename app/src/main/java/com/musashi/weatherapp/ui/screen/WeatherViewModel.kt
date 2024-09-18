@@ -1,4 +1,4 @@
-package com.musashi.weatherapp.ui.screen.summary
+package com.musashi.weatherapp.ui.screen
 
 import android.content.Context
 import android.os.Build
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SummaryViewModel @Inject constructor(
+class WeatherViewModel @Inject constructor(
     @ApplicationContext context: Context,
     private val weatherRepository: WeatherRepository,
     private val userLocalUserManager: LocalUserManager
@@ -50,11 +50,15 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    fun deleteFromBookmark(city: CityModel){
+    fun deleteFromBookmark(item: BookmarkModel){
+        val bookmarkedItems: MutableList<BookmarkModel> = state.value.result.toMutableList()
+        bookmarkedItems.remove(item)
         viewModelScope.launch {
-            weatherRepository.deleteBookmark(cityModel = city)
+            weatherRepository.deleteBookmark(cityModel = item.cityModel)
+            _state.update { it.copy(result = bookmarkedItems) }
+            loadBookmark(flag = "delete")
         }
-        loadBookmark()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -255,13 +259,13 @@ class SummaryViewModel @Inject constructor(
         }
     }
 
-    private fun loadBookmark(){
+    private fun loadBookmark(flag: String = "add"){
         viewModelScope.launch {
             _state.update { it.copy(
                 bookmarkedCities = weatherRepository.getBookmark().first(),
                 isBookmarkListLoaded = true,
             ) }
-            if(state.value.isBookmarkListLoaded) {
+            if(state.value.isBookmarkListLoaded && flag == "add") {
                 getBookmarkedCityWeather()
             }
         }

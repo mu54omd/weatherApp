@@ -55,6 +55,7 @@ import com.musashi.weatherapp.ui.helper.getNextHourTime
 import com.musashi.weatherapp.ui.helper.getNextHourWeather
 import com.musashi.weatherapp.ui.helper.getNextHourWeatherCode
 import com.musashi.weatherapp.ui.helper.isCitySetAsDefault
+import com.musashi.weatherapp.ui.screen.WeatherViewModel
 import com.musashi.weatherapp.ui.screen.about.AboutScreen
 import com.musashi.weatherapp.ui.screen.bookmark.BookmarkScreen
 import com.musashi.weatherapp.ui.screen.details.DetailedScreen
@@ -62,7 +63,6 @@ import com.musashi.weatherapp.ui.screen.navgraph.components.BottomNavigationItem
 import com.musashi.weatherapp.ui.screen.navgraph.components.WeatherBottomBar
 import com.musashi.weatherapp.ui.screen.settings.SettingsScreen
 import com.musashi.weatherapp.ui.screen.summary.SummaryScreen
-import com.musashi.weatherapp.ui.screen.summary.SummaryViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,8 +71,8 @@ fun NavGraph(
     startDestination: String,
     mainViewModel: MainViewModel
 ) {
-    val summaryViewModel: SummaryViewModel = hiltViewModel()
-    val summaryState = summaryViewModel.state.collectAsState()
+    val weatherViewModel: WeatherViewModel = hiltViewModel()
+    val summaryState = weatherViewModel.state.collectAsState()
 
     val pullRefreshState = rememberPullToRefreshState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -181,7 +181,7 @@ fun NavGraph(
             PullToRefreshBox(
                 isRefreshing = summaryState.value.isRefreshing,
                 state = pullRefreshState,
-                onRefresh = summaryViewModel::refresh,
+                onRefresh = weatherViewModel::refresh,
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
@@ -230,9 +230,9 @@ fun NavGraph(
                             state = summaryState.value,
                             countryValue = summaryState.value.localCityCountry.first,
                             cityValue = summaryState.value.localCityCountry.second,
-                            selectCountry = { country -> summaryViewModel.selectCountry(country) },
+                            selectCountry = { country -> weatherViewModel.selectCountry(country) },
                             changeCity = { cityName, countryName ->
-                                summaryViewModel.selectCity(
+                                weatherViewModel.selectCity(
                                     cityName,
                                     countryName
                                 )
@@ -240,7 +240,7 @@ fun NavGraph(
                             nextHourWeather = getNextHourWeather(state = summaryState.value),
                             nextHourWeatherCode = getNextHourWeatherCode(state = summaryState.value),
                             isNextHourDay = getNextHourTime(state = summaryState.value),
-                            onAddFavoriteClick = { summaryViewModel.addToBookmark() },
+                            onAddFavoriteClick = { weatherViewModel.addToBookmark() },
                             changeTheme = { theme -> mainViewModel.changeTheme(theme) },
                             changeLanguage = { locale -> mainViewModel.changeLanguage(locale) },
                             language = mainViewModel.state.value.appLanguage
@@ -250,7 +250,7 @@ fun NavGraph(
                     composable(route = Route.DetailedScreen.route) {
                         DetailedScreen(
                             state = summaryState.value,
-                            onBookmarkClick = { summaryViewModel.onSetDefaultCityClick() },
+                            onSetDefaultCityClick = { weatherViewModel.onSetDefaultCityClick() },
                             isCitySetAsDefault = { isCitySetAsDefault(state = summaryState.value) },
                             isErrorOccurred = summaryState.value.errorHourly != null,
                         )
@@ -259,9 +259,9 @@ fun NavGraph(
                     composable(route = Route.BookmarkScreen.route) {
                         BookmarkScreen(
                             state = summaryState.value,
-                            onDeleteClick = { city -> summaryViewModel.deleteFromBookmark(city) },
+                            onDeleteClick = { item -> weatherViewModel.deleteFromBookmark(item) },
                             onBookmarkCardClick = { city ->
-                                summaryViewModel.setSelectedAsCurrentCity(city)
+                                weatherViewModel.setSelectedAsCurrentCity(city)
                                 navigateToTab(
                                     navController = navController,
                                     route = Route.DetailedScreen.route
@@ -279,7 +279,7 @@ fun NavGraph(
                             onThemeColorClick = { theme -> mainViewModel.changeTheme(theme) },
                             onLanguageClick = { locale -> mainViewModel.changeLanguage(locale) },
                             onForecastDaysClick = { forecastDays ->
-                                summaryViewModel.changeForecastDays(forecastDays)
+                                weatherViewModel.changeForecastDays(forecastDays)
                                 },
                             language = mainViewModel.state.value.appLanguage,
                             forecastDays = summaryState.value.forecastDays

@@ -1,6 +1,6 @@
 package com.musashi.weatherapp.ui.helper
 
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 fun getNextHourIndex(state: WeatherState): Int?{
     val currentHour = state.weatherFullStatus?.current?.time?.split(":")?.get(0) + ":00"

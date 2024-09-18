@@ -41,11 +41,11 @@ import com.musashi.weatherapp.ui.common.EmptyScreen
 import com.musashi.weatherapp.ui.common.WeatherLineChart
 import com.musashi.weatherapp.ui.helper.getDateFromNow
 import com.musashi.weatherapp.ui.helper.returnWeatherCode
+import com.musashi.weatherapp.ui.screen.WeatherState
 import com.musashi.weatherapp.ui.screen.details.components.CityDetails
 import com.musashi.weatherapp.ui.screen.details.components.NextDayWeatherSelector
 import com.musashi.weatherapp.ui.screen.details.components.WeatherDetailsItemList
 import com.musashi.weatherapp.ui.screen.details.components.WeatherDetailsTitle
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
 import com.musashi.weatherapp.utils.Constants.TIME_EN
 import com.musashi.weatherapp.utils.Constants.TIME_FA
 
@@ -53,7 +53,7 @@ import com.musashi.weatherapp.utils.Constants.TIME_FA
 fun DetailedScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
-    onBookmarkClick: () -> Unit,
+    onSetDefaultCityClick: () -> Unit,
     isCitySetAsDefault: () -> Boolean,
     isErrorOccurred: Boolean
 ) {
@@ -83,7 +83,7 @@ fun DetailedScreen(
                 lat = state.currentCity.latitude,
                 lng = state.currentCity.longitude,
                 onFavoriteClick = {
-                    onBookmarkClick()
+                    onSetDefaultCityClick()
                 },
                 isCitySetAsDefault = state.isDefaultCitySet && isCitySetAsDefault(),
                 modifier = Modifier.verticalScroll(rememberScrollState())

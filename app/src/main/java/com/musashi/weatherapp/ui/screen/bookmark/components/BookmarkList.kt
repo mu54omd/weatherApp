@@ -8,6 +8,7 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CollectionsBookmark
 import androidx.compose.runtime.Composable
@@ -30,8 +31,9 @@ fun BookmarkList(
     bookmarkedCity: List<CityModel>,
     bookmarksResult: List<BookmarkModel>,
     onBookmarkCardClick: (CityModel) -> Unit,
-    onDeleteClick: (CityModel) -> Unit,
+    onDeleteClick: (BookmarkModel) -> Unit,
 ) {
+    val bookmarksResultShadow = bookmarksResult
     val deletedItem = remember { mutableStateListOf<BookmarkModel>() }
     if(bookmarkedCity.isEmpty()){
         EmptyScreen(
@@ -43,10 +45,14 @@ fun BookmarkList(
             modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(all = 10.dp)
         ) {
-            items(bookmarksResult.size) { i ->
-                val city = bookmarksResult[i]
+            items(
+                items = bookmarksResultShadow,
+                key = {
+                    item -> item.cityModel.id
+                }
+            ) { item ->
                 AnimatedVisibility(
-                    visible = !deletedItem.contains(city),
+                    visible = !deletedItem.contains(item),
                     exit = if(LocalLayoutDirection.current == LayoutDirection.Ltr){
                         slideOutHorizontally(
                             targetOffsetX = { -it },
@@ -67,14 +73,24 @@ fun BookmarkList(
                     )
                 ) {
                         BookmarkItem(
-                            onBookmarkCardClick = { onBookmarkCardClick(city.cityModel) },
-                            weatherImageId = returnWeatherCode(city.weatherCode, isDay = city.isDay).imageId,
-                            weatherTextId = returnWeatherCode(city.weatherCode, isDay = city.isDay).stringId,
-                            temperature = city.temp,
-                            cityName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) city.cityModel.cityName else city.cityModel.cityNameFa ?: city.cityModel.cityName,
-                            countryName = if(LocalLayoutDirection.current == LayoutDirection.Ltr) city.cityModel.countryName else city.cityModel.countryNameFa,
-                            onDeleteClick = { deletedItem.add(city) },
-                            isWeatherLoaded = city.error == null
+                            onBookmarkCardClick = { onBookmarkCardClick(item.cityModel) },
+                            weatherImageId = returnWeatherCode(
+                                item.weatherCode,
+                                isDay = item.isDay
+                            ).imageId,
+                            weatherTextId = returnWeatherCode(
+                                item.weatherCode,
+                                isDay = item.isDay
+                            ).stringId,
+                            temperature = item.temp,
+                            cityName = if (LocalLayoutDirection.current == LayoutDirection.Ltr) item.cityModel.cityName else item.cityModel.cityNameFa
+                                ?: item.cityModel.cityName,
+                            countryName = if (LocalLayoutDirection.current == LayoutDirection.Ltr) item.cityModel.countryName else item.cityModel.countryNameFa,
+                            onDeleteClick = {
+                                deletedItem.add(item)
+                                //onDeleteClick(item)
+                            },
+                            isWeatherLoaded = item.error == null
                         )
                 }
             }
@@ -82,7 +98,7 @@ fun BookmarkList(
         DisposableEffect(key1 = Unit) {
             onDispose {
                 deletedItem.forEach {
-                    onDeleteClick(it.cityModel)
+                    onDeleteClick(it)
                 }
             }
         }

@@ -6,16 +6,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.musashi.weatherapp.domain.model.BookmarkModel
 import com.musashi.weatherapp.domain.model.CityModel
 import com.musashi.weatherapp.ui.screen.bookmark.components.BookmarkList
-import com.musashi.weatherapp.ui.screen.summary.WeatherState
+import com.musashi.weatherapp.ui.screen.WeatherState
 
 @Composable
 fun BookmarkScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
     onBookmarkCardClick: (CityModel) -> Unit,
-    onDeleteClick: (CityModel) -> Unit,
+    onDeleteClick: (BookmarkModel) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
